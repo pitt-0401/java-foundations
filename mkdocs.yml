@@ -17,13 +17,15 @@ nav:
 theme:
   name: material
   font:
-    text: Source Sans 3
+    text: Public Sans
     code: JetBrains Mono
   features:
+    - navigation.tabs        # pages as tabs under the header
     - navigation.sections
     - navigation.footer
     - navigation.top
     - toc.follow
+    - toc.integrate          # a page's questions are listed in the left sidebar
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -67,6 +69,10 @@ exclude_docs: |
 
 extra_css:
   - stylesheets/extra.css
+
+# Interactive patterns and multiple-choice answers; inactive on pages without that markup.
+extra_javascript:
+  - javascripts/lesson.js
 
 extra:
   generator: false

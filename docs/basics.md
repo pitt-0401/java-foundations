@@ -80,7 +80,20 @@ java CarRace
 
 ## How do I declare a variable? { #variable }
 
-<pre class="pattern"><code><var>type</var> <var>name</var> = <var>value</var>;</code></pre>
+<pre class="pattern"><code><var data-label="kind of value">type</var> <var data-label="your choice">name</var> = <var data-label="fits the type">value</var>;</code></pre>
+
+<div class="pattern-parts" data-replace-with="a suitable type, variable name, and value" markdown>
+
+<var>type</var>
+:   The kind of value the variable holds, such as `int`, `double` or `String`.
+
+<var>name</var>
+:   The name you choose, in camelCase, such as `isOpen`.
+
+<var>value</var>
+:   The initial value must be compatible with the variable's type. For example, `9.99` can be assigned to a `double`, but assigning it to an `int` requires an explicit conversion, such as `(int) 9.99`, which produces `9`.
+
+</div>
 
 Examples:
 
@@ -110,6 +123,8 @@ int i = (int) 9.99;   // double to int: cast, gives 9
 
 ### Your turn
 
+Pick an answer to check it. If it's wrong, you can try again.
+
 1. **Predict the output.**
 
     ```java
@@ -121,11 +136,37 @@ int i = (int) 9.99;   // double to int: cast, gives 9
     System.out.println(c);
     ```
 
+    - `3.5` `3.5` `3.5`
+
+        **Not quite.** `7 / 2` divides two `int` values, so the result is `3` for both `a` and `b`. Storing it in a `double` doesn't bring the `.5` back.
+
+    - `3` `3` `3.5`
+
+        **Not quite.** `b` is a `double`, so `println` shows it with a decimal point: `3.0`, not `3`.
+
+    - `3` `3.0` `3.5`
+
+        **Correct.** `3`, then `3.0`, then `3.5`. When both numbers are `int`, `/` does integer division and drops the remainder, even if you store the result in a `double`. Making one number a `double` (`2.0`) keeps the decimal part.
+
+
 2. **Predict the output.**
 
     ```java
     System.out.println((int) 2.99);
     ```
+
+    - `3`
+
+        **Not quite.** Casting `2.99` to `int` truncates it: Java drops the fractional part `.99` and keeps `2`. Nothing is rounded up.
+
+    - `2`
+
+        **Correct.** `2`. The cast cuts off `.99`; it doesn't round up.
+
+    - `2.99`
+
+        **Not quite.** `(int)` turns `2.99` into an `int` before it's printed, so the decimal part is gone.
+
 
 3. **Find the bug.** Why doesn't this line compile?
 
@@ -134,17 +175,21 @@ int i = (int) 9.99;   // double to int: cast, gives 9
     ```
 
 <details markdown>
-<summary>Answers</summary>
+<summary>Answer</summary>
 
-1. `3`, then `3.0`, then `3.5`. When both numbers are `int`, `/` does integer division and drops the remainder, even if you store the result in a `double`. Making one number a `double` (`2.0`) keeps the decimal part.
-2. `2`. The cast cuts off `.99`; it doesn't round up.
-3. `40.5` is a `double`, and an `int` can't hold the `.5`, so Java won't convert it automatically:
+<ol start="3" markdown>
+<li markdown="block">
 
-    ```text
-    error: incompatible types: possible lossy conversion from double to int
-    ```
+`40.5` is a `double`, and an `int` can't hold the `.5`, so Java won't convert it automatically:
 
-    Use `double seats = 40.5;`, or write `(int) 40.5` if you want `40`.
+```text
+error: incompatible types: possible lossy conversion from double to int
+```
+
+Use `double seats = 40.5;`, or write `(int) 40.5` if you want `40`.
+
+</li>
+</ol>
 
 </details>
 

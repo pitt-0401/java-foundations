@@ -19,7 +19,7 @@ Example:
 ```java
 double[] prices = {0.99, 2.45, 7.32};
 int[] scores = new int[5];  // 0 0 0 0 0
-Car[] cars = new Car[2];    // null null
+Car[] cars = new Car[3];    // null null null
 
 prices[0]        // 0.99
 scores[4] = 100; // last slot
