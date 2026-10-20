@@ -1,0 +1,16 @@
+# Maven build output
+target/
+
+# MkDocs output
+site/
+
+# Local Python environment for MkDocs
+.venv/
+
+# Compiled classes from running javac by hand
+*.class
+
+# Editor and OS files
+.idea/
+*.iml
+.DS_Store

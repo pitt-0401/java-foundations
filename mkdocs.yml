@@ -1,0 +1,76 @@
+# Course website settings. Every page in docs/ is written by hand.
+site_name: Java Foundations
+site_url: https://pitt-0401.github.io/java-foundations/
+site_description: A Java syntax cheat sheet with patterns, examples, short exercises, and tested practice tasks.
+repo_url: https://github.com/pitt-0401/java-foundations
+repo_name: java-foundations
+edit_uri: ""   # no "edit this page" links
+
+nav:
+  - Home: index.md
+  - Basics: basics.md
+  - Classes and objects: classes-and-objects.md
+  - Arrays: arrays.md
+  - Help: help.md
+  - Practice: practice.md
+
+theme:
+  name: material
+  font:
+    text: Source Sans 3
+    code: JetBrains Mono
+  features:
+    - navigation.sections
+    - navigation.footer
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  # Toggle in the header cycles: system setting -> light -> dark -> system setting.
+  palette:
+    - media: "(prefers-color-scheme)"
+      scheme: default   # used only until the page script applies the system setting
+      primary: white
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system setting
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 2   # the page contents list shows only the questions
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+
+# design-guidelines.md is a contributor document, not a student page.
+exclude_docs: |
+  design-guidelines.md
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  generator: false
+
+validation:
+  links:
+    anchors: warn

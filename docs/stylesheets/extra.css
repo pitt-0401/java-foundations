@@ -1,0 +1,287 @@
+/*
+  Course site styles, layered on top of Material for MkDocs.
+
+  One accent color (--jf-accent) is used for links, the primary button, the
+  current page in the navigation, and focus outlines. Everything else uses the
+  theme's neutral text and background colors.
+*/
+
+/* ---------- Color tokens ---------- */
+
+body[data-md-color-scheme="default"] {
+  --jf-accent: #1d4f91;          /* 8.1:1 on white */
+  --jf-accent-strong: #133864;
+  --jf-on-accent: #ffffff;
+  --jf-rule: #e3e6ec;
+  --jf-note-bg: #f4f6fa;
+  --md-typeset-a-color: var(--jf-accent);
+  --md-accent-fg-color: var(--jf-accent-strong);
+  --md-accent-bg-color: var(--jf-on-accent);   /* text on hovered or focused buttons */
+  --md-default-fg-color: rgba(18, 22, 31, 0.92);
+  --md-default-fg-color--light: rgba(18, 22, 31, 0.68);
+}
+
+body[data-md-color-scheme="slate"] {
+  --md-hue: 222;
+  --jf-accent: #8db6ee;          /* 7.7:1 on the page, 6.8:1 on code */
+  --jf-accent-strong: #b8d1f5;
+  --jf-on-accent: #0f1b2d;
+  --jf-rule: #2f3542;
+  --jf-note-bg: #222733;
+  --md-typeset-a-color: var(--jf-accent);
+  --md-accent-fg-color: var(--jf-accent-strong);
+  --md-accent-bg-color: var(--jf-on-accent);   /* text on hovered or focused buttons */
+  /* Two of Material's dark code colors are just under 4.5:1 on the code background. */
+  --md-code-hl-number-color: #ec7a6d;    /* 5.1:1 */
+  --md-code-hl-constant-color: #a08fe8;  /* 5.1:1 */
+  /* Header and footer match the page instead of a colored bar. */
+  --md-primary-fg-color: #1a1e27;
+  --md-primary-fg-color--light: #1a1e27;
+  --md-primary-fg-color--dark: #1a1e27;
+  --md-primary-bg-color: #e6e9f0;
+  --md-primary-bg-color--light: rgba(230, 233, 240, 0.7);
+}
+
+/* Neutral footer (previous / next links) in both schemes. */
+body[data-md-color-scheme] {
+  --md-footer-bg-color: var(--md-default-bg-color);
+  --md-footer-bg-color--dark: var(--md-default-bg-color);
+  --md-footer-fg-color: var(--md-default-fg-color);
+  --md-footer-fg-color--light: var(--md-default-fg-color--light);
+  --md-footer-fg-color--lighter: var(--md-default-fg-color--lighter);
+}
+
+.md-header {
+  box-shadow: none;
+  border-bottom: 1px solid var(--jf-rule);
+}
+.md-footer {
+  border-top: 1px solid var(--jf-rule);
+}
+.md-footer-meta {
+  background-color: var(--md-default-bg-color);
+}
+
+/* ---------- Text ---------- */
+
+.md-typeset {
+  font-size: 0.85rem;            /* 17px */
+  line-height: 1.65;
+}
+
+/* Tables: slightly larger text than the theme default. */
+.md-typeset table:not([class]) {
+  font-size: 0.8em;
+}
+
+.md-typeset h1 {
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+  font-size: 1.9em;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6em;
+}
+
+.md-typeset h2 {
+  font-weight: 650;
+  font-size: 1.35em;
+  margin-top: 2.2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--jf-rule);
+}
+
+.md-typeset h3 {
+  font-weight: 650;
+  font-size: 1.08em;
+  margin-top: 1.8em;
+}
+
+.md-typeset strong {
+  font-weight: 650;
+}
+
+/* Side notes are blockquotes. */
+.md-typeset blockquote {
+  color: var(--md-default-fg-color);
+  background: var(--jf-note-bg);
+  border-left: 3px solid var(--jf-rule);
+  padding: 0.6em 1em;
+  border-radius: 0 4px 4px 0;
+}
+.md-typeset blockquote > :first-child { margin-top: 0; }
+.md-typeset blockquote > :last-child { margin-bottom: 0; }
+
+/* ---------- Code ---------- */
+
+.md-typeset code {
+  font-size: 0.84em;
+}
+
+/* Titles on code blocks (title="Car.java"). */
+.md-typeset .highlight span.filename {
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 0.4em 1.1em;
+  color: var(--md-default-fg-color--light);
+  background-color: var(--md-code-bg-color);
+  border-bottom: 1px solid var(--jf-rule);
+}
+
+/*
+  "Answers" boxes are plain <details> elements. They use the site accent
+  instead of the theme's default blue, so the page keeps a single accent color.
+*/
+.md-typeset details:not([class]) {
+  border-color: var(--jf-accent);
+}
+.md-typeset details:not([class]) > summary {
+  background-color: var(--jf-note-bg);
+}
+.md-typeset details:not([class]) > summary::before,
+.md-typeset details:not([class]) > summary::after {
+  background-color: var(--jf-accent);
+}
+/* Answers use the body text size; the theme makes <details> text smaller by default. */
+.md-typeset details:not([class]) {
+  font-size: inherit;
+}
+
+/*
+  Placeholders (<var>), mostly inside patterns: <pre class="pattern"><code>.
+  They are shown in the accent color AND in italics, so the difference does not
+  depend on color alone. Patterns are raw HTML, so they get no syntax colors.
+*/
+.md-typeset var {
+  color: var(--jf-accent);
+  font-style: italic;
+}
+
+/* "Lectures 02, 04": which lectures cover a section. Small and grey. */
+.md-typeset .lectures {
+  font-size: 0.85em;
+  color: var(--md-default-fg-color--light);
+}
+
+/* ---------- Buttons ---------- */
+
+.md-typeset .md-button {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5em 1.1em;
+  border-radius: 4px;
+  border-width: 1px;
+  color: var(--jf-accent);
+  border-color: var(--jf-accent);
+  margin: 0.2em 0.4em 0.2em 0;
+}
+.md-typeset .md-button:hover {
+  color: var(--jf-on-accent);
+  background-color: var(--jf-accent);
+  border-color: var(--jf-accent);
+}
+.md-typeset .md-button--primary {
+  color: var(--jf-on-accent);
+  background-color: var(--jf-accent);
+}
+.md-typeset .md-button--primary:hover {
+  background-color: var(--jf-accent-strong);
+  border-color: var(--jf-accent-strong);
+  color: var(--jf-on-accent);
+}
+
+/* ---------- Focus ---------- */
+
+.md-typeset a:focus-visible,
+.md-typeset summary:focus-visible,
+.md-nav__link:focus-visible,
+.md-footer__link:focus-visible,
+.md-header__button:focus-visible,
+.md-code__button:focus-visible,
+.md-typeset .md-button:focus-visible {
+  outline: 2px solid var(--jf-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Material removes the outline from "Back to top"; keep its pill shape. */
+.md-top:focus-visible {
+  outline: 2px solid var(--jf-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Navigation ---------- */
+
+.md-nav__link--active {
+  font-weight: 650;
+}
+
+/* ---------- Home page ---------- */
+
+/*
+  Question index ("How do I ...?"): the groups sit in columns on wide screens and
+  stack on narrow ones. Each group is a small uppercase grey heading followed by
+  a plain list of links, with no bullets or boxes.
+*/
+.md-typeset .question-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0 2rem;
+}
+.md-typeset .question-index h3 {
+  font-size: 0.8em;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--md-default-fg-color--light);
+  margin: 1.4em 0 0.3em;
+}
+.md-typeset .question-index ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+[dir] .md-typeset .question-index li {
+  margin: 0;
+  padding: 0.15em 0;
+}
+
+.md-typeset .page-footnote {
+  margin-top: 3em;
+  font-size: 0.9em;
+  color: var(--md-default-fg-color--light);
+}
+
+/*
+  Class anatomy ("Where each part goes"): a nested list drawn as nested boxes.
+  It stays a real list, so screen readers announce the nesting. Each box has a
+  text label, so the structure does not depend on borders or color alone.
+*/
+.md-typeset ul.anatomy,
+.md-typeset ul.anatomy ul {
+  list-style: none;
+  margin: 0.4em 0 0;
+  padding: 0;
+}
+.md-typeset ul.anatomy {
+  margin: 1em 0;
+}
+[dir] .md-typeset ul.anatomy li {
+  margin: 0.5em 0 0;
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--jf-accent);
+  border-radius: 4px;
+}
+[dir] .md-typeset ul.anatomy > li {
+  margin-top: 0;
+}
+[dir] .md-typeset ul.anatomy ul li {
+  border-color: var(--md-default-fg-color--lighter);
+  background-color: var(--md-default-bg-color);
+}
+[dir] .md-typeset ul.anatomy ul ul li {
+  background-color: var(--jf-note-bg);
+}
+.md-typeset .anatomy-label {
+  display: block;
+  font-weight: 650;
+}

@@ -1,0 +1,4 @@
+# Website build tools. MkDocs is pinned below 2.0 because
+# Material for MkDocs does not support MkDocs 2.0.
+mkdocs>=1.6,<2
+mkdocs-material>=9.5,<10

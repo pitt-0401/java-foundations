@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Build file for java-foundations.
+
+  The code lives in top-level folders instead of Maven's usual src/main/java
+  layout. The build-helper plugin tells Maven where those folders are:
+
+    examples/car, examples/playlist   runnable examples (always compiled)
+    tests/                            JUnit tests for the practice exercises
+    exercises/  or  solutions/        the code under test (one profile each)
+
+    mvn test                          run the tests against YOUR code in exercises/
+    mvn test -Dtest=TipCalculatorTest run the tests for one exercise
+    mvn test -Psolutions              run the tests against the reference solutions
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>edu.javafoundations</groupId>
+  <artifactId>java-foundations</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.11.4</junit.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+        <configuration>
+          <!-- String.format follows the computer's language settings, so on a
+               computer set to German it prints 3,50 instead of 3.50. The tests
+               expect 3.50, so they always run with English (US) settings. -->
+          <argLine>-Duser.language=en -Duser.country=US</argLine>
+          <!-- A test that runs longer than 5 seconds fails instead of hanging:
+               the code under test probably has a loop that never ends. -->
+          <properties>
+            <configurationParameters>
+              junit.jupiter.execution.timeout.default = 5 s
+              junit.jupiter.execution.timeout.thread.mode.default = SEPARATE_THREAD
+            </configurationParameters>
+          </properties>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <!-- Example programs (always compiled) -->
+          <execution>
+            <id>add-examples</id>
+            <phase>generate-sources</phase>
+            <goals><goal>add-source</goal></goals>
+            <configuration>
+              <sources>
+                <source>examples/car</source>
+                <source>examples/playlist</source>
+              </sources>
+            </configuration>
+          </execution>
+          <!-- Tests -->
+          <execution>
+            <id>add-tests</id>
+            <phase>generate-test-sources</phase>
+            <goals><goal>add-test-source</goal></goals>
+            <configuration>
+              <sources>
+                <source>tests</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- The code under test. Exactly one of these profiles is active. -->
+  <profiles>
+    <profile>
+      <id>exercises</id>
+      <activation><activeByDefault>true</activeByDefault></activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>add-code-under-test</id>
+                <phase>generate-sources</phase>
+                <goals><goal>add-source</goal></goals>
+                <configuration>
+                  <sources>
+                    <source>exercises</source>
+                  </sources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>solutions</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>add-code-under-test</id>
+                <phase>generate-sources</phase>
+                <goals><goal>add-source</goal></goals>
+                <configuration>
+                  <sources>
+                    <source>solutions</source>
+                  </sources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
