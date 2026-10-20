@@ -277,8 +277,9 @@ body[data-md-color-scheme] {
 /*
   Interactive patterns (docs/javascripts/lesson.js): each placeholder is a tinted
   slot; selecting one outlines it, shows its explanation, and highlights the
-  matching part of the examples. A one-line pattern (.is-row) is larger and
-  shows each placeholder's short label underneath.
+  matching part of the examples. A placeholder with data-label shows that short
+  label underneath. A one-line pattern (.is-row) is larger; a multi-line one
+  keeps the normal size with taller lines, so each line has room for labels.
 */
 /* Material lets code blocks run to the screen edge on phones; a pattern keeps the
    content margins so a selected placeholder is not cut off. */
@@ -293,10 +294,19 @@ body[data-md-color-scheme] {
   word-spacing: 0.5em;           /* room for the labels; copied text is unchanged */
   padding-bottom: 1.6em;
 }
-.md-typeset pre.pattern.is-row var {
+.md-typeset pre.pattern.is-interactive:not(.is-row) > code {
+  padding-right: 2.2rem;         /* room for the copy button */
+  font-size: 0.9em;              /* a 71-character method header fits the column */
+  line-height: 2.6;
+}
+.md-typeset pre.pattern.is-interactive:not(.is-row) .jf-ph {
+  line-height: 1.3;              /* the slot keeps its size on the taller lines */
+  padding: 0 0.08em;
+}
+.md-typeset pre.pattern.is-interactive var {
   position: relative;
 }
-.md-typeset pre.pattern.is-row var[data-label]::after {
+.md-typeset pre.pattern.is-interactive var[data-label]::after {
   position: absolute;
   top: 100%;
   left: 0.1em;
@@ -304,13 +314,16 @@ body[data-md-color-scheme] {
   content: attr(data-label);
   content: attr(data-label) / "";   /* the button's name already includes it */
   font-family: var(--md-text-font-family);
-  font-size: 0.5em;
+  font-size: 0.75em;
   font-style: normal;
   line-height: 1.3;
   word-spacing: normal;
   color: var(--md-default-fg-color--light);
   white-space: nowrap;
   pointer-events: none;
+}
+.md-typeset pre.pattern.is-row var[data-label]::after {
+  font-size: 0.5em;
 }
 .md-typeset .jf-ph {
   font: inherit;
@@ -366,6 +379,15 @@ body[data-md-color-scheme] {
 }
 .md-typeset .jf-note.is-on {
   color: var(--md-default-fg-color);
+}
+/* Text for screen readers only: the live region that announces a selection. */
+.md-typeset .jf-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 .md-typeset .jf-note code {
   white-space: nowrap;
@@ -676,6 +698,14 @@ body[data-md-color-scheme] {
 }
 
 /* ---------- Small screens and motion ---------- */
+
+/* On phones Material's copy button sits over the end of a pattern's first line;
+   start the pattern below it instead. */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset pre.pattern > code {
+    padding-top: 2.6em;
+  }
+}
 
 @media screen and (max-width: 30em) {
   .md-typeset pre.pattern.is-row > code {

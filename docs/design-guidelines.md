@@ -155,7 +155,10 @@ already reading:
   is clear without the borders, and screen readers announce a real nested list.
 - **Read it word by word:** the line as a `java` block, then a two-column
   `| Part | Meaning |` table with one row per word or symbol. Do not put the
-  whole line in the table header; it wraps badly on phones.
+  whole line in the table header; it wraps badly on phones. Keep every row
+  even when the section's pattern is interactive: the pattern's explanations
+  appear only after a placeholder is selected, so the table is the explanation
+  students see without clicking.
 - **Build it step by step:** numbered steps, each a complete `java` block that
   compiles (the last step may point to the finished example at the top of the
   section instead of repeating it), with the new lines marked by `hl_lines` (from
@@ -204,15 +207,23 @@ with a definition list follows it directly, one term per placeholder:
   next heading. Selecting it again, or pressing Escape, clears the selection.
 - Highlighted parts are bold accent text while the rest of the code turns
   `--jf-muted`. There is no background, so the code does not look selected.
-- The examples are matched line by line against the pattern: the text between
-  placeholders must appear as written (any run of spaces matches one or more),
-  and lines that do not match are left alone. Code in **Your turn** is never
-  highlighted. Only `<span>` wrappers are added, so the copied code is unchanged.
-- A one-line pattern is larger, and a `data-label` on a `<var>` adds a short label
-  under that placeholder (drawn with CSS, so it is not copied). Matching is per
-  line, so a multi-line pattern (a class or a method) can explain its
-  placeholders but cannot highlight examples; it keeps its layout and has no
-  labels.
+- Which example code belongs to a placeholder is found in one of two ways:
+  - **Explicit mapping (`data-find`)**, for multi-line patterns and anything
+    the automatic matching cannot do. See below.
+  - **Automatic**, for a one-line pattern with no `data-find` at all: each
+    example line is matched against the pattern. The text between placeholders
+    must appear as written (any run of spaces matches one or more), and lines
+    that do not match are left alone.
+- Code in **Your turn** is never highlighted (the search stops at the next
+  heading). Only `<span>` wrappers are added, so the copied code is unchanged.
+- A `data-label` on a `<var>` in the pattern adds a short label under that
+  placeholder (drawn with CSS, so it is not copied). When a placeholder appears
+  more than once, put the label on one occurrence only (every occurrence still
+  gets it in its accessible name), and choose occurrences
+  whose labels do not collide (in the method pattern, the first `type` and the
+  second `paramName`). A one-line pattern is larger; a multi-line pattern keeps
+  its indentation, is slightly smaller, and has taller lines to make room for
+  the labels.
 - Only selecting or clearing a placeholder is announced to screen readers;
   hover and focus change the explanation line visually only.
 - The line under the pattern starts as "Italicized words are placeholders.
@@ -222,10 +233,48 @@ with a definition list follows it directly, one term per placeholder:
   placeholders stand for.
 - Without JavaScript the explanations are a visible two-column list.
 
-Only "How do I declare a variable?" uses an interactive pattern so far. Add one
-to another section only when the examples follow the pattern line by line.
+Three sections use interactive patterns: "How do I write a program that runs?"
+and "How do I write a method?" (explicit mapping) and "How do I declare a
+variable?" (automatic).
 
-What the matching handles (checked against `type name = value;` and
+### Explicit mapping with `data-find`
+
+Put `data-find` on the `<var>` in the explanation list. It lists the example text
+for that placeholder, separated by ` | ` (space, bar, space). Each entry is
+literal text copied from the examples with the placeholder's part in `[[ ]]`;
+the text around it only pins down which occurrence is meant:
+
+```html
+<var data-find="int [[a]] | int [[b]] | String [[name]]">paramName</var>
+:   A parameter is a variable that receives a value when the method is called. …
+
+<var data-find='[[return (a + b) / 2.0;]] | [[System.out.println("Hello, " + name);]]'>statements</var>
+:   These instructions run when the method is called.
+```
+
+- Every occurrence of an entry in the examples is highlighted, so `[[int]] a`
+  marks the `int` before `a` but no other `int`. Add context until the entry
+  means exactly what you intend: `[[a]]` alone would also match the `a` in
+  `(a + b)`.
+- A word at either end of an entry must be a whole word (`int [[a]]` does not
+  match inside `int ab`). Any run of spaces in an entry matches any whitespace,
+  including a line break.
+- One highlighted part may contain another: `statements` and `value` both
+  highlight inside `return (a + b) / 2.0;`.
+- A placeholder that does not apply to an example simply has no entry for it
+  (`value` has none for the `void` method `greet`). Do not invent one.
+- Use single quotes around the attribute when an entry contains `"`. Write `<`
+  and `&` as `&lt;` and `&amp;`. An entry cannot contain ` | `. The part starts
+  at the first `[[` and ends at the last `]]`, so `[[arr[i]]] = 0` marks
+  `arr[i]`; a part that starts with `[` (`int[[[5]]]`) is ambiguous, so add
+  context instead.
+- An entry without `[[ ]]`, with an empty part, or one that matches nothing,
+  logs a console warning and highlights nothing. Check the browser console after
+  changing examples.
+
+### Automatic matching (one-line patterns)
+
+What the automatic matching handles (checked against `type name = value;` and
 `object.method(arguments);`):
 
 - Works: leading indentation; array and generic types without spaces
@@ -302,7 +351,8 @@ match with `<ol start="3" markdown>` and `<li markdown="block">`.
 - On narrow screens the tabs and the page's questions move into Material's
   drawer.
 - On phones, patterns keep the content margins (other code blocks run to the
-  screen edge), a one-line interactive pattern gets smaller, and answer buttons
+  screen edge) and start below Material's copy button, so the button never
+  covers pattern text; a one-line interactive pattern gets smaller, and answer buttons
   share the width in three equal columns.
 - The question index stacks into one column on narrow screens.
 - Code blocks and tables scroll inside their own containers.

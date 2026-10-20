@@ -4,11 +4,21 @@ The syntax almost every program uses: running a program, variables, methods, dec
 
 ## How do I write a program that runs? { #program }
 
-<pre class="pattern"><code>public class <var>ClassName</var> {
+<pre class="pattern"><code>public class <var data-label="class name">ClassName</var> {
     public static void main(String[] args) {
-        <var>statements</var>
+        <var data-label="code to run">statements</var>
     }
 }</code></pre>
+
+<div class="pattern-parts" markdown>
+
+<var data-find="class [[CarRace]]">ClassName</var>
+:   Choose a class name, such as `CarRace`. If the class is public, save the file with the same name: `CarRace.java`.
+
+<var data-find='[[System.out.println("Ready!");]]'>statements</var>
+:   Write the instructions you want Java to execute inside `main`. Java starts running this program in the `main` method.
+
+</div>
 
 Example, in a file named `CarRace.java`:
 
@@ -195,10 +205,34 @@ Use `double seats = 40.5;`, or write `(int) 40.5` if you want `40`.
 
 ## How do I write a method? { #method }
 
-<pre class="pattern"><code>public static <var>returnType</var> <var>methodName</var>(<var>type</var> <var>paramName</var>, <var>type</var> <var>paramName</var>) {
-    <var>statements</var>
-    return <var>value</var>;  // leave out if returnType is void
+<pre class="pattern"><code>public static <var data-label="return type">returnType</var> <var data-label="method name">methodName</var>(<var data-label="parameter type">type</var> <var>paramName</var>, <var>type</var> <var data-label="parameter name">paramName</var>) {
+    <var data-label="method body">statements</var>
+    return <var data-label="returned value">value</var>;  // omit for void methods
 }</code></pre>
+
+<div class="pattern-parts" markdown>
+
+<var data-find="static [[double]] | static [[void]]">returnType</var>
+:   The type of value the method returns, such as `int` or `double`. Use `void` when the method does not return a value.
+
+<var data-find="[[average]]( | [[greet]](">methodName</var>
+:   Choose a descriptive name in camelCase, such as `average` or `greet`.
+
+<var data-find="[[int]] a | [[int]] b | [[String]] name">type</var>
+:   Each parameter has a type that determines which values can be passed to it.
+
+<var data-find="int [[a]] | int [[b]] | String [[name]]">paramName</var>
+:   A parameter is a variable that receives a value when the method is called. Choose a meaningful name, such as `a`, `b`, or `name`.
+
+<var data-find='[[return (a + b) / 2.0;]] | [[System.out.println("Hello, " + name);]]'>statements</var>
+:   Instructions that run when the method is called. A return statement can be part of the method body.
+
+<var data-find="return [[(a + b) / 2.0]]">value</var>
+:   The expression returned by the method. Its type must be compatible with the return type. Methods declared `void` do not return a value.
+
+</div>
+
+The pattern is a simplified outline: a method does not need other statements before `return`, and in `average` the return statement is the whole body. Leave out `return value;` in a `void` method.
 
 Examples:
 
@@ -212,7 +246,7 @@ public static void greet(String name) {
 }
 ```
 
-- The returned value must match the return type.
+- The returned value must be compatible with the return type.
 - A method that works on an object's fields leaves out `static`. See [Declare a class](classes-and-objects.md#class).
 
 ### Read it word by word { #method-words }
