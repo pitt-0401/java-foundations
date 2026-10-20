@@ -1,6 +1,6 @@
 # Java Foundations
 
-"Java: How do I …?" is a Java syntax cheat sheet for CMPINF 0401. Each section
+"Java: How do I …?" is a Java syntax cheat sheet. Each section
 answers one question with a pattern to copy, an example, and short exercises.
 Nine practice exercises put the topics together in small programs, with tests
 that check your code.
