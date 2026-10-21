@@ -315,7 +315,7 @@
     return choices.length > 1 && correct === 1 ? choices : null;
   }
 
-  function setUpChoices(ul, choices, onSolved) {
+  function setUpChoices(ul, choices, onSolved, onReset) {
     var group = document.createElement("div");
     group.className = "jf-choices";
     group.setAttribute("role", "group");
@@ -363,13 +363,38 @@
         feedback.className = "jf-feedback " + (choice.correct ? "is-right" : "is-wrong");
         feedback.textContent = "";
         feedback.appendChild(text);
+        reset.hidden = false;
       });
       buttons.push(button);
       group.appendChild(button);
     });
 
+    // Reset clears every mark and the feedback, so the question can be tried
+    // again from the start. It appears once an answer has been picked.
+    var reset = document.createElement("button");
+    reset.type = "button";
+    reset.className = "jf-reset";
+    reset.textContent = "Reset";
+    reset.setAttribute("aria-label", "Reset exercise " + number);
+    reset.hidden = true;
+    reset.addEventListener("click", function () {
+      buttons.forEach(function (b, i) {
+        b.classList.remove("is-right", "is-wrong", "is-dim");
+        b.removeAttribute("aria-disabled");
+        b.setAttribute("aria-label", choices[i].lines.join(", then "));
+        var tag = b.querySelector(".jf-tag");
+        if (tag) tag.remove();
+      });
+      feedback.className = "jf-feedback";
+      feedback.textContent = "";
+      reset.hidden = true;
+      buttons[0].focus();
+      onReset();
+    });
+
     ul.replaceWith(group);
     group.after(feedback);
+    feedback.after(reset);
   }
 
   // Progress for a "Your turn" list that has answer buttons. A question is done
@@ -402,7 +427,9 @@
     if (heading) heading.after(progress);
 
     questions.forEach(function (q) {
-      if (q.choices) setUpChoices(q.ul, q.choices, function () { done.add(q.li); update(); });
+      if (q.choices) setUpChoices(q.ul, q.choices,
+        function () { done.add(q.li); update(); },
+        function () { done.delete(q.li); update(); });
     });
     if (answers) {
       answers.addEventListener("toggle", function () {

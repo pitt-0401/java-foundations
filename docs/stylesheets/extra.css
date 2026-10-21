@@ -194,6 +194,10 @@ body[data-md-color-scheme] {
 .md-footer-meta {
   background-color: var(--md-default-bg-color);
 }
+/* Material's copyright grey is too faint to read; use the secondary text grey. */
+.md-copyright {
+  color: var(--md-default-fg-color--light);
+}
 
 /* ---------- Layout ---------- */
 
@@ -700,6 +704,31 @@ body[data-md-color-scheme] {
 }
 .md-typeset .jf-feedback.is-wrong strong:first-child { color: var(--jf-bad); }
 .md-typeset .jf-feedback.is-right strong:first-child { color: var(--jf-ok); }
+/* Reset under the feedback, drawn like the Answers button. */
+.md-typeset .jf-reset {
+  display: block;
+  font: inherit;
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--jf-accent);
+  background: none;
+  border: 1px solid var(--jf-rule-strong);
+  border-radius: 6px;
+  padding: 0.2em 0.8em;
+  margin: 0.7em 0 0;
+  cursor: pointer;
+}
+.md-typeset .jf-reset[hidden] {
+  display: none;
+}
+.md-typeset .jf-reset:hover {
+  border-color: var(--jf-accent);
+  background: var(--jf-hl-soft);
+}
+.md-typeset .jf-reset:focus-visible {
+  outline: 2px solid var(--jf-accent);
+  outline-offset: 3px;
+}
 
 /* ---------- Buttons ---------- */
 
@@ -804,12 +833,6 @@ body[data-md-color-scheme] {
 [dir] .md-typeset .question-index li {
   margin: 0;
   padding: 0.15em 0;
-}
-
-.md-typeset .page-footnote {
-  margin-top: 3em;
-  font-size: 0.9em;
-  color: var(--md-default-fg-color--light);
 }
 
 /*

@@ -5,14 +5,12 @@ site_description: A Java syntax cheat sheet with patterns, examples, short exerc
 repo_url: https://github.com/pitt-0401/java-foundations
 repo_name: java-foundations
 edit_uri: ""   # no "edit this page" links
+copyright: Copyright &copy; 2026 Nadine von Frankenberg
 
 nav:
   - Home: index.md
   - Basics: basics.md
   - Classes and objects: classes-and-objects.md
-  - Arrays: arrays.md
-  - Help: help.md
-  - Practice: practice.md
 
 theme:
   name: material
@@ -64,8 +62,12 @@ markdown_extensions:
   - pymdownx.details
 
 # design-guidelines.md is a contributor document, not a student page.
+# arrays.md, help.md and practice.md are hidden until they are ready for students.
 exclude_docs: |
   design-guidelines.md
+  arrays.md
+  help.md
+  practice.md
 
 extra_css:
   - stylesheets/extra.css

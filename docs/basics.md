@@ -423,7 +423,7 @@ To repeat a fixed number of times, use `for`:
     <var>statements</var>
 }</code></pre>
 
-To visit every element of an array, use for-each (see [Loop through an array](arrays.md#loop-array)):
+To visit every element of an array, use for-each:
 
 <pre class="pattern"><code>for (<var>type</var> <var>item</var> : <var>array</var>) {
     <var>statements</var>

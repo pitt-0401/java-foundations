@@ -1,8 +1,6 @@
 # Java: How do I …?
 
 This page serves as a Java syntax cheat sheet. Each section includes a topic, explains the syntax, and short exercises to help you practice it.
-[practice exercises](practice.md) are small
-programs that combine several topics, with tests that check your code.
 
 If you are new to programming, start at the beginning. You can also use the list
 below to find the topic you need.
@@ -43,27 +41,6 @@ below to find the topic you need.
 - [Use `this`](classes-and-objects.md#this)
 - [Compare values](classes-and-objects.md#compare)
 - [Avoid crashes](classes-and-objects.md#avoid-crashes)
-
-</div>
-
-<div markdown>
-
-### Arrays
-
-- [Create an array](arrays.md#create-array)
-- [Loop through an array](arrays.md#loop-array)
-- [Use a 2D array](arrays.md#2d-array)
-
-### Help
-
-- [Read a compile error](help.md#compile-errors)
-- [Read a runtime error](help.md#runtime-errors)
-- [Avoid common mistakes](help.md#common-mistakes)
-
-### Practice
-
-- [Practice exercises](practice.md)
-- [Approach a problem](practice.md#approach)
 
 </div>
 
@@ -129,10 +106,3 @@ Run `mvn` commands from the course folder (the one that contains `pom.xml`).
    the **Your turn** exercises before you check the the answers.
 2. Compile and run after every few lines. One error at a time is easy to fix;
    twenty at once are typically not.
-3. Once you feel comfortable with a few sections, try a
-   [practice exercise](practice.md) that practices the topics.
-4. When you see an error message, look it up on the [Help](help.md) page.
-
-<p class="page-footnote">Teaching with this site? The
-<a href="https://github.com/pitt-0401/java-foundations/blob/main/INSTRUCTORS.md">instructor
-guide</a> explains how to check the solutions and publish the site.</p>

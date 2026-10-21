@@ -776,9 +776,8 @@ try {
 number, so `parseInt` throws a `NumberFormatException`. Java skips
 `println(age)`, runs the `catch` block, and prints `Invalid number`.
 
-- `prices.length` is the number of elements in an array. See [Create an array](arrays.md#create-array).
+- `prices.length` is the number of elements in an array.
 - `scanner.hasNextInt()` checks that the next input is a whole number. See [Read input](basics.md#input).
-- To understand the error message when a program does crash, see [Runtime errors](help.md#runtime-errors).
 
 <p class="lectures">Lectures 06, 10</p>
 

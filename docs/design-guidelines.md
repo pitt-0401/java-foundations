@@ -191,7 +191,8 @@ the blank.**
   per column. Each group is a small uppercase grey H3 followed by a plain list of
   links (no bullets). The columns sit side by side on wide screens
   (`auto-fit`, at least `14rem` each) and stack on narrow ones.
-- **Footnote:** `<p class="page-footnote">` for the instructor link, small and grey.
+- **Copyright:** set by `copyright` in `mkdocs.yml`; Material shows it in the
+  footer of every page, in the secondary text grey.
 
 ## Tables
 
@@ -381,6 +382,9 @@ Answers box.
   answer is marked "✗ Incorrect", its explanation appears with "Try another
   answer.", and the other answers stay available. The correct answer is marked
   "✓ Correct" and ends the question; earlier wrong picks stay marked.
+- Once an answer is picked, a small **Reset** button (drawn like the Answers
+  button) appears under the feedback. It clears the marks and the feedback,
+  moves focus to the first answer, and takes the question off the progress count.
 - Answered buttons use `aria-disabled` rather than `disabled`, so keyboard focus
   stays where it was; their accessible name adds "Incorrect" or "Correct". The
   feedback is in an `aria-live` region.
