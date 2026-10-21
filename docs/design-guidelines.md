@@ -14,7 +14,9 @@ needed.
 ## Principles
 
 - One accent color, neutral everything else. Green and red appear only on
-  checked answers, always with a text label.
+  checked answers, always with a text label. The one exception is the
+  placeholders of interactive patterns, which have one soft color per kind of
+  placeholder (see "Placeholder colors" below).
 - Plain text, tables, and code blocks rather than cards, badges, or decorative
   boxes.
 - Content first: no hero section, no animation, no decorative icons.
@@ -55,15 +57,16 @@ Colors are set as tokens on `body[data-md-color-scheme]`:
 
 | Token | Light (`default`) | Dark (`slate`) | Used for |
 |---|---|---|---|
-| `--jf-accent` | `#2b4fa3` | `#8db6ee` | Links, placeholders, primary button, current tab and question, focus outlines, Answers buttons, highlighted pattern parts |
-| `--jf-accent-strong` | `#213f86` | `#b8d1f5` | Hover on the primary button, link hover, selected placeholder |
+| `--jf-accent` | `#2b4fa3` | `#8db6ee` | Links, placeholders, primary button, current tab and question, focus outlines, Answers buttons, highlighted parts of placeholders without a kind |
+| `--jf-accent-strong` | `#213f86` | `#b8d1f5` | Hover on the primary button, link hover, current question in the sidebar |
 | `--jf-on-accent` | `#ffffff` | `#0f1b2d` | Text on the primary button, and on hovered or focused buttons (Material's `--md-accent-bg-color` is set to it) |
 | `--jf-rule` | `#e2e5e3` | `#2f3542` | Thin rules: under H2 and patterns, under the header and tabs, footer border |
 | `--jf-rule-strong` | `#858c89` | `#737c90` | Borders of answer buttons and Answers buttons, empty progress ticks |
 | `--jf-note-bg` | `#f4f6fa` | `#222733` | Side notes (blockquotes) |
 | `--jf-code-border` | `#dce1e6` | `#333a48` | The 1 px border around code blocks |
 | `--jf-muted` | `#5b6360` | `#a5adbb` | Code that steps back while a pattern part is highlighted |
-| `--jf-hl-soft`, `--jf-hl`, `--jf-hl-line`, `--jf-hl-line-strong` | `#eef2fb`, `#dfe7f8`, `#d3dcf0`, `#b9c7e8` | `#222c42`, `#2b3956`, `#3b4b6e`, `#52668f` | Placeholder slots (rest, hover or selected, outline, hover outline); answer button hover |
+| `--jf-hl-soft`, `--jf-hl`, `--jf-hl-line` | `#eef2fb`, `#dfe7f8`, `#d3dcf0` | `#222c42`, `#2b3956`, `#3b4b6e` | Slots of placeholders without a kind (tint and outline); answer button hover and press; Answers button hover |
+| `--jf-ph-<kind>-bg`, `-fg`, `-line` | see "Placeholder colors" | see "Placeholder colors" | Interactive placeholders, their explanation line, and their highlighted example code |
 | `--jf-ok`, `--jf-ok-bg` | `#1d6b38`, `#e8f3ec` | `#86d19f`, `#1b2e23` | A correct answer and its "✓ Correct" label |
 | `--jf-bad`, `--jf-bad-bg` | `#a3282c`, `#f9eaea` | `#f2a1a1`, `#3a2326` | A wrong answer and its "✗ Incorrect" label |
 
@@ -125,7 +128,8 @@ Every "How do I …?" section follows the same order. Sections without a pattern
 (the Help sections and "Which kind of variable do I need?") skip step 1.
 
 1. **Pattern:** raw HTML, `<pre class="pattern"><code>…</code></pre>`, with every
-   placeholder wrapped in `<var>`. Placeholders are shown in the accent color and
+   placeholder wrapped in `<var>`. Placeholders are shown in the accent color
+   (interactive patterns use one color per kind; see "Placeholder colors") and
    in italics, so they do not depend on color alone. Escape `<` and `&` inside
    the block. Patterns have no syntax colors; that is intended, so the
    placeholders stand out. A pattern has no box: it sits between the H2 rule and
@@ -205,8 +209,9 @@ with a definition list follows it directly, one term per placeholder:
   shows its explanation in the line under the pattern (announced with
   `aria-live`), and highlights the matching part of every example line up to the
   next heading. Selecting it again, or pressing Escape, clears the selection.
-- Highlighted parts are bold accent text while the rest of the code turns
-  `--jf-muted`. There is no background, so the code does not look selected.
+- Highlighted parts are bold, underlined text in the placeholder's color on its tint,
+  while the rest of the code turns `--jf-muted`. A part inside the highlighted
+  one (`value` inside `statements`) takes the outer part's colors.
 - Which example code belongs to a placeholder is found in one of two ways:
   - **Explicit mapping (`data-find`)**, for multi-line patterns and anything
     the automatic matching cannot do. See below.
@@ -236,6 +241,53 @@ with a definition list follows it directly, one term per placeholder:
 Three sections use interactive patterns: "How do I write a program that runs?"
 and "How do I write a method?" (explicit mapping) and "How do I declare a
 variable?" (automatic).
+
+### Placeholder colors
+
+Each placeholder name belongs to a kind, and each kind has its own soft color.
+The same kind has the same color in every pattern, in the explanation line, and
+in the highlighted example code, so students can match a placeholder to its part
+of the code. Color only reinforces the labels, the explanation line and the
+highlight; it never carries meaning on its own.
+
+| Kind (`data-kind`) | Placeholder names | Color | Light: tint / text / outline | Dark: tint / text / outline |
+|---|---|---|---|---|
+| `return-type` | `returnType` | Amber | `#fbe9c7` / `#8a5a00` / `#d8a63a` | `#42351f` / `#f2c875` / `#b58a3d` |
+| `method-name` | `methodName`, `ClassName` | Blue | `#e6f0fa` / `#1e4f8a` / `#7da6d8` | `#20364d` / `#a6cefa` / `#679ccf` |
+| `type` | `type` | Green | `#e4f4ef` / `#0e6b57` / `#6db8a1` | `#1d3d35` / `#89dec2` / `#55ac91` |
+| `name` | `name`, `paramName` | Purple | `#f6e8f3` / `#8a4f79` / `#c59bbc` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
+| `statements` | `statements` | Teal | `#e8f5fa` / `#2b6f86` / `#8dc7d8` | `#1c3c46` / `#a0dceb` / `#69aabd` |
+| `value` | `value` | Vermillion | `#fbe7e2` / `#8e4737` / `#d29a8d` | `#49302c` / `#f4b6a7` / `#cc8879` |
+
+- The hues follow the Okabe–Ito palette. The tokens are `--jf-ph-<kind>-bg`,
+  `-fg` and `-line` in `extra.css`.
+- The names are mapped to kinds in `KINDS` at the top of the interactive-pattern
+  part of `lesson.js`. To color a new placeholder, add its name there with one of
+  the six kinds; no CSS is needed. Choose the kind by what the placeholder
+  stands for, not by its position. A name that is not listed keeps the accent
+  colors (`--jf-accent` on `--jf-hl-soft`).
+- States: at rest a tint with a thin outline; hover or keyboard preview turns the
+  outline into the text color; selected makes it 2 px. Keyboard focus adds the
+  usual 2 px accent outline outside the slot, so focus and selection look
+  different. Placeholders stay italic in every state.
+- Contrast, measured on the rendered pages: placeholder text on its tint is
+  4.96:1 or more in the light scheme (amber is the lowest) and 6.9:1 or more in
+  the dark scheme. Highlighted example code has the same ratios. The hover and
+  selected outlines (the text color) are 4.96:1 or more against both the tint
+  and the page, so selection is visible in grayscale too. In the light scheme
+  the resting outline is decorative and lighter (about 1.9 to 2.5:1 on white);
+  the italic colored text and the tint mark the slot. In the light scheme the
+  tints are barely lighter or darker than the code background, and highlighted
+  code is close in lightness to the dimmed code, so highlighted parts are also
+  bold and underlined.
+- Some kinds are hard to tell apart for some readers. Teal (`statements`) is
+  close to blue in normal vision and, in simulations, close to purple
+  (protanopia, deuteranopia) or green (tritanopia); amber and vermillion are
+  close under tritanopia, and several tints become nearly identical under every
+  simulated deficiency. This is why every
+  placeholder keeps its name, many have a label underneath, and selecting one
+  explains it in words. Do not remove those cues, and do not put two
+  placeholders whose colors are close next to each other without a label.
 
 ### Explicit mapping with `data-find`
 

@@ -27,6 +27,24 @@
 
   /* ---------- 1. Interactive patterns ---------- */
 
+  // Placeholder colors: each placeholder name belongs to one kind, drawn in that
+  // kind's color in the pattern and in the examples (extra.css, data-kind). The
+  // same name gets the same color on every page. A name not listed here keeps
+  // the accent color; add it here to give it a kind.
+  var KINDS = {
+    returnType: "return-type",
+    methodName: "method-name",
+    ClassName: "method-name",
+    type: "type",
+    name: "name",
+    paramName: "name",
+    statements: "statements",
+    value: "value"
+  };
+  function setKind(el, name) {
+    if (Object.prototype.hasOwnProperty.call(KINDS, name)) el.dataset.kind = KINDS[name];
+  }
+
   // A regular expression for one line of example code, built from the pattern:
   // literal text must match (a run of spaces matches one or more spaces), and
   // each placeholder is a capture group. A placeholder followed by a space is
@@ -77,6 +95,7 @@
         var span = document.createElement("span");
         span.className = "jf-part";
         span.dataset.part = range.name;
+        setKind(span, range.name);
         target.parentNode.insertBefore(span, target);
         span.appendChild(target);
       });
@@ -187,6 +206,7 @@
       button.type = "button";
       button.className = "jf-ph";
       button.dataset.part = name;
+      setKind(button, name);
       button.setAttribute("aria-pressed", "false");
       button.setAttribute("aria-label", name + ", placeholder" + (labels[name] ? ": " + labels[name] : ""));
       button.textContent = name;
@@ -232,6 +252,7 @@
       if (name) {
         var v = document.createElement("var");
         v.textContent = name;
+        setKind(v, name);
         note.innerHTML = ": " + explanations[name];
         note.insertBefore(v, note.firstChild);
       } else {

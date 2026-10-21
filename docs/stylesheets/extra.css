@@ -5,6 +5,7 @@
   One accent color (--jf-accent) is used for links, placeholders, the primary
   button, the current page and question in the navigation, and focus outlines.
   Green and red appear only on checked answers, always with a text label.
+  Placeholders in interactive patterns have one color per kind (--jf-ph-*).
 */
 
 /* Headings use Newsreader; Material loads the text and code fonts (mkdocs.yml). */
@@ -21,15 +22,34 @@ body[data-md-color-scheme="default"] {
   --jf-note-bg: #f4f6fa;
   --jf-muted: #5b6360;           /* 5.6:1 on code, 6.3:1 on white */
   --jf-code-border: #dce1e6;
-  --jf-hl: #dfe7f8;              /* placeholder slot: hover and selected */
-  --jf-hl-soft: #eef2fb;         /* placeholder slot at rest, answer hover */
+  --jf-hl: #dfe7f8;              /* answer button press */
+  --jf-hl-soft: #eef2fb;         /* slot of a placeholder without a kind, answer hover */
   --jf-hl-line: #d3dcf0;
-  --jf-hl-line-strong: #b9c7e8;
   --jf-ok: #1d6b38;
   --jf-ok-bg: #e8f3ec;
   --jf-bad: #a3282c;
   --jf-bad-bg: #f9eaea;
   --jf-dim-bg: #f6f7f6;
+  /* Placeholder kinds (lesson.js): tint, text, outline. Hues follow the
+     Okabe-Ito palette; the text is 4.5:1 or more on its tint. */
+  --jf-ph-return-type-bg: #fbe9c7;      /* amber */
+  --jf-ph-return-type-fg: #8a5a00;
+  --jf-ph-return-type-line: #d8a63a;
+  --jf-ph-method-name-bg: #e6f0fa;      /* blue */
+  --jf-ph-method-name-fg: #1e4f8a;
+  --jf-ph-method-name-line: #7da6d8;
+  --jf-ph-type-bg: #e4f4ef;             /* green */
+  --jf-ph-type-fg: #0e6b57;
+  --jf-ph-type-line: #6db8a1;
+  --jf-ph-name-bg: #f6e8f3;             /* purple */
+  --jf-ph-name-fg: #8a4f79;
+  --jf-ph-name-line: #c59bbc;
+  --jf-ph-statements-bg: #e8f5fa;       /* teal */
+  --jf-ph-statements-fg: #2b6f86;
+  --jf-ph-statements-line: #8dc7d8;
+  --jf-ph-value-bg: #fbe7e2;            /* vermillion */
+  --jf-ph-value-fg: #8e4737;
+  --jf-ph-value-line: #d29a8d;
   --md-typeset-a-color: var(--jf-accent);
   --md-accent-fg-color: var(--jf-accent-strong);
   --md-accent-bg-color: var(--jf-on-accent);   /* text on hovered or focused buttons */
@@ -64,12 +84,29 @@ body[data-md-color-scheme="slate"] {
   --jf-hl: #2b3956;
   --jf-hl-soft: #222c42;
   --jf-hl-line: #3b4b6e;
-  --jf-hl-line-strong: #52668f;
   --jf-ok: #86d19f;
   --jf-ok-bg: #1b2e23;
   --jf-bad: #f2a1a1;
   --jf-bad-bg: #3a2326;
   --jf-dim-bg: #222733;
+  --jf-ph-return-type-bg: #42351f;
+  --jf-ph-return-type-fg: #f2c875;
+  --jf-ph-return-type-line: #b58a3d;
+  --jf-ph-method-name-bg: #20364d;
+  --jf-ph-method-name-fg: #a6cefa;
+  --jf-ph-method-name-line: #679ccf;
+  --jf-ph-type-bg: #1d3d35;
+  --jf-ph-type-fg: #89dec2;
+  --jf-ph-type-line: #55ac91;
+  --jf-ph-name-bg: #422b3f;
+  --jf-ph-name-fg: #e8b5dc;
+  --jf-ph-name-line: #bb83ac;
+  --jf-ph-statements-bg: #1c3c46;
+  --jf-ph-statements-fg: #a0dceb;
+  --jf-ph-statements-line: #69aabd;
+  --jf-ph-value-bg: #49302c;
+  --jf-ph-value-fg: #f4b6a7;
+  --jf-ph-value-line: #cc8879;
   --md-typeset-a-color: var(--jf-accent);
   --md-accent-fg-color: var(--jf-accent-strong);
   --md-accent-bg-color: var(--jf-on-accent);   /* text on hovered or focused buttons */
@@ -325,27 +362,65 @@ body[data-md-color-scheme] {
 .md-typeset pre.pattern.is-row var[data-label]::after {
   font-size: 0.5em;
 }
+/* Each placeholder kind has its own tint, text and outline color (tokens above),
+   used for its slot, its explanation line and its part of the examples. A
+   placeholder without a kind keeps the accent colors. */
+.md-typeset .jf-ph,
+.md-typeset .jf-part {
+  --jf-ph-bg: var(--jf-hl-soft);
+  --jf-ph-fg: var(--jf-accent);
+  --jf-ph-line: var(--jf-hl-line);
+}
+.md-typeset [data-kind="return-type"] {
+  --jf-ph-bg: var(--jf-ph-return-type-bg);
+  --jf-ph-fg: var(--jf-ph-return-type-fg);
+  --jf-ph-line: var(--jf-ph-return-type-line);
+}
+.md-typeset [data-kind="method-name"] {
+  --jf-ph-bg: var(--jf-ph-method-name-bg);
+  --jf-ph-fg: var(--jf-ph-method-name-fg);
+  --jf-ph-line: var(--jf-ph-method-name-line);
+}
+.md-typeset [data-kind="type"] {
+  --jf-ph-bg: var(--jf-ph-type-bg);
+  --jf-ph-fg: var(--jf-ph-type-fg);
+  --jf-ph-line: var(--jf-ph-type-line);
+}
+.md-typeset [data-kind="name"] {
+  --jf-ph-bg: var(--jf-ph-name-bg);
+  --jf-ph-fg: var(--jf-ph-name-fg);
+  --jf-ph-line: var(--jf-ph-name-line);
+}
+.md-typeset [data-kind="statements"] {
+  --jf-ph-bg: var(--jf-ph-statements-bg);
+  --jf-ph-fg: var(--jf-ph-statements-fg);
+  --jf-ph-line: var(--jf-ph-statements-line);
+}
+.md-typeset [data-kind="value"] {
+  --jf-ph-bg: var(--jf-ph-value-bg);
+  --jf-ph-fg: var(--jf-ph-value-fg);
+  --jf-ph-line: var(--jf-ph-value-line);
+}
+/* At rest a tinted slot with a thin outline; hover and focus darken the outline;
+   selected doubles its width. Focus adds the usual accent ring outside the slot. */
 .md-typeset .jf-ph {
   font: inherit;
   font-style: italic;
-  color: var(--jf-accent);
-  background: var(--jf-hl-soft);
-  box-shadow: inset 0 0 0 1px var(--jf-hl-line);
+  color: var(--jf-ph-fg);
+  background: var(--jf-ph-bg);
+  box-shadow: inset 0 0 0 1px var(--jf-ph-line);
   border: 0;
   border-radius: 4px;
   padding: 0 0.16em;
   cursor: pointer;
-  transition: background-color 120ms ease, box-shadow 120ms ease;
+  transition: box-shadow 120ms ease;
 }
 .md-typeset .jf-ph:hover,
 .md-typeset .jf-ph.is-preview {
-  background: var(--jf-hl);
-  box-shadow: inset 0 0 0 1px var(--jf-hl-line-strong);
+  box-shadow: inset 0 0 0 1px var(--jf-ph-fg);
 }
 .md-typeset .jf-ph[aria-pressed="true"] {
-  background: var(--jf-hl);
-  color: var(--jf-accent-strong);
-  box-shadow: inset 0 0 0 1.5px var(--jf-accent);
+  box-shadow: inset 0 0 0 2px var(--jf-ph-fg);
 }
 .md-typeset .jf-ph:focus-visible {
   outline: 2px solid var(--jf-accent);
@@ -396,17 +471,28 @@ body[data-md-color-scheme] {
   font-family: var(--md-code-font-family);
   font-size: 0.92em;
 }
+.md-typeset .jf-note var[data-kind] {
+  color: var(--jf-ph-fg);
+}
 
-/* The matching part of each example line: bold accent text while the rest of
-   the code steps back. No background, so it does not look like selected text. */
+/* The matching part of each example line: bold, underlined text in its kind's
+   color on its kind's tint, while the rest of the code steps back. The underline
+   marks it where the colors are hard to tell apart. A part inside the
+   highlighted one (value inside statements) takes the outer part's colors. */
 .md-typeset code.jf-dim,
 .md-typeset code.jf-dim span {
   color: var(--jf-muted);
 }
-.md-typeset code.jf-dim .jf-part.is-on,
-.md-typeset code.jf-dim .jf-part.is-on * {
-  color: var(--jf-accent);
+.md-typeset code.jf-dim .jf-part.is-on {
+  color: var(--jf-ph-fg);
+  background: var(--jf-ph-bg);
+  border-radius: 2px;
   font-weight: 600;
+  text-decoration: underline 2px;
+  text-underline-offset: 0.2em;
+}
+.md-typeset code.jf-dim .jf-part.is-on * {
+  color: inherit;
 }
 .md-typeset code .jf-part,
 .md-typeset code.jf-dim span {
