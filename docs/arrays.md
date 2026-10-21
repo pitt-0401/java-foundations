@@ -10,7 +10,7 @@ In Java, an array holds a fixed number of elements (values) of the same type in 
 // know only the size
 <var>type</var>[] <var>name</var> = new <var>type</var>[<var>size</var>];
 
-<var>name</var>[<var>index</var>]          // read
+<var>name</var>[<var>index</var>]           // read
 <var>name</var>[<var>index</var>] = <var>value</var>;  // write
 <var>name</var>.length           // size, no ( )</code></pre>
 

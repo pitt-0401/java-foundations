@@ -26,16 +26,17 @@ needed.
 
 | Element | Setting |
 |---|---|
-| Heading font | Newsreader (serif), loaded with `@import` at the top of `extra.css`; also the site name in the header |
-| Body font | Public Sans (`theme.font.text`) |
-| Code font | JetBrains Mono (`theme.font.code`) |
-| Body text | `0.85rem` (17 px at the default size; Material raises the root font size on screens 1600 px and wider), line height `1.65` |
-| H1 | `2.3em`, weight 500, slight negative letter spacing, default text color |
-| H2 | `1.5em`, weight 600, `2.2em` space above, thin rule underneath |
-| H3 | `1.2em`, weight 600, `1.8em` space above |
+| Text font | IBM Plex Sans (`theme.font.text`) for headings, body text, navigation, tables, labels and the site name in the header |
+| Code font | IBM Plex Mono (`theme.font.code`) for code, inline code and patterns; its italic marks placeholders |
+| Font weights | Material loads 300, 400 and 700; the `@import` at the top of `extra.css` adds Plex Sans 500 and 600 and Plex Mono 600 |
+| Body text | `0.825rem` (16.5 px at the default size; Material raises the root font size on screens 1600 px and wider), line height `1.6` |
+| H1 | `2.06em` (34 px), weight 600, slight negative letter spacing, default text color |
+| H2 | `1.4em` (23 px), weight 600, slight negative letter spacing, `2.2em` space above, thin rule underneath |
+| H3 | `1.12em` (18.5 px), weight 600, `1.8em` space above |
 | Bold | weight 600 |
 | Tables | `0.8em` (slightly larger than the theme default) |
-| Inline code | `0.84em` |
+| Code | `0.82em` (13.5 px), inline and in code blocks; code blocks have line height `1.5` |
+| Patterns | `1.09em` (18 px); interactive patterns use the sizes under "Interactive patterns" |
 
 Each page has one H1 (the group name, such as "Basics"). Most H2s are
 "How do I …?" questions; Help uses error-focused questions and Practice uses
@@ -227,8 +228,9 @@ with a definition list follows it directly, one term per placeholder:
   gets it in its accessible name), and choose occurrences
   whose labels do not collide (in the method pattern, the first `type` and the
   second `paramName`). A one-line pattern is larger; a multi-line pattern keeps
-  its indentation, is slightly smaller, and has taller lines to make room for
-  the labels.
+  its indentation, is the body text size, and has taller lines to make room for
+  the labels. It starts below the copy button at every width, so its first line
+  can use the full column; a line still too long scrolls inside the pattern.
 - Only selecting or clearing a placeholder is announced to screen readers;
   hover and focus change the explanation line visually only.
 - The line under the pattern starts as "Italicized words are placeholders.
