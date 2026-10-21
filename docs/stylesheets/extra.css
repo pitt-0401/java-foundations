@@ -25,32 +25,33 @@ body[data-md-color-scheme="default"] {
   --jf-code-border: #dce1e6;
   --jf-hl: #dfe7f8;              /* answer button press */
   --jf-hl-soft: #eef2fb;         /* slot of a placeholder without a kind, answer hover */
-  --jf-hl-line: #d3dcf0;
+  --jf-var-line: #6f88c8;        /* placeholder outline without a kind: 3.5:1 on white */
   --jf-ok: #1d6b38;
   --jf-ok-bg: #e8f3ec;
   --jf-bad: #a3282c;
   --jf-bad-bg: #f9eaea;
   --jf-dim-bg: #f6f7f6;
   /* Placeholder kinds (lesson.js): tint, text, outline. Hues follow the
-     Okabe-Ito palette; the text is 4.5:1 or more on its tint. */
+     Okabe-Ito palette; the text is 4.5:1 or more on its tint, the outline 3:1
+     or more on its tint and on the page. */
   --jf-ph-return-type-bg: #fbe9c7;      /* amber */
   --jf-ph-return-type-fg: #8a5a00;
-  --jf-ph-return-type-line: #d8a63a;
+  --jf-ph-return-type-line: #ac7b1a;
   --jf-ph-method-name-bg: #e6f0fa;      /* blue */
   --jf-ph-method-name-fg: #1e4f8a;
-  --jf-ph-method-name-line: #7da6d8;
+  --jf-ph-method-name-line: #5e89be;
   --jf-ph-type-bg: #e4f4ef;             /* green */
   --jf-ph-type-fg: #0e6b57;
-  --jf-ph-type-line: #6db8a1;
+  --jf-ph-type-line: #439680;
   --jf-ph-name-bg: #f6e8f3;             /* purple */
   --jf-ph-name-fg: #8a4f79;
-  --jf-ph-name-line: #c59bbc;
+  --jf-ph-name-line: #a8759a;
   --jf-ph-statements-bg: #e8f5fa;       /* teal */
   --jf-ph-statements-fg: #2b6f86;
-  --jf-ph-statements-line: #8dc7d8;
+  --jf-ph-statements-line: #5292a7;
   --jf-ph-value-bg: #fbe7e2;            /* vermillion */
   --jf-ph-value-fg: #8e4737;
-  --jf-ph-value-line: #d29a8d;
+  --jf-ph-value-line: #b47567;
   --md-typeset-a-color: var(--jf-accent);
   --md-accent-fg-color: var(--jf-accent-strong);
   --md-accent-bg-color: var(--jf-on-accent);   /* text on hovered or focused buttons */
@@ -84,7 +85,7 @@ body[data-md-color-scheme="slate"] {
   --jf-code-border: #333a48;
   --jf-hl: #2b3956;
   --jf-hl-soft: #222c42;
-  --jf-hl-line: #3b4b6e;
+  --jf-var-line: #6a80b8;
   --jf-ok: #86d19f;
   --jf-ok-bg: #1b2e23;
   --jf-bad: #f2a1a1;
@@ -296,12 +297,23 @@ body[data-md-color-scheme] {
 /*
   Patterns: <pre class="pattern"><code>…</code></pre> with every placeholder in
   <var>. No box, a thin rule underneath (the H2 rule is above), so the pattern
-  reads as the rule the examples follow. Placeholders are in the accent color AND
-  in italics, so the difference does not depend on color alone.
+  reads as the rule the examples follow. Placeholders are upright (italics marks
+  abstract elements in UML) in the accent color AND on a tint with an outline, so
+  the difference does not depend on color alone. The outline is 3:1 or more on
+  the page and the tint. There is no padding: the slot covers the characters'
+  own cells, so the columns of a monospace pattern stay aligned.
 */
 .md-typeset var {
   color: var(--jf-accent);
-  font-style: italic;
+  font-style: normal;
+  background: var(--jf-hl-soft);
+  box-shadow: inset 0 0 0 1px var(--jf-var-line);
+  border-radius: 4px;
+}
+/* In an interactive pattern the button inside the <var> draws the slot. */
+.md-typeset var:has(> .jf-ph) {
+  background: none;
+  box-shadow: none;
 }
 .md-typeset pre.pattern > code {
   background: transparent;
@@ -370,7 +382,7 @@ body[data-md-color-scheme] {
 .md-typeset .jf-part {
   --jf-ph-bg: var(--jf-hl-soft);
   --jf-ph-fg: var(--jf-accent);
-  --jf-ph-line: var(--jf-hl-line);
+  --jf-ph-line: var(--jf-var-line);
 }
 .md-typeset [data-kind="return-type"] {
   --jf-ph-bg: var(--jf-ph-return-type-bg);
@@ -406,7 +418,6 @@ body[data-md-color-scheme] {
    selected doubles its width. Focus adds the usual accent ring outside the slot. */
 .md-typeset .jf-ph {
   font: inherit;
-  font-style: italic;
   color: var(--jf-ph-fg);
   background: var(--jf-ph-bg);
   box-shadow: inset 0 0 0 1px var(--jf-ph-line);
@@ -474,6 +485,8 @@ body[data-md-color-scheme] {
 }
 .md-typeset .jf-note var[data-kind] {
   color: var(--jf-ph-fg);
+  background: var(--jf-ph-bg);
+  box-shadow: inset 0 0 0 1px var(--jf-ph-line);
 }
 
 /* The matching part of each example line: bold, underlined text in its kind's

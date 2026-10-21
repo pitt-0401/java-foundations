@@ -27,7 +27,7 @@ needed.
 | Element | Setting |
 |---|---|
 | Text font | IBM Plex Sans (`theme.font.text`) for headings, body text, navigation, tables, labels and the site name in the header |
-| Code font | IBM Plex Mono (`theme.font.code`) for code, inline code and patterns; its italic marks placeholders |
+| Code font | IBM Plex Mono (`theme.font.code`) for code, inline code and patterns. Placeholders are upright, never italic: in UML, which students also learn, italics marks abstract elements |
 | Font weights | Material loads 300, 400 and 700; the `@import` at the top of `extra.css` adds Plex Sans 500 and 600 and Plex Mono 600 |
 | Body text | `0.825rem` (16.5 px at the default size; Material raises the root font size on screens 1600 px and wider), line height `1.6` |
 | H1 | `2.06em` (34 px), weight 600, slight negative letter spacing, default text color |
@@ -66,7 +66,8 @@ Colors are set as tokens on `body[data-md-color-scheme]`:
 | `--jf-note-bg` | `#f4f6fa` | `#222733` | Side notes (blockquotes) |
 | `--jf-code-border` | `#dce1e6` | `#333a48` | The 1 px border around code blocks |
 | `--jf-muted` | `#5b6360` | `#a5adbb` | Code that steps back while a pattern part is highlighted |
-| `--jf-hl-soft`, `--jf-hl`, `--jf-hl-line` | `#eef2fb`, `#dfe7f8`, `#d3dcf0` | `#222c42`, `#2b3956`, `#3b4b6e` | Slots of placeholders without a kind (tint and outline); answer button hover and press; Answers button hover |
+| `--jf-hl-soft`, `--jf-hl` | `#eef2fb`, `#dfe7f8` | `#222c42`, `#2b3956` | Tint of placeholders without a kind; answer button hover and press; Answers button hover |
+| `--jf-var-line` | `#6f88c8` | `#6a80b8` | Outline of placeholders without a kind (static patterns, the home page, the explanation line, and slots without a kind): 3:1 or more on the page and on the tint |
 | `--jf-ph-<kind>-bg`, `-fg`, `-line` | see "Placeholder colors" | see "Placeholder colors" | Interactive placeholders, their explanation line, and their highlighted example code |
 | `--jf-ok`, `--jf-ok-bg` | `#1d6b38`, `#e8f3ec` | `#86d19f`, `#1b2e23` | A correct answer and its "✓ Correct" label |
 | `--jf-bad`, `--jf-bad-bg` | `#a3282c`, `#f9eaea` | `#f2a1a1`, `#3a2326` | A wrong answer and its "✗ Incorrect" label |
@@ -129,9 +130,11 @@ Every "How do I …?" section follows the same order. Sections without a pattern
 (the Help sections and "Which kind of variable do I need?") skip step 1.
 
 1. **Pattern:** raw HTML, `<pre class="pattern"><code>…</code></pre>`, with every
-   placeholder wrapped in `<var>`. Placeholders are shown in the accent color
-   (interactive patterns use one color per kind; see "Placeholder colors") and
-   in italics, so they do not depend on color alone. Escape `<` and `&` inside
+   placeholder wrapped in `<var>`. Placeholders are upright, in the accent color
+   (interactive patterns use one color per kind; see "Placeholder colors"), on a
+   tint with an outline, so they do not depend on color alone. In a pattern that
+   is not interactive the outline is `--jf-var-line` and the slot has no
+   padding, so aligned comments stay aligned. Escape `<` and `&` inside
    the block. Patterns have no syntax colors; that is intended, so the
    placeholders stand out. A pattern has no box: it sits between the H2 rule and
    a thin rule of its own. Material still adds its copy button. A pattern can be
@@ -233,7 +236,7 @@ with a definition list follows it directly, one term per placeholder:
   can use the full column; a line still too long scrolls inside the pattern.
 - Only selecting or clearing a placeholder is announced to screen readers;
   hover and focus change the explanation line visually only.
-- The line under the pattern starts as "Italicized words are placeholders.
+- The line under the pattern starts as "Highlighted words are placeholders.
   Select a placeholder to highlight its role in the examples." (or "… to see
   what it means." when no example matches). The optional `data-replace-with`
   adds a middle sentence, "Replace them with …", naming what this pattern's
@@ -254,12 +257,12 @@ highlight; it never carries meaning on its own.
 
 | Kind (`data-kind`) | Placeholder names | Color | Light: tint / text / outline | Dark: tint / text / outline |
 |---|---|---|---|---|
-| `return-type` | `returnType` | Amber | `#fbe9c7` / `#8a5a00` / `#d8a63a` | `#42351f` / `#f2c875` / `#b58a3d` |
-| `method-name` | `methodName`, `ClassName` | Blue | `#e6f0fa` / `#1e4f8a` / `#7da6d8` | `#20364d` / `#a6cefa` / `#679ccf` |
-| `type` | `type` | Green | `#e4f4ef` / `#0e6b57` / `#6db8a1` | `#1d3d35` / `#89dec2` / `#55ac91` |
-| `name` | `name`, `paramName` | Purple | `#f6e8f3` / `#8a4f79` / `#c59bbc` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
-| `statements` | `statements` | Teal | `#e8f5fa` / `#2b6f86` / `#8dc7d8` | `#1c3c46` / `#a0dceb` / `#69aabd` |
-| `value` | `value` | Vermillion | `#fbe7e2` / `#8e4737` / `#d29a8d` | `#49302c` / `#f4b6a7` / `#cc8879` |
+| `return-type` | `returnType` | Amber | `#fbe9c7` / `#8a5a00` / `#ac7b1a` | `#42351f` / `#f2c875` / `#b58a3d` |
+| `method-name` | `methodName`, `ClassName` | Blue | `#e6f0fa` / `#1e4f8a` / `#5e89be` | `#20364d` / `#a6cefa` / `#679ccf` |
+| `type` | `type` | Green | `#e4f4ef` / `#0e6b57` / `#439680` | `#1d3d35` / `#89dec2` / `#55ac91` |
+| `name` | `name`, `paramName` | Purple | `#f6e8f3` / `#8a4f79` / `#a8759a` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
+| `statements` | `statements` | Teal | `#e8f5fa` / `#2b6f86` / `#5292a7` | `#1c3c46` / `#a0dceb` / `#69aabd` |
+| `value` | `value` | Vermillion | `#fbe7e2` / `#8e4737` / `#b47567` | `#49302c` / `#f4b6a7` / `#cc8879` |
 
 - The hues follow the Okabe–Ito palette. The tokens are `--jf-ph-<kind>-bg`,
   `-fg` and `-line` in `extra.css`.
@@ -271,14 +274,16 @@ highlight; it never carries meaning on its own.
 - States: at rest a tint with a thin outline; hover or keyboard preview turns the
   outline into the text color; selected makes it 2 px. Keyboard focus adds the
   usual 2 px accent outline outside the slot, so focus and selection look
-  different. Placeholders stay italic in every state.
+  different. Placeholders are upright in every state.
 - Contrast, measured on the rendered pages: placeholder text on its tint is
   4.96:1 or more in the light scheme (amber is the lowest) and 6.9:1 or more in
   the dark scheme. Highlighted example code has the same ratios. The hover and
   selected outlines (the text color) are 4.96:1 or more against both the tint
-  and the page, so selection is visible in grayscale too. In the light scheme
-  the resting outline is decorative and lighter (about 1.9 to 2.5:1 on white);
-  the italic colored text and the tint mark the slot. In the light scheme the
+  and the page, so selection is visible in grayscale too. The resting outline
+  is 3.1:1 or more against both the tint and the page in both schemes (light:
+  3.10 vermillion to 3.14 amber on the tint; dark: 3.79 or more), so a slot is
+  visible without color; it stays lighter (light scheme) or darker (dark scheme)
+  than the hover outline. In the light scheme the
   tints are barely lighter or darker than the code background, and highlighted
   code is close in lightness to the dimmed code, so highlighted parts are also
   bold and underlined.
