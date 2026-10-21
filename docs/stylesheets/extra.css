@@ -304,11 +304,16 @@ body[data-md-color-scheme] {
   own cells, so the columns of a monospace pattern stay aligned.
 */
 .md-typeset var {
+  font-family: var(--md-code-font-family);
   color: var(--jf-accent);
   font-style: normal;
   background: var(--jf-hl-soft);
   box-shadow: inset 0 0 0 1px var(--jf-var-line);
   border-radius: 4px;
+}
+/* A placeholder in running text is the size of inline code. */
+.md-typeset p > var {
+  font-size: 0.84em;
 }
 /* In an interactive pattern the button inside the <var> draws the slot. */
 .md-typeset var:has(> .jf-ph) {

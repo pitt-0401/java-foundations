@@ -69,7 +69,7 @@ below to find the topic you need.
 
 </div>
 
-In a pattern, a highlighted word such as <var>ClassName</var> is a placeholder:
+In a pattern, a boxed word such as <var>ClassName</var> is a placeholder:
 replace it with your own name, type, or value. 
 Type everything else exactly as it is shown.
 

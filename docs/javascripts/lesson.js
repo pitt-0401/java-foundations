@@ -232,7 +232,7 @@
     // The middle sentence names what the placeholders stand for, so it comes from
     // the page: <div class="pattern-parts" data-replace-with="…">.
     var replaceWith = partsBox.dataset.replaceWith;
-    var defaultNote = "Highlighted words are placeholders. " +
+    var defaultNote = "Boxed words are placeholders. " +
       (replaceWith ? "Replace them with " + replaceWith + ". " : "") +
       (examples.length ? "Select a placeholder to highlight its role in the examples." : "Select a placeholder to see what it means.");
     note.textContent = defaultNote;

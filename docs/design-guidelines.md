@@ -27,7 +27,7 @@ needed.
 | Element | Setting |
 |---|---|
 | Text font | IBM Plex Sans (`theme.font.text`) for headings, body text, navigation, tables, labels and the site name in the header |
-| Code font | IBM Plex Mono (`theme.font.code`) for code, inline code and patterns. Placeholders are upright, never italic: in UML, which students also learn, italics marks abstract elements |
+| Code font | IBM Plex Mono (`theme.font.code`) for code, inline code, patterns and every placeholder (`<var>`), including one in running text. Placeholders are upright, never italic: in UML, which students also learn, italics marks abstract elements |
 | Font weights | Material loads 300, 400 and 700; the `@import` at the top of `extra.css` adds Plex Sans 500 and 600 and Plex Mono 600 |
 | Body text | `0.825rem` (16.5 px at the default size; Material raises the root font size on screens 1600 px and wider), line height `1.6` |
 | H1 | `2.06em` (34 px), weight 600, slight negative letter spacing, default text color |
@@ -236,7 +236,7 @@ with a definition list follows it directly, one term per placeholder:
   can use the full column; a line still too long scrolls inside the pattern.
 - Only selecting or clearing a placeholder is announced to screen readers;
   hover and focus change the explanation line visually only.
-- The line under the pattern starts as "Highlighted words are placeholders.
+- The line under the pattern starts as "Boxed words are placeholders.
   Select a placeholder to highlight its role in the examples." (or "… to see
   what it means." when no example matches). The optional `data-replace-with`
   adds a middle sentence, "Replace them with …", naming what this pattern's
