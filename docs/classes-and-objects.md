@@ -79,7 +79,7 @@ closes it:
   <li><span class="anatomy-label">Class: <code>public class Car { … }</code></span>
     <ul>
       <li><span class="anatomy-label">Fields: <code>private String model;</code></span>
-        Declarations only, directly inside the class.</li>
+        Declarations only, directly in the class body.</li>
       <li><span class="anatomy-label">Constructor: <code>public Car(String model, int year) { … }</code></span>
         <ul>
           <li><span class="anatomy-label">Statements</span> <code>this.model = model;</code><br><code>this.year = year;</code></li>
@@ -94,11 +94,12 @@ closes it:
   </li>
 </ul>
 
-- Fields, constructors, and methods go inside the class braces, next to each
-  other. A method never goes inside another method.
-- Statements such as `speed = 10;` or `System.out.println(...)` go only inside a
-  constructor or a method. A statement directly in the class body gives
-  `error: <identifier> expected`.
+- Fields, constructors, and methods are declared directly in the class body,
+  the outermost block. You can't declare a method inside another method.
+- Statements such as `speed = 10;` and `System.out.println(...);` belong in the
+  body of a constructor or method. A field declaration can include a starting
+  value, as in `private int speed = 0;`, but a separate statement directly in
+  the class body gives `error: <identifier> expected`.
 
 ### Read it word by word
 
@@ -108,19 +109,20 @@ private String model;
 
 | Part | Meaning |
 |---|---|
-| `private` | Only code inside `Car` can use it. |
-| `String` | The type of value it holds. |
+| `private` | Access modifier: only code in the `Car` class can use this field. |
+| `String` | The data type: the kind of value `model` holds. A `String` is text. |
 | `model` | The name you choose, in camelCase. |
 | `;` | Ends the declaration. |
 
-The constructor line is explained in
-[Write a constructor](#constructor-words), and the method line in
+The same breakdown for a constructor is in
+[Write a constructor](#constructor-words), and for a method in
 [Write a method](basics.md#method-words).
 
 ### Build it step by step
 
-Write a class in small steps and compile after each one. Each step below
-compiles, and the new lines are highlighted.
+Build a class a few lines at a time and compile after each step, so any error
+is easy to find. Each version below compiles on its own; the new lines are
+highlighted.
 
 Step 1: the empty class.
 
@@ -129,7 +131,7 @@ public class Car {
 }
 ```
 
-Step 2: add the fields between the braces.
+Step 2: add the fields inside the class body.
 
 ```java hl_lines="2 3 4"
 public class Car {
@@ -154,7 +156,7 @@ public class Car {
 }
 ```
 
-Step 4: add a method below the constructor, still inside the class braces.
+Step 4: add the `drive` method below the constructor, still inside the class body.
 The result is the `Car` class at the top of this section.
 
 <p class="lectures">Lectures 07, 08</p>
@@ -416,7 +418,7 @@ public void setSpeed(int speed) {
 }
 ```
 
-- `private` means only this class can use it. `public` means every class can.
+- `private` means only code in this class can use the field or method. `public` means code in any class can.
 - Not every field needs a setter.
 
 <p class="lectures">Lecture 08</p>
@@ -473,7 +475,7 @@ System.out.println(car2);  // Car [model: Roadster]
 ```
 
 - `println` calls `toString()` for you.
-- Write it exactly like this: named `toString`, returns a `String`, takes no parameters.
+- Write it exactly like this: `public`, named `toString`, returns a `String`, takes no parameters.
 
 <p class="lectures">Lecture 08</p>
 
@@ -640,7 +642,8 @@ One constructor can also call another with `this(...)`:
 public Student() { this("Unknown", 0); }
 ```
 
-The `this(...)` call must be the first statement in the constructor.
+Put the `this(...)` call first in the constructor. Java 21, which this course
+uses, requires that; Java 25 and later relax the rule.
 
 <p class="lectures">Lecture 09</p>
 
@@ -725,7 +728,8 @@ Objects are stored as references. `==` asks whether two references point to the 
 
 ## How do I keep my program from crashing? { #avoid-crashes }
 
-Option 1: check first. Use this for problems you can predict.
+Option 1: check first. Use an `if` when you can test for the problem before the
+operation runs.
 
 ```java
 if (car != null) {
@@ -737,9 +741,17 @@ if (i < prices.length) {
 if (scanner.hasNextInt()) {
     age = scanner.nextInt();
 }
+if (count != 0) {
+    int average = sum / count;
+} else {
+    System.out.println("count is 0");
+}
 ```
 
-Option 2: `try` / `catch`. Use this for problems you can't predict.
+Option 2: `try` / `catch`. Use this when an operation can throw an exception
+that you want to handle instead of letting the program crash. If a statement in
+the `try` block throws the type of exception you catch, Java skips the rest of
+the `try` block and runs the `catch` block.
 
 <pre class="pattern"><code>try {
     <var>risky statements;</var>
@@ -753,11 +765,16 @@ Example:
 
 ```java
 try {
-    int average = sum / count;
-} catch (ArithmeticException e) {
-    System.out.println("count is 0");
+    int age = Integer.parseInt("abc");
+    System.out.println(age);
+} catch (NumberFormatException e) {
+    System.out.println("Invalid number");
 }
 ```
+
+`Integer.parseInt` converts text such as `"42"` into an `int`. `"abc"` isn't a
+number, so `parseInt` throws a `NumberFormatException`. Java skips
+`println(age)`, runs the `catch` block, and prints `Invalid number`.
 
 - `prices.length` is the number of elements in an array. See [Create an array](arrays.md#create-array).
 - `scanner.hasNextInt()` checks that the next input is a whole number. See [Read input](basics.md#input).

@@ -34,7 +34,7 @@ needed.
 | H2 | `1.4em` (23 px), weight 600, slight negative letter spacing, `2.2em` space above, thin rule underneath |
 | H3 | `1.12em` (18.5 px), weight 600, `1.8em` space above |
 | Bold | weight 600 |
-| Tables | `0.8em` (slightly larger than the theme default) |
+| Tables | `0.8em` (slightly larger than the theme default); code in tables `0.92em` of that (about 12 px); header weight 600 |
 | Code | `0.82em` (13.5 px), inline and in code blocks; code blocks have line height `1.5` |
 | Patterns | `1.09em` (18 px); interactive patterns use the sizes under "Interactive patterns" |
 
@@ -82,10 +82,15 @@ numbers `#0b6370` 6.2:1, strings `#2f6b1f` 5.8:1, comments `#5d6561` 5.4:1;
 function names, operators and punctuation use the code text color. Placeholder
 slots, answer states and highlighted pattern parts are all 4.7:1 or above in both
 schemes. Borders of answer buttons and Answers buttons (`--jf-rule-strong`) are
-3.4:1 (light) and 3.8:1 (dark), so the controls are recognizable. Dark-scheme code comments are 4.58:1, the closest to the limit, so do
-not lighten them further. In the dark scheme, Material's number and constant code
-colors are lightened (`#ec7a6d`, `#a08fe8`) to reach 5.1:1 on the code
-background. Keep all text at 4.5:1 or above.
+3.4:1 (light) and 3.8:1 (dark), so the controls are recognizable. Dark code
+colors follow the same scheme as light ones: keywords and constants `#e0a36b`
+6.5:1, numbers `#5cc0cc` 6.7:1, Material's green strings 5.1:1, and function
+names, operators and punctuation in the code text color. Highlighted lines
+(`hl_lines`) use `--jf-hl` (light) and `--jf-hl-soft` (dark) with a 2 px
+`--jf-accent` bar; the dark tint is the darker one because dark-scheme code
+comments are 4.58:1 on code and 4.53:1 on highlighted lines, the closest to the
+limit, so do not lighten either. Keep all text at 4.5:1 or above, on highlighted
+lines too.
 
 Do not use color alone to show meaning; pair it with text.
 
@@ -118,6 +123,8 @@ pages; change the shared rule instead.
   on a cool grey background with a 1 px `--jf-code-border` border and 6 px
   corners.
 - A block title (`title="Car.java"`) is shown as a small grey label above the code.
+- Line numbers (`linenums="1"`) use the code's size and line height, so each
+  number stays beside its line, and sit inside the same bordered box.
 - Compiler and runtime output goes in `text` blocks with the real output.
 - Code blocks scroll sideways inside their own box when a line is too long; the
   page itself never scrolls. Do not make code or output blocks wrap: wrapping
@@ -230,7 +237,9 @@ with a definition list follows it directly, one term per placeholder:
   more than once, put the label on one occurrence only (every occurrence still
   gets it in its accessible name), and choose occurrences
   whose labels do not collide (in the method pattern, the first `type` and the
-  second `paramName`). A one-line pattern is larger; a multi-line pattern keeps
+  second `paramName`). Keep each line of a multi-line pattern to about 36
+  characters where Java allows, so its placeholders fit a 390 px phone; the method
+  pattern puts each parameter on its own line for this reason. A one-line pattern is larger; a multi-line pattern keeps
   its indentation, is the body text size, and has taller lines to make room for
   the labels. It starts below the copy button at every width, so its first line
   can use the full column; a line still too long scrolls inside the pattern.
@@ -411,7 +420,8 @@ match with `<ol start="3" markdown>` and `<li markdown="block">`.
   drawer.
 - On phones, patterns keep the content margins (other code blocks run to the
   screen edge) and start below Material's copy button, so the button never
-  covers pattern text; a one-line interactive pattern gets smaller, and answer buttons
+  covers pattern text; a one-line interactive pattern gets smaller (its labels
+  stay at about 11.5 px, with wider word spacing to keep them apart), and answer buttons
   share the width in three equal columns.
 - The question index stacks into one column on narrow screens.
 - Code blocks and tables scroll inside their own containers.

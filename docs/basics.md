@@ -205,7 +205,9 @@ Use `double seats = 40.5;`, or write `(int) 40.5` if you want `40`.
 
 ## How do I write a method? { #method }
 
-<pre class="pattern"><code>public static <var data-label="return type">returnType</var> <var data-label="method name">methodName</var>(<var data-label="parameter type">type</var> <var>paramName</var>, <var>type</var> <var data-label="parameter name">paramName</var>) {
+<pre class="pattern"><code>public static <var data-label="return type">returnType</var> <var data-label="method name">methodName</var>(
+        <var data-label="parameter type">type</var> <var>paramName</var>,
+        <var>type</var> <var data-label="parameter name">paramName</var>) {
     <var data-label="method body">statements</var>
     return <var data-label="returned value">value</var>;  // omit for void methods
 }</code></pre>
@@ -296,10 +298,10 @@ public static double average(int a, int b) {
 
 | Situation | Pattern | Example |
 |---|---|---|
-| static, same class | `methodName(args);` | `greet("Taylor");` |
-| static, other class | `ClassName.methodName(args);` | `Car.getTotalCars();` |
-| on an object | `object.methodName(args);` | `car1.drive();` |
-| keep the result | `type var = methodName(args);` | `double avg = average(4, 7);` |
+| static, same class | <code><var>methodName</var>(<var>args</var>);</code> | `greet("Taylor");` |
+| static, other class | <code><var>ClassName</var>.<var>methodName</var>(<var>args</var>);</code> | `Car.getTotalCars();` |
+| on an object | <code><var>object</var>.<var>methodName</var>(<var>args</var>);</code> | `car1.drive();` |
+| keep the result | <code><var>type</var> <var>var</var> = <var>methodName</var>(<var>args</var>);</code> | `double avg = average(4, 7);` |
 
 Parameter vs argument:
 

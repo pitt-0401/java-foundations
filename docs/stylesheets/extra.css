@@ -71,6 +71,9 @@ body[data-md-color-scheme="default"] {
   --md-code-hl-variable-color: var(--md-code-fg-color);
   --md-code-hl-operator-color: var(--md-code-fg-color);
   --md-code-hl-punctuation-color: var(--md-code-fg-color);
+  /* Highlighted lines (hl_lines): the accent tint with an accent bar. */
+  --md-code-hl-color: var(--jf-accent);
+  --md-code-hl-color--light: var(--jf-hl);
 }
 
 body[data-md-color-scheme="slate"] {
@@ -112,9 +115,20 @@ body[data-md-color-scheme="slate"] {
   --md-typeset-a-color: var(--jf-accent);
   --md-accent-fg-color: var(--jf-accent-strong);
   --md-accent-bg-color: var(--jf-on-accent);   /* text on hovered or focused buttons */
-  /* Two of Material's dark code colors are just under 4.5:1 on the code background. */
-  --md-code-hl-number-color: #ec7a6d;    /* 5.1:1 */
-  --md-code-hl-constant-color: #a08fe8;  /* 5.1:1 */
+  /* Code colors follow the light scheme: keywords and constants warm, numbers
+     teal, strings green, everything else the code text color. Each is 4.5:1 or
+     more on the code background and on highlighted lines. */
+  --md-code-hl-keyword-color: #e0a36b;   /* 6.5:1 */
+  --md-code-hl-constant-color: #e0a36b;
+  --md-code-hl-number-color: #5cc0cc;    /* 6.7:1 */
+  --md-code-hl-function-color: var(--md-code-fg-color);
+  --md-code-hl-name-color: var(--md-code-fg-color);
+  --md-code-hl-variable-color: var(--md-code-fg-color);
+  --md-code-hl-operator-color: var(--md-code-fg-color);
+  --md-code-hl-punctuation-color: var(--md-code-fg-color);
+  /* A darker tint than the light scheme's, so comments stay above 4.5:1. */
+  --md-code-hl-color: var(--jf-accent);
+  --md-code-hl-color--light: var(--jf-hl-soft);
   /* Header and footer match the page instead of a colored bar. */
   --md-primary-fg-color: #1a1e27;
   --md-primary-fg-color--light: #1a1e27;
@@ -207,9 +221,20 @@ body[data-md-color-scheme] {
   line-height: 1.6;
 }
 
-/* Tables: slightly larger text than the theme default. */
+/* Tables: slightly larger text than the theme default. Code in a table is a
+   little larger relative to it than in running text (about 12px). */
 .md-typeset table:not([class]) {
   font-size: 0.8em;
+}
+.md-typeset table:not([class]) code {
+  font-size: 0.92em;
+}
+/* A placeholder in a narrow table cell wraps as a whole, not mid-word. */
+.md-typeset table:not([class]) code var {
+  display: inline-block;
+}
+.md-typeset table:not([class]) th {
+  font-weight: 600;
 }
 
 .md-typeset h1,
@@ -276,6 +301,18 @@ body[data-md-color-scheme] {
   border-radius: 6px;
 }
 
+/* Line numbers (linenums="1"): the same size and line height as the code, so
+   each number stays beside its line, and inside the same bordered box. */
+.md-typeset .highlighttable .linenos {
+  font-size: 0.82em;
+  border: 1px solid var(--jf-code-border);
+  border-right: 0;
+  border-radius: 6px 0 0 6px;
+}
+.md-typeset .highlighttable .linenodiv pre {
+  line-height: 1.5;
+}
+
 /* Titles on code blocks (title="Car.java"). */
 .md-typeset .highlight span.filename {
   font-size: 0.75em;
@@ -327,6 +364,10 @@ body[data-md-color-scheme] {
   border-radius: 0;
   font-size: 1.09em;             /* 18px */
   padding: 0.5em 0 0.9em;
+}
+/* A pattern has no box, so the copy button has no box behind it either. */
+.md-typeset pre.pattern .md-code__nav {
+  background: none;
 }
 
 /*
@@ -701,6 +742,10 @@ body[data-md-color-scheme] {
   outline-offset: 2px;
   border-radius: 2px;
 }
+/* Buttons keep their own corners on focus; the outline follows them. */
+.md-typeset .md-button:focus-visible {
+  border-radius: 4px;
+}
 
 /* Material removes the outline from "Back to top"; keep its pill shape. */
 .md-top:focus-visible {
@@ -815,10 +860,10 @@ body[data-md-color-scheme] {
 @media screen and (max-width: 30em) {
   .md-typeset pre.pattern.is-row > code {
     font-size: 1em;
-    word-spacing: 0.6em;
+    word-spacing: 1em;
   }
   .md-typeset pre.pattern.is-row var[data-label]::after {
-    font-size: 0.55em;
+    font-size: 0.7em;            /* 11.5px, as wide as the spacing allows */
   }
   .md-typeset .jf-choices {
     grid-template-columns: repeat(3, minmax(0, 1fr));
