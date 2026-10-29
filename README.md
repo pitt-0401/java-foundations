@@ -5,8 +5,6 @@ answers one question with a pattern to copy, an example, and short exercises.
 
 **Website:** <https://pitt-0401.github.io/java-foundations/>. Start there.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/pitt-0401/java-foundations)
-
 ## Contents
 
 | Page | Questions |

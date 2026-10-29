@@ -168,13 +168,13 @@ already reading:
   boxes (accent border outside, grey borders inside, note background for the
   innermost boxes). Each box starts with a bold `.anatomy-label`, so the nesting
   is clear without the borders, and screen readers announce a real nested list.
-- **Read it word by word:** the line as a `java` block, then a two-column
+- **What each word means:** the line as a `java` block, then a two-column
   `| Part | Meaning |` table with one row per word or symbol. Do not put the
   whole line in the table header; it wraps badly on phones. Keep every row
   even when the section's pattern is interactive: the pattern's explanations
   appear only after a placeholder is selected, so the table is the explanation
   students see without clicking.
-- **Build it step by step:** numbered steps, each a complete `java` block that
+- **Write it one step at a time:** numbered steps, each a complete `java` block that
   compiles (the last step may point to the finished example at the top of the
   section instead of repeating it), with the new lines marked by `hl_lines` (from
   `pymdownx.highlight`). The lead-in sentence names what was added, so the
@@ -186,7 +186,8 @@ the blank.**
 
 ## Home page components
 
-- **Buttons:** Codespaces (primary) and local setup, at the top.
+- **Button:** local setup (primary), at the top. A Codespaces button and setup
+  option are left out until Codespaces has been tested.
 - **Question index:** `<div class="question-index">` holds one `<div markdown>`
   per column. Each group is a small uppercase grey H3 followed by a plain list of
   links (no bullets). The columns sit side by side on wide screens

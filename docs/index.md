@@ -5,8 +5,7 @@ This page serves as a Java syntax cheat sheet. Each section includes a topic, ex
 If you are new to programming, start at the beginning. You can also use the list
 below to find the topic you need.
 
-[Open in GitHub Codespaces](https://codespaces.new/pitt-0401/java-foundations){ .md-button .md-button--primary }
-[Set up on your own computer](#setup){ .md-button }
+[Set up on your own computer](#setup){ .md-button .md-button--primary }
 
 ## How do I …? { #questions }
 
@@ -54,14 +53,8 @@ Type everything else exactly as it is shown.
 
 You need >= Java 21 (the JDK: the compiler and the runtime that runs Java
 programs), Maven (a tool that runs the automated tests), and a code editor.
-You can use them in the browser or install them yourself.
 
-### OPTION 1: Browser
-**GitHub Codespaces** runs everything in your browser, which means you do not need to
-install anything. You do need a GitHub account that you are logged in in your browser session. Ideally, also sign up for the student pack via GitHub Education. Then select **Open in GitHub Codespaces** (button above) and wait 1-2 minutes until setup is complete. 
-GitHub Codespaces includes a limited number of free hours each month; when you finish, click **Codespaces** in the bottom-left corner and choose **Stop Current Codespace**.
-
-### OPTION 2: Your own computer
+### Install on your own computer
 
 1. Download the course files: on the repository page, choose
    **Code > Download ZIP** and unzip it, or clone the repository with Git.
@@ -103,6 +96,6 @@ Run `mvn` commands from the course folder (the one that contains `pom.xml`).
 ## How to practice
 
 1. For the best learning experience, read a section and type its example yourself instead of copying it. Then do
-   the **Your turn** exercises before you check the the answers.
+   the **Your turn** exercises before you check the answers.
 2. Compile and run after every few lines. One error at a time is easy to fix;
    twenty at once are typically not.

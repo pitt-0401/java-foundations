@@ -1,6 +1,6 @@
 # Basics
 
-The syntax almost every program uses: running a program, variables, methods, decisions, loops, input and output.
+This page covers the syntax that most Java programs use: running a program, variables, methods, decisions, loops, input and output.
 
 ## How do I write a program that runs? { #program }
 
@@ -13,7 +13,7 @@ The syntax almost every program uses: running a program, variables, methods, dec
 <div class="pattern-parts" markdown>
 
 <var data-find="class [[CarRace]]">ClassName</var>
-:   Choose a class name, such as `CarRace`. If the class is public, save the file with the same name: `CarRace.java`.
+:   Choose a class name, such as `CarRace`. If the class is public, you must save it in a file with the same name: `CarRace.java`.
 
 <var data-find='[[System.out.println("Ready!");]]'>statements</var>
 :   Write the instructions you want Java to execute inside `main`. Java starts running this program in the `main` method.
@@ -251,7 +251,7 @@ public static void greet(String name) {
 - The returned value must be compatible with the return type.
 - A method that works on an object's fields leaves out `static`. See [Declare a class](classes-and-objects.md#class).
 
-### Read it word by word { #method-words }
+### What each word means { #method-words }
 
 ```java
 public static double average(int a, int b) {

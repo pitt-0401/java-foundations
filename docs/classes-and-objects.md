@@ -1,6 +1,10 @@
 # Classes and objects
 
-A class describes a kind of object: the data it keeps and what it can do. You write the class once and then create as many objects from it as you need.
+A class describes the structure of an object. You can think of it as a data type
+you define yourself. It sets out the data each object keeps (its fields, also
+called instance variables) and what each object can do (its methods, also
+called instance methods). You write the class once and then create as many
+objects from it as you need.
 
 ## How do I declare a class? { #class }
 
@@ -50,7 +54,7 @@ The same class as a UML class diagram:
 | `- model: String`<br>`- year: int`<br>`- speed: int` |
 | `+ drive()` |
 
-In UML, `-` means `private` and `+` means `public`.
+In a UML class diagram, `-` means `private` and `+` means `public`.
 
 The full `Car` class used on this page, with a `CarRace` program that uses it, is in
 `examples/car/`. To run it, go to the repository folder and enter:
@@ -61,14 +65,15 @@ javac Car.java CarRace.java
 java CarRace
 ```
 
-- Write the class name in PascalCase: `Car`, `CarRace`.
-- The file name must match the class name. `public class Car` in `Cars.java`
-  gives `error: class Car is public, should be declared in a file named Car.java`.
-- `Car` has no `main` method, so `java Car` can't run it:
-  `Error: Main method not found in class Car`. `Car` only describes the objects.
-  A separate class with `main`, here `CarRace`, creates and uses them.
-- Don't put `static` on fields or methods that belong to each object.
-- Methods work as described in [Write a method](basics.md#method).
+- Write the class name in PascalCase: `Car`, `CarRace`
+- The file name must match the class name: `public class Car` in `Cars.java`
+  gives `error: class Car is public, should be declared in a file named Car.java`
+- `Car` has no `main` method, so `java Car` gives
+  `Error: Main method not found in class Car`
+- `Car` only describes the objects; a separate class with `main`, here
+  `CarRace`, creates and uses them
+- Don't put `static` on fields or methods that belong to each object
+- Methods work as described in [Write a method](basics.md#method)
 
 ### Where each part goes
 
@@ -95,13 +100,13 @@ closes it:
 </ul>
 
 - Fields, constructors, and methods are declared directly in the class body,
-  the outermost block. You can't declare a method inside another method.
+  the outermost block.
 - Statements such as `speed = 10;` and `System.out.println(...);` belong in the
   body of a constructor or method. A field declaration can include a starting
   value, as in `private int speed = 0;`, but a separate statement directly in
   the class body gives `error: <identifier> expected`.
 
-### Read it word by word
+### What each word means
 
 ```java
 private String model;
@@ -118,7 +123,7 @@ The same breakdown for a constructor is in
 [Write a constructor](#constructor-words), and for a method in
 [Write a method](basics.md#method-words).
 
-### Build it step by step
+### Write it one step at a time
 
 Build a class a few lines at a time and compile after each step, so any error
 is easy to find. Each version below compiles on its own; the new lines are
@@ -294,7 +299,7 @@ public Car(String model, int year) {
 - It runs when you write `new`.
 - If you write no constructor at all, Java adds an empty no-arg constructor for you.
 
-### Read it word by word { #constructor-words }
+### What each word means { #constructor-words }
 
 ```java
 public Car(String model, int year) {
