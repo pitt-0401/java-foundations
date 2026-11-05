@@ -19,6 +19,7 @@ below to find the topic you need.
 - [Declare a variable](basics.md#variable)
 - [Write a method](basics.md#method)
 - [Call a method](basics.md#call-method)
+- [Use a parameter](basics.md#parameter)
 - [Make a decision](basics.md#decision)
 - [Repeat something](basics.md#repeat)
 - [Read input](basics.md#input)
@@ -40,6 +41,16 @@ below to find the topic you need.
 - [Use `this`](classes-and-objects.md#this)
 - [Compare values](classes-and-objects.md#compare)
 - [Avoid crashes](classes-and-objects.md#avoid-crashes)
+
+</div>
+
+<div markdown>
+
+### Arrays
+
+- [Create an array](arrays.md#create-array)
+- [Loop through an array](arrays.md#loop-array)
+- [Use a 2D array](arrays.md#2d-array)
 
 </div>
 

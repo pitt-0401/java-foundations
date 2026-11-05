@@ -1,29 +1,54 @@
 # Classes and objects
 
-A class describes the structure of an object. You can think of it as a data type
-you define yourself. It sets out the data each object keeps (its fields, also
-called instance variables) and what each object can do (its methods, also
-called instance methods). You write the class once and then create as many
-objects from it as you need.
+A class describes the structure of an object, like a blueprint. Classes allow you
+to define your own data types. A class defines the data each object stores (its
+attributes, also known as fields or instance variables) and what each object can
+do (its methods, also known as instance methods). You write the class once; then
+you can create as many objects (instances) from it as you need.
 
 ## How do I declare a class? { #class }
 
 Pattern, in a file named <code><var>ClassName</var>.java</code>:
 
-<pre class="pattern"><code>public class <var>ClassName</var> {
+<pre class="pattern"><code>public class <var data-label="class name">ClassName</var> {
     // 1. fields (data)
-    private <var>type</var> <var>fieldName</var>;
+    private <var>type</var> <var data-label="field name">fieldName</var>;
 
     // 2. constructor (setup)
-    public <var>ClassName</var>(<var>type</var> <var>param</var>) {
+    public <var>ClassName</var>(<var>type</var> <var data-label="parameter">param</var>) {
         this.<var>fieldName</var> = <var>param</var>;
     }
 
     // 3. methods (actions)
-    public <var>returnType</var> <var>methodName</var>() {
-        <var>statements;</var>
+    public <var data-label="return type">returnType</var> <var data-label="method name">methodName</var>() {
+        <var data-label="method body">statements</var>
     }
 }</code></pre>
+
+<div class="pattern-parts" data-replace-with="a class name, fields, a constructor, and methods" markdown>
+
+<var data-find="class [[Car]] | public [[Car]](">ClassName</var>
+:   The name of the class, written in PascalCase, e.g., `Car`. The constructor has the same name as the class.
+
+<var data-find="private [[String]] | private [[int]] | ([[String]] model | , [[int]] year">type</var>
+:   The data type of a field or parameter, e.g., `String` or `int`.
+
+<var data-find="private String [[model]] | private int [[year]] | private int [[speed]] | this.[[model]] | this.[[year]]">fieldName</var>
+:   The name of a field (attribute), written in camelCase, e.g., `model`. Each object stores its own value for each field.
+
+<var data-find="(String [[model]], | int [[year]]) | = [[model]]; | = [[year]];">param</var>
+:   A constructor parameter: the starting value that is passed in when an object is created. The constructor stores it in the field.
+
+<var data-find="public [[void]] drive">returnType</var>
+:   The type of value the method returns, e.g., `int`. `void` means that the method does not return anything.
+
+<var data-find="void [[drive]](">methodName</var>
+:   A descriptive method name, written in camelCase, e.g., `drive`.
+
+<var data-find='[[System.out.println("Vroom");]]'>statements</var>
+:   The method body: the statements that are executed when the method is invoked.
+
+</div>
 
 Example, in a file named `Car.java`:
 
@@ -54,7 +79,7 @@ The same class as a UML class diagram:
 | `- model: String`<br>`- year: int`<br>`- speed: int` |
 | `+ drive()` |
 
-In a UML class diagram, `-` means `private` and `+` means `public`.
+A UML class diagram has three parts: class name, attributes (fields), and methods. `-` indicates `private` members, `+` indicates `public` members.
 
 The full `Car` class used on this page, with a `CarRace` program that uses it, is in
 `examples/car/`. To run it, go to the repository folder and enter:
@@ -72,7 +97,7 @@ java CarRace
   `Error: Main method not found in class Car`
 - `Car` only describes the objects; a separate class with `main`, here
   `CarRace`, creates and uses them
-- Don't put `static` on fields or methods that belong to each object
+- Do not put `static` on fields or methods that belong to each object
 - Methods work as described in [Write a method](basics.md#method)
 
 ### Where each part goes
@@ -99,12 +124,13 @@ closes it:
   </li>
 </ul>
 
-- Fields, constructors, and methods are declared directly in the class body,
-  the outermost block.
-- Statements such as `speed = 10;` and `System.out.println(...);` belong in the
-  body of a constructor or method. A field declaration can include a starting
-  value, as in `private int speed = 0;`, but a separate statement directly in
-  the class body gives `error: <identifier> expected`.
+- Fields, constructors, and methods are declared directly in the class body
+  (the outermost block)
+- Statements, e.g., `speed = 10;` and `System.out.println(...);`, belong in the
+  body of a constructor or method
+    - A field declaration can include a starting value, e.g., `private int speed = 0;`
+    - A separate statement directly in the class body leads to
+      `error: <identifier> expected`
 
 ### What each word means
 
@@ -114,9 +140,9 @@ private String model;
 
 | Part | Meaning |
 |---|---|
-| `private` | Access modifier: only code in the `Car` class can use this field. |
+| `private` | Access modifier: the field is only accessible from within the `Car` class. |
 | `String` | The data type: the kind of value `model` holds. A `String` is text. |
-| `model` | The name you choose, in camelCase. |
+| `model` | The field name, written in camelCase. |
 | `;` | Ends the declaration. |
 
 The same breakdown for a constructor is in
@@ -125,8 +151,8 @@ The same breakdown for a constructor is in
 
 ### Write it one step at a time
 
-Build a class a few lines at a time and compile after each step, so any error
-is easy to find. Each version below compiles on its own; the new lines are
+Start with the structure, then add the fields, the constructor, and the methods.
+Compile after each step: errors are easier to find and fix. Each version below compiles on its own; the new lines are
 highlighted.
 
 Step 1: the empty class.
@@ -229,7 +255,7 @@ The result is the `Car` class at the top of this section.
 <details markdown>
 <summary>Answers</summary>
 
-1. The class line comes first and its `}` comes last. The first `}` closes the
+1. The class line comes first and its `}` comes last; the first `}` closes the
    constructor:
 
     ```java
@@ -241,19 +267,23 @@ The result is the `Car` class at the top of this section.
     }
     ```
 
-    Fields usually come first, but that's only a convention; the class still
-    compiles with the field after the constructor. What matters is that both are inside the class
-    braces and the statement is inside the constructor.
+    - Fields usually come first, but that is only a convention; the class still
+      compiles with the field after the constructor
+    - What matters is that both are inside the class braces and the statement is
+      inside the constructor
 
-2. Line 2 is the field. Lines 4 to 6 are the constructor: its name is the class
-   name and it has no return type. Lines 8 to 10 are the method `turnOn`. The
-   statements are line 5 (`on = false;`) and line 9 (`on = true;`), each inside
-   a body.
-3. `Student` and `this.name`. A constructor's name is exactly the class name, and
-   it has no return type. `this.name` is the field; plain `name` is the parameter.
-   `name = name;` compiles, but it assigns the parameter to itself, so the
-   field stays `null`.
-4. `model` is `static`, so all buses share one `model` field and each new bus overwrites it. Remove `static`.
+2. The parts:
+    - Field: line 2
+    - Constructor: lines 4 to 6; its name is the class name and it has no return type
+    - Method `turnOn`: lines 8 to 10
+    - Statements: line 5 (`on = false;`) and line 9 (`on = true;`), each inside a body
+3. `Student` and `this.name`
+    - A constructor's name is exactly the class name, and it has no return type
+    - `this.name` is the field; plain `name` is the parameter
+    - `name = name;` compiles, but it assigns the parameter to itself, so the
+      field stays `null`
+4. `model` is `static`, so all buses share one `model` field and each new bus overwrites it
+    - Remove `static`
 5. One possible answer:
 
     ```java
@@ -272,14 +302,33 @@ The result is the `Car` class at the top of this section.
 Pattern:
 
 <pre class="pattern"><code>// no-arg
-public <var>ClassName</var>() {
-    <var>fieldName</var> = <var>startValue</var>;
+public <var data-label="class name">ClassName</var>() {
+    <var data-label="field name">fieldName</var> = <var data-label="starting value">startValue</var>;
 }
 
 // parameterized
-public <var>ClassName</var>(<var>type</var> <var>param</var>) {
+public <var>ClassName</var>(<var>type</var> <var data-label="parameter">param</var>) {
     this.<var>fieldName</var> = <var>param</var>;
 }</code></pre>
+
+<div class="pattern-parts" data-replace-with="the class name, field names, and starting values or parameters" markdown>
+
+<var data-find="public [[Car]](">ClassName</var>
+:   The name of the class, e.g., `Car`. A constructor must have the same name as the class.
+
+<var data-find='[[model]] = "Unknown" | this.[[model]] | this.[[year]]'>fieldName</var>
+:   A field of the class, e.g., `model`. The constructor gives it its starting value.
+
+<var data-find='= [["Unknown"]]'>startValue</var>
+:   A fixed starting value for the field, e.g., `"Unknown"`. It must match the field's type.
+
+<var data-find="([[String]] model | , [[int]] year">type</var>
+:   The data type of the parameter, e.g., `String` or `int`. It must match the field's type.
+
+<var data-find="(String [[model]], | int [[year]]) | = [[model]]; | = [[year]];">param</var>
+:   A parameter acts as a placeholder for the value that is passed in with `new`, e.g., `new Car("Roadster", 2024)`.
+
+</div>
 
 Example, inside class `Car`:
 
@@ -294,10 +343,10 @@ public Car(String model, int year) {
 }
 ```
 
-- A constructor has the **same name as the class**.
-- It has **no return type**, not even `void`.
-- It runs when you write `new`.
-- If you write no constructor at all, Java adds an empty no-arg constructor for you.
+- A constructor has the **same name as the class**
+- It has **no return type**, not even `void`
+- It is invoked when you create an object with `new`
+- If a class has no constructor, Java adds an empty no-arg constructor (the default constructor)
 
 ### What each word means { #constructor-words }
 
@@ -307,10 +356,10 @@ public Car(String model, int year) {
 
 | Part | Meaning |
 |---|---|
-| `public` | Code in other classes can use it with `new`. |
-| `Car` | Exactly the class name, with no return type, not even `void`. That's what makes it a constructor. |
-| `(String model, int year)` | Parameters: the values you pass in `new Car("Roadster", 2024)`. |
-| `{` | Starts the body. The body ends at the matching `}`. |
+| `public` | Access modifier: code in other classes can call it with `new`. |
+| `Car` | Exactly the class name, with no return type, not even `void`. That is what makes it a constructor. |
+| `(String model, int year)` | The parameters: they receive the arguments in `new Car("Roadster", 2024)`. |
+| `{` | Starts the constructor body, which ends at the matching `}`. |
 
 <p class="lectures">Lecture 07</p>
 
@@ -331,8 +380,11 @@ public Car(String model, int year) {
 <details markdown>
 <summary>Answers</summary>
 
-1. It prints `null`. Because of `void`, `Car()` is an ordinary method, not a constructor. Java adds an empty constructor, so `model` keeps its default value `null`.
-2. It doesn't compile. Java adds the empty no-arg constructor only when you write no constructor at all:
+1. It prints `null`
+    - Because of `void`, `Car()` is an ordinary method, not a constructor
+    - Java adds an empty constructor, so `model` keeps its default value `null`
+2. It does not compile
+    - Java adds the empty no-arg constructor only when you write no constructor at all:
 
     ```text
     error: constructor Car in class Car cannot be applied to given types;
@@ -347,8 +399,25 @@ public Car(String model, int year) {
 
 Pattern:
 
-<pre class="pattern"><code><var>ClassName</var> <var>varName</var> = new <var>ClassName</var>(<var>arguments</var>);
-<var>varName</var>.<var>methodName</var>(<var>arguments</var>);</code></pre>
+<pre class="pattern"><code><var data-label="class name">ClassName</var> <var data-label="object name">varName</var> =
+        new <var>ClassName</var>(<var data-label="may be empty">arguments</var>);
+<var>varName</var>.<var data-label="method name">methodName</var>(<var>arguments</var>);</code></pre>
+
+<div class="pattern-parts" data-replace-with="the class name, a variable name, a method name, and arguments" markdown>
+
+<var data-find="[[Car]] car1 | [[Car]] car2 | new [[Car]](">ClassName</var>
+:   The name of the class, e.g., `Car`. It is the data type of the variable, and `new ClassName(...)` invokes its constructor.
+
+<var data-find="Car [[car1]] | Car [[car2]] | [[car2]].drive | [[car2]].getSpeed">varName</var>
+:   The variable name, written in camelCase, e.g., `car2`. The variable refers to the new object.
+
+<var data-find='([["Roadster", 2024]])'>arguments</var>
+:   The values that are passed to the constructor or method, separated by commas. The parentheses can be empty, e.g., `new Car()` and `car2.drive()`.
+
+<var data-find=".[[drive]]( | .[[getSpeed]](">methodName</var>
+:   The method to invoke on the object, e.g., `drive`.
+
+</div>
 
 Example, in `main`:
 
@@ -359,15 +428,16 @@ car2.drive();
 int speed = car2.getSpeed();
 ```
 
-- The arguments decide which constructor runs.
-- Each object has its own field values.
-- `Car car3;` on its own doesn't create an object. Only `new` creates one.
+- The arguments determine which constructor is invoked
+- The dot notation (`.`) is used to access an object's fields and invoke its methods, e.g., `car2.drive()`
+- Each object has its own field values (its state)
+- `Car car3;` on its own does not create an object; only `new` creates one
 
 <p class="lectures">Lectures 07, 09</p>
 
 ### Your turn
 
-1. **Predict the output.** Both cars start with speed 0.
+1. **Code tracing.** What does this print? Both cars start with speed 0.
 
     ```java
     Car car1 = new Car("Roadster", 2024);
@@ -375,10 +445,11 @@ int speed = car2.getSpeed();
     car1.accelerate(20);
     car2.accelerate(50);
     car1.accelerate(5);
-    System.out.println(car1.getSpeed() + " " + car2.getSpeed());
+    System.out.println(car1.getSpeed() + " "
+            + car2.getSpeed());
     ```
 
-2. **Find the bug.** This code inside `main` doesn't compile.
+2. **Find the bug.** This code inside `main` does not compile.
 
     ```java
     Car car3;
@@ -388,8 +459,11 @@ int speed = car2.getSpeed();
 <details markdown>
 <summary>Answers</summary>
 
-1. `25 50`. Each car has its own `speed` field, so `car2.accelerate(50)` doesn't change `car1`.
-2. `car3` refers to no object yet. The compiler reports `error: variable car3 might not have been initialized`. Write `Car car3 = new Car();` instead.
+1. `25 50`
+    - Each car has its own `speed` field, so `car2.accelerate(50)` does not change `car1`
+2. `car3` refers to no object yet
+    - The compiler reports `error: variable car3 might not have been initialized`
+    - Write `Car car3 = new Car();` instead
 
 </details>
 
@@ -397,9 +471,9 @@ int speed = car2.getSpeed();
 
 Pattern:
 
-<pre class="pattern"><code>private <var>type</var> <var>fieldName</var>;
+<pre class="pattern"><code>private <var>type</var> <var data-label="field name">fieldName</var>;
 
-public <var>type</var> get<var>FieldName</var>() {
+public <var>type</var> get<var data-label="capitalized">FieldName</var>() {
     return <var>fieldName</var>;
 }
 
@@ -407,7 +481,20 @@ public void set<var>FieldName</var>(<var>type</var> <var>fieldName</var>) {
     this.<var>fieldName</var> = <var>fieldName</var>;
 }</code></pre>
 
-Example of a setter that checks the new value:
+<div class="pattern-parts" data-replace-with="the field's type and name" markdown>
+
+<var data-find="private [[int]] | [[int]] getSpeed | ([[int]] speed">type</var>
+:   The data type of the field, e.g., `int`. The getter returns this type, and the setter's parameter has this type.
+
+<var data-find="private int [[speed]] | return [[speed]] | int [[speed]]) | this.[[speed]] = | = [[speed]];">fieldName</var>
+:   The name of the field, e.g., `speed`. The setter's parameter usually has the same name; `this.speed` is the field, `speed` is the parameter.
+
+<var data-find="get[[Speed]] | set[[Speed]]">FieldName</var>
+:   The field name with its first letter capitalized, e.g., `getSpeed` and `setSpeed`.
+
+</div>
+
+Example of a setter that rejects invalid values:
 
 ```java
 private int speed;
@@ -423,14 +510,16 @@ public void setSpeed(int speed) {
 }
 ```
 
-- `private` means only code in this class can use the field or method. `public` means code in any class can.
-- Not every field needs a setter.
+- Getters read a value; setters change it and can validate the new value
+- `private`: only accessible from within the class; `public`: accessible from anywhere
+- Not every field needs a setter
+- Encapsulation (also known as information hiding): fields are `private`, and access is controlled through `public` getters and setters
 
 <p class="lectures">Lecture 08</p>
 
 ### Your turn
 
-1. **Predict the output.**
+1. **Code tracing.** What does this print?
 
     ```java
     Car car = new Car();
@@ -449,8 +538,10 @@ public void setSpeed(int speed) {
 <details markdown>
 <summary>Answers</summary>
 
-1. `30`. The setter ignores `-5` because it's negative.
-2. It doesn't compile: `error: speed has private access in Car`. Use `car.setSpeed(100);` instead.
+1. `30`
+    - The setter ignores `-5` because it is negative
+2. It does not compile: `error: speed has private access in Car`
+    - Use `car.setSpeed(100);` instead
 
 </details>
 
@@ -460,8 +551,19 @@ Pattern, added to your class:
 
 <pre class="pattern"><code>@Override
 public String toString() {
-    return "<var>ClassName</var> [<var>field</var>: " + <var>field</var> + "]";
+    return "<var data-label="class name">ClassName</var> [<var>field</var>: "
+            + <var data-label="field value">field</var> + "]";
 }</code></pre>
+
+<div class="pattern-parts" data-replace-with="the class name and its fields" markdown>
+
+<var data-find='"[[Car]] ['>ClassName</var>
+:   The name of the class, e.g., `Car`. Inside the quotes it is text, so it appears in the output as written.
+
+<var data-find='[[[model]]: " | + [[model]] +'>field</var>
+:   A field, e.g., `model`. Inside the quotes it labels the value; outside the quotes it is the field's value. Add more fields the same way.
+
+</div>
 
 Example:
 
@@ -475,12 +577,14 @@ public String toString() {
 Then in `main`:
 
 ```java
-System.out.println(car2);  // Car [model: Roadster]
-// without toString() you get something like Car@7ad041f3
+System.out.println(car2);
+// prints Car [model: Roadster]
+// without toString(): e.g., Car@7ad041f3
 ```
 
-- `println` calls `toString()` for you.
-- Write it exactly like this: `public`, named `toString`, returns a `String`, takes no parameters.
+- `println` calls `toString()` for you
+- Every class already has a `toString()` (declared in `Object`) that returns something like `Car@7ad041f3`; `@Override` means that you provide a custom implementation
+- The method header must be exactly `public String toString()`: `public`, named `toString`, returns a `String`, no parameters
 
 <p class="lectures">Lecture 08</p>
 
@@ -499,8 +603,10 @@ System.out.println(car2);  // Car [model: Roadster]
 <details markdown>
 <summary>Answers</summary>
 
-1. The name must be `toString` with a capital S. `tostring` is a new method that `println` never calls.
-2. It doesn't compile: `error: method does not override or implement a method from a supertype`. `@Override` makes the compiler catch the misspelling for you.
+1. The name must be `toString` with a capital S
+    - `tostring` is a new method that `println` never calls
+2. It does not compile: `error: method does not override or implement a method from a supertype`
+    - `@Override` makes the compiler catch the misspelling for you
 
 </details>
 
@@ -517,16 +623,20 @@ Example:
 
 ```java
 public class Car {
-    private static int totalCars = 0;  // class (static)
-    private int speed;                 // instance
-    public void accelerate(int amount) {  // amount: parameter
-        int newSpeed = speed + amount;    // local
+    // class (static)
+    private static int totalCars = 0;
+    // instance
+    private int speed;
+    // amount: parameter
+    public void accelerate(int amount) {
+        // local
+        int newSpeed = speed + amount;
         speed = newSpeed;
     }
 }
 ```
 
-Fields get default values (`0`, `false`, `null`). Local variables don't, so set them before you use them.
+Fields get default values (`0`, `false`, `null`); local variables do not, so initialize them before you use them.
 
 <p class="lectures">Lectures 02, 07, 09</p>
 
@@ -543,8 +653,14 @@ Fields get default values (`0`, `false`, `null`). Local variables don't, so set 
 <details markdown>
 <summary>Answers</summary>
 
-1. `amount` is a parameter, `speed` is an instance variable, `totalCars` is a class (`static`) variable, and `newSpeed` is a local variable.
-2. It doesn't compile: `error: variable total might not have been initialized`. Local variables get no default value. Write `int total = 0;`.
+1. Each one is a different kind:
+    - `amount`: parameter
+    - `speed`: instance variable
+    - `totalCars`: class (`static`) variable
+    - `newSpeed`: local variable
+2. It does not compile: `error: variable total might not have been initialized`
+    - Local variables get no default value
+    - Write `int total = 0;`
 
 </details>
 
@@ -552,14 +668,35 @@ Fields get default values (`0`, `false`, `null`). Local variables don't, so set 
 
 Pattern:
 
-<pre class="pattern"><code>private static <var>type</var> <var>name</var> = <var>value</var>;
+<pre class="pattern"><code>private static <var>type</var> <var data-label="field name">name</var> = <var data-label="starting value">value</var>;
 
-public static <var>type</var> get<var>Name</var>() {
+public static <var>type</var> get<var data-label="capitalized">Name</var>() {
     return <var>name</var>;
 }
 
 // call on the class:
-<var>ClassName</var>.get<var>Name</var>();</code></pre>
+<var data-label="class name">ClassName</var>.get<var>Name</var>();</code></pre>
+
+<div class="pattern-parts" data-replace-with="a type, a field name, a starting value, and the class name" markdown>
+
+<var data-find="static [[int]]">type</var>
+:   The data type of the `static` field, e.g., `int`.
+
+<var data-find="int [[totalCars]] = | [[totalCars]]++ | return [[totalCars]]">name</var>
+:   The name of the `static` field (class variable), written in camelCase, e.g., `totalCars`.
+
+<var data-find="= [[0]];">value</var>
+:   The starting value. It is set once for the class, not once per object.
+
+<var data-find="get[[TotalCars]]">Name</var>
+:   The field name with its first letter capitalized, e.g., `getTotalCars`.
+
+<var data-find="[[Car]].getTotalCars">ClassName</var>
+:   The name of the class, e.g., `Car`. A `static` method is invoked on the class, not on an object.
+
+</div>
+
+A `static` field (also known as a class variable) belongs to the class, not to individual objects: all objects share the same field. A `static` method (also known as a class method) is called using the class name, without creating an object.
 
 Example that counts all cars, inside class `Car`:
 
@@ -580,13 +717,13 @@ In `main`:
 int n = Car.getTotalCars();
 ```
 
-A `static` method (like `main`) can't use instance fields directly. Create an object first.
+A `static` method (e.g., `main`) cannot access instance fields directly; create an object first.
 
 <p class="lectures">Lecture 09</p>
 
 ### Your turn
 
-1. **Predict the output.** Every `Car` constructor runs `totalCars++`.
+1. **Code tracing.** What does this print? Every `Car` constructor runs `totalCars++`.
 
     ```java
     Car car1 = new Car();
@@ -595,7 +732,7 @@ A `static` method (like `main`) can't use instance fields directly. Create an ob
     System.out.println(Car.getTotalCars());
     ```
 
-2. **What happens?** This class doesn't compile. Why?
+2. **What happens?** This class does not compile. Why?
 
     ```java
     public class Counter {
@@ -609,14 +746,16 @@ A `static` method (like `main`) can't use instance fields directly. Create an ob
 <details markdown>
 <summary>Answers</summary>
 
-1. `3`. All cars share one `totalCars`, and each constructor call adds 1 to it.
-2. `count` is an instance field, and `main` is `static`: `error: non-static variable count cannot be referenced from a static context`. Create an object first, or make `count` `static` if all objects should share it.
+1. `3`
+    - All cars share one `totalCars`, and each constructor call adds 1 to it
+2. `count` is an instance field, and `main` is `static`: `error: non-static variable count cannot be referenced from a static context`
+    - Create an object first, or make `count` `static` if all objects should share it
 
 </details>
 
 ## How do I use `this`? { #this }
 
-A common problem: your constructor doesn't set the fields.
+Problem: the constructor does not set the fields.
 
 Wrong:
 
@@ -638,23 +777,24 @@ public Student(String name, int age) {
 // prints: Yoda is 864 years old
 ```
 
-- The parameter `name` hides the field `name`. This is called **shadowing**. `name = name` assigns the parameter to itself, and the field keeps its default value.
-- `this.name` means "the field of this object".
+- **Shadowing**: the parameter `name` shadows the field `name`, so inside the constructor, `name` on its own refers to the parameter
+- `name = name` assigns the parameter to itself; the field keeps its default value
+- `this` refers to the current object, so `this.name` is the field
 
-One constructor can also call another with `this(...)`:
+Constructor chaining: one constructor can call another with `this(...)`:
 
 ```java
 public Student() { this("Unknown", 0); }
 ```
 
-Put the `this(...)` call first in the constructor. Java 21, which this course
-uses, requires that; Java 25 and later relax the rule.
+Important: the `this(...)` call must come first in the constructor. Java 21
+(used in this course) requires that; Java 25 and later relax the rule.
 
 <p class="lectures">Lecture 09</p>
 
 ### Your turn
 
-1. **Predict the output.** `Car` has `toString()` from [Print an object](#print-object) and this constructor:
+1. **Code tracing.** `Car` has `toString()` from [Print an object](#print-object) and this constructor:
 
     ```java
     public Car(String model, int year) {
@@ -676,8 +816,10 @@ uses, requires that; Java 25 and later relax the rule.
 <details markdown>
 <summary>Answers</summary>
 
-1. `Car [model: null]`. The parameters shadow the fields, so the fields are never set. Write `this.model = model;` and `this.year = year;`.
-2. `this("Unknown", 0);` calls `Car(String model, int year)`.
+1. `Car [model: null]`
+    - The parameters shadow the fields, so the fields are never set
+    - Write `this.model = model;` and `this.year = year;`
+2. `this("Unknown", 0);` calls `Car(String model, int year)`
 
 </details>
 
@@ -694,26 +836,27 @@ Why not `==` for Strings?
 
 ```java
 if (answer == "yes")       // may be false
-if (answer.equals("yes"))  // compares the text
+if (answer.equals("yes"))  // compares text
 ```
 
-Objects are stored as references. `==` asks whether two references point to the same object, not whether the content matches. A String read with a `Scanner` (see [Read input](basics.md#input)) is a new object, so `==` usually gives `false` even when the text matches.
+A reference variable stores a reference to an object, not the object itself. `==` checks whether two references point to the same object (identity), not whether the content is equal (equality). A String read with a `Scanner` (see [Read input](basics.md#input)) is a new object, so `==` usually gives `false`, even when the text matches.
 
 <p class="lectures">Lectures 05, 09</p>
 
 ### Your turn
 
-1. **Predict the output.**
+1. **Code tracing.** What does this print?
 
     ```java
     String a = "yes";
     String b = new String("yes");
     System.out.println(a == b);
     System.out.println(a.equals(b));
-    System.out.println("YES".equalsIgnoreCase(a));
+    System.out.println(
+            "YES".equalsIgnoreCase(a));
     ```
 
-2. **Predict the output.**
+2. **Code tracing.** What does this print?
 
     ```java
     Car car1 = new Car("Roadster", 2024);
@@ -726,15 +869,20 @@ Objects are stored as references. `==` asks whether two references point to the 
 <details markdown>
 <summary>Answers</summary>
 
-1. `false`, `true`, `true`. `new String` makes a second object, so `==` is `false`, but the text is the same.
-2. `true`, `false`. `winner` and `car1` refer to the same object. `twin` is a different object with the same field values.
+1. `false`, `true`, `true`
+    - `new String` makes a second object, so `==` is `false`, but the text is the same
+2. `true`, `false`
+    - `winner` and `car1` refer to the same object
+    - `twin` is a different object with the same field values
 
 </details>
 
 ## How do I keep my program from crashing? { #avoid-crashes }
 
-Option 1: check first. Use an `if` when you can test for the problem before the
-operation runs.
+Predictable problem → check it; surprise problem → catch it.
+
+Option 1: check first. Use an `if` when bad input is normal and easy to test
+for before the operation runs.
 
 ```java
 if (car != null) {
@@ -753,18 +901,32 @@ if (count != 0) {
 }
 ```
 
-Option 2: `try` / `catch`. Use this when an operation can throw an exception
-that you want to handle instead of letting the program crash. If a statement in
-the `try` block throws the type of exception you catch, Java skips the rest of
-the `try` block and runs the `catch` block.
+Option 2: `try` / `catch`. Use this when the error is rare or you cannot check
+for it ahead of time. The `try` block contains code that might throw an
+exception; the `catch` block handles it, so the program does not crash. If an
+exception of the specified type is thrown in the `try` block, Java skips the
+rest of the `try` block and jumps to the `catch` block.
 
 <pre class="pattern"><code>try {
-    <var>risky statements;</var>
-} catch (<var>ExceptionType</var> e) {
-    <var>what to do instead;</var>
+    <var>risky statements</var>
+} catch (<var data-label="exception class">ExceptionType</var> e) {
+    <var>what to do instead</var>
 } finally {
     // optional: always runs
 }</code></pre>
+
+<div class="pattern-parts" data-replace-with="the code that might fail, an exception type, and what to do instead" markdown>
+
+<var data-find='[[int age = Integer.parseInt("abc"); System.out.println(age);]]'>risky statements</var>
+:   The statements that might throw an exception. If one of them throws, the rest of the `try` block is skipped.
+
+<var data-find="catch ([[NumberFormatException]]">ExceptionType</var>
+:   The type of exception to catch, e.g., `NumberFormatException`. Other exceptions still crash the program.
+
+<var data-find='[[System.out.println("Invalid number");]]'>what to do instead</var>
+:   The statements that handle the exception. They run only if the exception is thrown.
+
+</div>
 
 Example:
 
@@ -777,12 +939,12 @@ try {
 }
 ```
 
-`Integer.parseInt` converts text such as `"42"` into an `int`. `"abc"` isn't a
+`Integer.parseInt` converts text such as `"42"` into an `int`. `"abc"` is not a
 number, so `parseInt` throws a `NumberFormatException`. Java skips
 `println(age)`, runs the `catch` block, and prints `Invalid number`.
 
-- `prices.length` is the number of elements in an array.
-- `scanner.hasNextInt()` checks that the next input is a whole number. See [Read input](basics.md#input).
+- `prices.length` is the number of elements in an array; see [Create an array](arrays.md#create-array)
+- `scanner.hasNextInt()` checks whether the next input is a whole number; see [Read input](basics.md#input)
 
 <p class="lectures">Lectures 06, 10</p>
 
@@ -794,7 +956,7 @@ number, so `parseInt` throws a `NumberFormatException`. Java skips
     if (car.getSpeed() > 0 && car != null) {
     ```
 
-2. **Predict the output.** `sum` is `10` and `count` is `0`.
+2. **Code tracing.** What does this print? `sum` is `10` and `count` is `0`.
 
     ```java
     try {
@@ -808,7 +970,9 @@ number, so `parseInt` throws a `NumberFormatException`. Java skips
 <details markdown>
 <summary>Answers</summary>
 
-1. Swap the two conditions: `if (car != null && car.getSpeed() > 0) {`. Java checks `&&` from left to right and stops at the first `false`, so `getSpeed()` is never called on `null`.
-2. Only `count is 0`. Dividing an `int` by 0 throws an `ArithmeticException`, so Java jumps straight to `catch` and skips the rest of the `try` block.
+1. Swap the two conditions: `if (car != null && car.getSpeed() > 0) {`
+    - Java checks `&&` from left to right and stops at the first `false`, so `getSpeed()` is never called on `null`
+2. Only `count is 0`
+    - Dividing an `int` by 0 throws an `ArithmeticException`, so Java jumps straight to `catch` and skips the rest of the `try` block
 
 </details>

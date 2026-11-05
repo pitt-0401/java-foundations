@@ -880,7 +880,37 @@ body[data-md-color-scheme] {
   }
 }
 
+/* On phones every line of a pattern should fit without scrolling: patterns
+   use the code size, and their labels stay at about 11 px. Compiler messages
+   and other plain text wrap. A code block in a list uses the full screen width,
+   like the code blocks outside lists. */
 @media screen and (max-width: 30em) {
+  .md-typeset pre.pattern > code,
+  .md-typeset pre.pattern.is-interactive:not(.is-row) > code {
+    font-size: 0.82em;           /* 13.5px, as in code blocks */
+  }
+  .md-typeset pre.pattern.is-interactive:not(.is-row) var[data-label]::after {
+    font-size: 0.82em;           /* 11px */
+  }
+  .md-typeset pre:not(.pattern) > code {
+    padding-left: 0.75em;        /* 10px: one more character per line */
+    padding-right: 0.75em;
+  }
+  .md-typeset .language-text pre > code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .md-typeset > :is(ol, ul) > li > .highlight > pre,
+  .md-typeset > details > :is(ol, ul) > li > .highlight > pre {
+    margin-left: -2.35rem;       /* the list indent plus the page margin */
+    margin-right: -0.8rem;
+  }
+  .md-typeset > :is(ol, ul) > li > .highlight > pre > code,
+  .md-typeset > details > :is(ol, ul) > li > .highlight > pre > code {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
   .md-typeset pre.pattern.is-row > code {
     font-size: 1em;
     word-spacing: 1em;

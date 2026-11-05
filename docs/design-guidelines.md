@@ -104,7 +104,7 @@ pages; change the shared rule instead.
 - Links use `--jf-accent` and change to `--jf-accent-strong` on hover.
 - Buttons (`.md-button`) are outlined in the accent color; the primary button
   (`.md-button--primary`) is filled. Only the home page uses buttons.
-- The six pages are tabs in a compact row under the header
+- The pages are tabs in a compact row under the header
   (`navigation.tabs`); the current page is bold with an accent underline.
 - The left sidebar lists the current page's questions (`toc.integrate`, with
   `toc.follow`), on a thin rule; the question being read is bold accent with an
@@ -134,7 +134,10 @@ pages; change the shared rule instead.
 ### Sections: pattern, example, notes, Your turn
 
 Every "How do I …?" section follows the same order. Sections without a pattern
-(the Help sections and "Which kind of variable do I need?") skip step 1.
+(the Help sections, "Which kind of variable do I need?" and "How do I use a
+parameter inside a method?") skip step 1. A section with several patterns
+("How do I repeat something?") repeats steps 1 and 2 for each one, so each
+example sits directly under its pattern.
 
 1. **Pattern:** raw HTML, `<pre class="pattern"><code>…</code></pre>`, with every
    placeholder wrapped in `<var>`. Placeholders are upright, in the accent color
@@ -147,11 +150,15 @@ Every "How do I …?" section follows the same order. Sections without a pattern
    a thin rule of its own. Material still adds its copy button. A pattern can be
    made interactive; see "Interactive patterns" below.
 2. **Example:** a normal fenced `java` block with a one-line lead-in.
-3. **Notes:** a short bullet list or one or two sentences.
+3. **Notes:** a short bullet list or one or two sentences. Bullets hold one idea
+   each and have no final period; details go in sub-bullets. Student text spells
+   out contractions ("does not", "it is"), except inside code and quoted
+   compiler messages.
 4. **Lectures line:** `<p class="lectures">Lectures 02, 04</p>`, small and grey.
 5. **Your turn** (H3): one to three numbered exercises (up to five in a section
    with syntax helps), each starting with a bold
-   label such as **Predict the output.**, **Find the bug.**, **Fill in the
+   label such as **Code tracing.** (followed by "What does this print?" unless the
+   exercise asks its own question), **Find the bug.**, **Fill in the
    blank.**, **Write it.**, or **What happens?** (Help also uses **Read this
    error.** and **Which exception will each line throw?**), followed by one `<details markdown>` box
    with `<summary>Answers</summary>`.
@@ -160,8 +167,8 @@ Every "How do I …?" section follows the same order. Sections without a pattern
 
 Sections whose main difficulty is syntax can add up to three H3 parts after the
 notes and before the lectures line. "How do I declare a class?" uses all three;
-"How do I write a constructor?" and "How do I write a method?" each have a
-word-by-word table, so the explanation is in the section the student is
+"How do I write a constructor?", "How do I write a method?" and "How do I
+create an array?" each have a word-by-word table, so the explanation is in the section the student is
 already reading:
 
 - **Where each part goes:** a `<ul class="anatomy">` nested list drawn as nested
@@ -212,7 +219,7 @@ with a definition list follows it directly, one term per placeholder:
 <div class="pattern-parts" data-replace-with="a suitable type, variable name, and value" markdown>
 
 <var>type</var>
-:   The kind of value the variable holds, such as `int`, `double` or `String`.
+:   The data type of the variable, e.g., `int`, `double`, or `String`. It defines the kind of data the variable can store.
 
 </div>
 ```
@@ -233,15 +240,18 @@ with a definition list follows it directly, one term per placeholder:
     must appear as written (any run of spaces matches one or more), and lines
     that do not match are left alone.
 - Code in **Your turn** is never highlighted (the search stops at the next
-  heading). Only `<span>` wrappers are added, so the copied code is unchanged.
+  heading). When several patterns share a section, each pattern highlights only
+  the parts it mapped (`lesson.js` marks each highlighted part with its
+  pattern), so selecting `statements` in the `while` pattern does not also
+  highlight the `for` loop body. Only `<span>` wrappers are added, so the copied code is unchanged.
 - A `data-label` on a `<var>` in the pattern adds a short label under that
   placeholder (drawn with CSS, so it is not copied). When a placeholder appears
   more than once, put the label on one occurrence only (every occurrence still
   gets it in its accessible name), and choose occurrences
   whose labels do not collide (in the method pattern, the first `type` and the
-  second `paramName`). Keep each line of a multi-line pattern to about 36
-  characters where Java allows, so its placeholders fit a 390 px phone; the method
-  pattern puts each parameter on its own line for this reason. A one-line pattern is larger; a multi-line pattern keeps
+  second `paramName`). Keep each line of a pattern to 44 characters or fewer
+  (counting indentation), breaking it where Java allows, so it fits a 390 px
+  phone; the method pattern puts each parameter on its own line for this reason. A one-line pattern is larger; a multi-line pattern keeps
   its indentation, is the body text size, and has taller lines to make room for
   the labels. It starts below the copy button at every width, so its first line
   can use the full column; a line still too long scrolls inside the pattern.
@@ -254,9 +264,10 @@ with a definition list follows it directly, one term per placeholder:
   placeholders stand for.
 - Without JavaScript the explanations are a visible two-column list.
 
-Three sections use interactive patterns: "How do I write a program that runs?"
-and "How do I write a method?" (explicit mapping) and "How do I declare a
-variable?" (automatic).
+Every pattern on Basics, Classes and objects, and Arrays is interactive. The
+variable pattern uses automatic matching; the others use explicit mapping. Every
+placeholder has a matching part in the examples; a placeholder without one
+shows its explanation only. `condition` and `format` keep the accent colors.
 
 ### Placeholder colors
 
@@ -269,11 +280,11 @@ highlight; it never carries meaning on its own.
 | Kind (`data-kind`) | Placeholder names | Color | Light: tint / text / outline | Dark: tint / text / outline |
 |---|---|---|---|---|
 | `return-type` | `returnType` | Amber | `#fbe9c7` / `#8a5a00` / `#ac7b1a` | `#42351f` / `#f2c875` / `#b58a3d` |
-| `method-name` | `methodName`, `ClassName` | Blue | `#e6f0fa` / `#1e4f8a` / `#5e89be` | `#20364d` / `#a6cefa` / `#679ccf` |
-| `type` | `type` | Green | `#e4f4ef` / `#0e6b57` / `#439680` | `#1d3d35` / `#89dec2` / `#55ac91` |
-| `name` | `name`, `paramName` | Purple | `#f6e8f3` / `#8a4f79` / `#a8759a` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
-| `statements` | `statements` | Teal | `#e8f5fa` / `#2b6f86` / `#5292a7` | `#1c3c46` / `#a0dceb` / `#69aabd` |
-| `value` | `value` | Vermillion | `#fbe7e2` / `#8e4737` / `#b47567` | `#49302c` / `#f4b6a7` / `#cc8879` |
+| `method-name` | `methodName`, `ClassName`, `nextXxx` | Blue | `#e6f0fa` / `#1e4f8a` / `#5e89be` | `#20364d` / `#a6cefa` / `#679ccf` |
+| `type` | `type`, `ExceptionType` | Green | `#e4f4ef` / `#0e6b57` / `#439680` | `#1d3d35` / `#89dec2` / `#55ac91` |
+| `name` | `name`, `Name`, `paramName`, `param`, `var`, `varName`, `element`, `array`, `fieldName`, `FieldName`, `field` | Purple | `#f6e8f3` / `#8a4f79` / `#a8759a` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
+| `statements` | `statements`, `risky statements`, `what to do instead` | Teal | `#e8f5fa` / `#2b6f86` / `#5292a7` | `#1c3c46` / `#a0dceb` / `#69aabd` |
+| `value` | `value`, `values`, `length`, `startValue`, `arguments`, `count`, `rows`, `cols`, `row`, `col` | Vermillion | `#fbe7e2` / `#8e4737` / `#b47567` | `#49302c` / `#f4b6a7` / `#cc8879` |
 
 - The hues follow the Okabe–Ito palette. The tokens are `--jf-ph-<kind>-bg`,
   `-fg` and `-line` in `extra.css`.
@@ -336,8 +347,9 @@ the text around it only pins down which occurrence is meant:
 - Use single quotes around the attribute when an entry contains `"`. Write `<`
   and `&` as `&lt;` and `&amp;`. An entry cannot contain ` | `. The part starts
   at the first `[[` and ends at the last `]]`, so `[[arr[i]]] = 0` marks
-  `arr[i]`; a part that starts with `[` (`int[[[5]]]`) is ambiguous, so add
-  context instead.
+  `arr[i]`. Where `[[[` or `]]]` leaves a choice, the shorter part wins if its
+  brackets balance, so `new int[[[5]]]` marks the `5` in `new int[5]`. A part
+  that itself starts with `[` and ends with `]` cannot be written this way.
 - An entry without `[[ ]]`, with an empty part, or one that matches nothing,
   logs a console warning and highlights nothing. Check the browser console after
   changing examples.
@@ -366,7 +378,7 @@ What the automatic matching handles (checked against `type name = value;` and
 
 ## Multiple choice and progress
 
-A **Predict the output.** exercise can have answer buttons. Under the
+A **Code tracing.** exercise can have answer buttons. Under the
 exercise's code, add a bulleted list with one item per answer: the output as
 inline code (one code span per output line), then, indented by eight spaces, an
 explanation that starts with **Correct.** or **Not quite.** Each explanation is
@@ -394,8 +406,8 @@ Answers box.
   is opened: the first `<details>` after the list, before the next heading. If
   there is none, those exercises never count as done. Nothing is stored;
   reloading the page resets it.
-- Put "Pick an answer to check it. If it's wrong, you can try again." under the
-  Your turn heading.
+- No instruction line is needed under the Your turn heading: the buttons are
+  self-explanatory, and a wrong answer's feedback ends with "Try another answer."
 - Without JavaScript the answers are a plain list with their explanations.
 - If the list does not follow the format (two or no **Correct.** answers, a
   single answer, an answer that is not inline code, a verdict that is not the
@@ -404,9 +416,9 @@ Answers box.
   built page after writing a question.
 
 Multiple choice is a learning aid, not the default exercise format: writing or
-completing code is usually more valuable for beginners. Only "How do I declare a
-variable?" uses it so far; review which other exercises would benefit before
-adding more.
+completing code is usually more valuable for beginners. It is used in "How do I
+declare a variable?" (Basics) and in "How do I create an array?" and "How do I use a 2D array?"; review which other exercises would
+benefit before adding more.
 
 ## Answers
 
@@ -417,6 +429,11 @@ chevron, and the answers open below it without a frame. Answer text uses the bod
 text size; the theme's smaller default for `<details>` is overridden. When the
 first exercises in a list have answer buttons, number the remaining answers to
 match with `<ol start="3" markdown>` and `<li markdown="block">`.
+
+Each answer starts with the short answer itself, without a final period (for
+example `` 1. `5.5` ``), followed by sub-bullets that explain it, one idea each,
+also without final periods. Multiple-choice explanations (**Correct.** /
+**Not quite.**) stay full sentences.
 
 ## Responsive behavior
 
@@ -429,4 +446,14 @@ match with `<ol start="3" markdown>` and `<li markdown="block">`.
   stay at about 11.5 px, with wider word spacing to keep them apart), and answer buttons
   share the width in three equal columns.
 - The question index stacks into one column on narrow screens.
-- Code blocks and tables scroll inside their own containers.
+- On phones (30em and narrower) nothing needs sideways scrolling at 390 px:
+  - Patterns use the code size (13.5 px), so a line of up to 44 characters fits;
+    labels under placeholders are about 11 px.
+  - Code blocks have 10 px side padding, so a line of up to 45 characters fits.
+    Code blocks in a list or in the Answers run to the screen edges, like the
+    code blocks outside lists.
+  - `text` blocks (compiler messages, program output) wrap. This uses the
+    `language-text` class from `pygments_lang_class` in `mkdocs.yml`.
+  - Keep example lines to 45 characters: put a long comment on its own line
+    above the code, and break long calls after `(` or before `+`.
+- Code blocks and tables otherwise scroll inside their own containers.

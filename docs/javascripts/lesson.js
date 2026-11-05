@@ -35,11 +35,33 @@
     returnType: "return-type",
     methodName: "method-name",
     ClassName: "method-name",
+    nextXxx: "method-name",
     type: "type",
+    ExceptionType: "type",
     name: "name",
+    Name: "name",
     paramName: "name",
+    param: "name",
+    varName: "name",
+    var: "name",
+    element: "name",
+    array: "name",
+    fieldName: "name",
+    FieldName: "name",
+    field: "name",
     statements: "statements",
-    value: "value"
+    "risky statements": "statements",
+    "what to do instead": "statements",
+    value: "value",
+    values: "value",
+    length: "value",
+    startValue: "value",
+    count: "value",
+    rows: "value",
+    cols: "value",
+    row: "value",
+    col: "value",
+    arguments: "value"
   };
   function setKind(el, name) {
     if (Object.prototype.hasOwnProperty.call(KINDS, name)) el.dataset.kind = KINDS[name];
@@ -76,7 +98,7 @@
   // node it touches gets its own wrapper. Ranges may nest (value inside
   // statements): the text nodes are listed again for each range, which works
   // because wrapping never changes the text. Copying gives exactly the same Java.
-  function wrapRanges(code, ranges) {
+  function wrapRanges(code, ranges, owner) {
     ranges.forEach(function (range) {
       var walker = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
       var hits = [];
@@ -95,6 +117,7 @@
         var span = document.createElement("span");
         span.className = "jf-part";
         span.dataset.part = range.name;
+        span.dataset.owner = owner;
         setKind(span, range.name);
         target.parentNode.insertBefore(span, target);
         span.appendChild(target);
@@ -111,6 +134,16 @@
   function findRegex(spec) {
     var open = spec.indexOf("[[");
     var close = spec.lastIndexOf("]]");
+    // "int[[[5]]]" marks the 5 in "int[5]": when "[[[" or "]]]" leaves a choice,
+    // take the shorter part as long as its brackets still balance.
+    var inner = function (a, b) { return spec.slice(a + 2, b); };
+    var balanced = function (t) { return t.split("[").length === t.split("]").length; };
+    var o = spec.slice(open, open + 3) === "[[[" ? open + 1 : open;
+    var c = spec.slice(close - 1, close + 2) === "]]]" ? close - 1 : close;
+    if (open !== -1 && (o !== open || c !== close) && balanced(inner(o, c))) {
+      open = o;
+      close = c;
+    }
     if (open === -1 || close < open + 3) return null;   // no part, or an empty one
     var literal = function (t) {
       return t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
@@ -124,7 +157,7 @@
     return new RegExp(source, "dg");
   }
 
-  function annotateFinds(code, finds) {
+  function annotateFinds(code, finds, owner) {
     var text = code.textContent;
     var ranges = [];
     finds.forEach(function (f) {
@@ -135,11 +168,11 @@
         f.used = true;
       }
     });
-    if (ranges.length) wrapRanges(code, ranges);
+    if (ranges.length) wrapRanges(code, ranges, owner);
     return ranges.length > 0;
   }
 
-  function annotate(code, pattern) {
+  function annotate(code, pattern, owner) {
     var ranges = [];
     var lineStart = 0;
     code.textContent.split("\n").forEach(function (line) {
@@ -152,11 +185,13 @@
       }
       lineStart += line.length + 1;
     });
-    if (ranges.length) wrapRanges(code, ranges);
+    if (ranges.length) wrapRanges(code, ranges, owner);
     return ranges.length > 0;
   }
 
-  function setUpPattern(pre, partsBox) {
+  // owner: a number for this pattern. Several patterns can share one example
+  // block (the loops on Basics), so each pattern highlights only its own parts.
+  function setUpPattern(pre, partsBox, owner) {
     var code = pre.querySelector("code");
     var list = partsBox.querySelector("dl");
     if (!code || !list) return;
@@ -184,7 +219,7 @@
     var examples = [];
     for (var el = partsBox.nextElementSibling; el && !/^H[1-6]$/.test(el.tagName); el = el.nextElementSibling) {
       slice(el.querySelectorAll(".highlight code")).forEach(function (c) {
-        var found = finds.length ? annotateFinds(c, finds) : pattern ? annotate(c, pattern) : false;
+        var found = finds.length ? annotateFinds(c, finds, owner) : pattern ? annotate(c, pattern, owner) : false;
         if (found) examples.push(c);
       });
     }
@@ -244,7 +279,7 @@
       examples.forEach(function (c) {
         c.classList.toggle("jf-dim", !!name);
         slice(c.querySelectorAll(".jf-part")).forEach(function (s) {
-          s.classList.toggle("is-on", s.dataset.part === name);
+          s.classList.toggle("is-on", s.dataset.part === name && s.dataset.owner === owner);
         });
       });
       buttons.forEach(function (b) { b.classList.toggle("is-preview", b.dataset.part === name); });
@@ -280,9 +315,9 @@
     });
   }
 
-  slice(document.querySelectorAll(".md-typeset pre.pattern")).forEach(function (pre) {
+  slice(document.querySelectorAll(".md-typeset pre.pattern")).forEach(function (pre, i) {
     var box = pre.nextElementSibling;
-    if (box && box.classList.contains("pattern-parts")) setUpPattern(pre, box);
+    if (box && box.classList.contains("pattern-parts")) setUpPattern(pre, box, String(i));
   });
 
   /* ---------- 2. Multiple choice ---------- */

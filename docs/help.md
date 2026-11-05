@@ -52,7 +52,7 @@ CarRace.java:3: error: ';' expected
 <details markdown>
 <summary>Answers</summary>
 
-1. File `Garage.java`, line 4. The method name is misspelled: `getSpeeed` has an extra `e`. The class `Car` has no method with that name, so javac can't find it. Change it to `getSpeed()`.
+1. File `Garage.java`, line 4. The method name is misspelled: `getSpeeed` has an extra `e`. The class `Car` has no method with that name, so javac cannot find it. Change it to `getSpeed()`.
 2. `variable laps might not have been initialized`. The local variable `laps` is printed before it has a value. Declare it as `int laps = 0;`.
 
 </details>
@@ -118,7 +118,7 @@ Exception in thread "main" java.util.InputMismatchException
 <summary>Answers</summary>
 
 1. (a) `ArrayIndexOutOfBoundsException`: an array of 3 has indices 0 to 2. (b) `NullPointerException`: `new Car[2]` creates two empty slots that hold `null`, not two cars. (c) `ArithmeticException: / by zero`: `5 - 5` is 0, and both numbers are `int`.
-2. It prints `Infinity` and doesn't crash. Only `int` division by 0 throws an exception; `10.0` is a `double`.
+2. It prints `Infinity` and does not crash. Only `int` division by 0 throws an exception; `10.0` is a `double`.
 3. `i` never changes, so `i < 5` stays true and the program prints `0` forever. Add `i++;` inside the loop.
 
 </details>
@@ -147,7 +147,7 @@ Exception in thread "main" java.util.InputMismatchException
     }
     ```
 
-2. **Predict the output.**
+2. **Code tracing.** What does this print?
 
     ```java
     double avg = 7 / 2;

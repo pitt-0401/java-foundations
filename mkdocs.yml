@@ -11,6 +11,7 @@ nav:
   - Home: index.md
   - Basics: basics.md
   - Classes and objects: classes-and-objects.md
+  - Arrays: arrays.md
 
 theme:
   name: material
@@ -57,15 +58,15 @@ markdown_extensions:
   - toc:
       permalink: true
       toc_depth: 2   # the page contents list shows only the questions
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      pygments_lang_class: true   # language-text blocks wrap on phones (extra.css)
   - pymdownx.superfences
   - pymdownx.details
 
 # design-guidelines.md is a contributor document, not a student page.
-# arrays.md, help.md and practice.md are hidden until they are ready for students.
+# help.md and practice.md are hidden until they are ready for students.
 exclude_docs: |
   design-guidelines.md
-  arrays.md
   help.md
   practice.md
 

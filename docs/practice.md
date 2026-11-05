@@ -50,13 +50,13 @@ exercise file stops all tests: fix the file named in the error first.
 
 If your computer is set to a language that writes decimals with a comma,
 `printf` prints `42,50` instead of `42.50` when you run a program yourself. The
-tests always use a decimal point, so this doesn't affect them.
+tests always use a decimal point, so this does not affect them.
 
 `mvn test` without `-Dtest` runs the tests for all nine exercises. Tests for
-exercises you haven't finished yet will fail; that's expected.
+exercises you have not finished yet will fail; that is expected.
 
 Each exercise has a reference solution in the `solutions` folder. Look at it after
-you've made a real attempt, and compare it with yours.
+you have made a real attempt, and compare it with yours.
 
 ## 1. Tip calculator { #tip-calculator }
 
@@ -147,7 +147,7 @@ You entered 2 scores.
 Average: 7.5
 ```
 
-**Hints:** `hasNextInt()` before `nextInt()`. Throw bad input away with `next()`. Don't
+**Hints:** `hasNextInt()` before `nextInt()`. Throw bad input away with `next()`. Do not
 divide when the count is 0.
 
 File: `exercises/ScoreCollector.java`. Test: `mvn test -Dtest=ScoreCollectorTest`.
@@ -455,12 +455,12 @@ public class Playlist {
 }
 ```
 
-It compiles but doesn't do anything yet, which is fine for now. The placeholder
+It compiles but does not do anything yet, which is fine for now. The placeholder
 returns (`null`, `0`, `false`) are only there so it compiles.
 
 ### Step 4: Fill in one method at a time
 
-`Song`'s constructor and getters come first. They're short: `this.title = title;`
+`Song`'s constructor and getters come first. They are short: `this.title = title;`
 and `return title;`.
 
 1. `addSong`, then compile:

@@ -9,8 +9,9 @@ answers one question with a pattern to copy, an example, and short exercises.
 
 | Page | Questions |
 |---|---|
-| [Basics](docs/basics.md) | Write a program, declare a variable, write and call a method, make a decision, repeat something, read input, print output |
+| [Basics](docs/basics.md) | Write a program, declare a variable, write and call a method, use a parameter, make a decision, repeat something, read input, print output |
 | [Classes and objects](docs/classes-and-objects.md) | Classes, constructors, objects, getters and setters, `toString`, kinds of variables, `static`, `this`, comparing values, avoiding crashes |
+| [Arrays](docs/arrays.md) | Create an array, loop through an array, use a 2D array |
 
 More pages will be added later.
 
