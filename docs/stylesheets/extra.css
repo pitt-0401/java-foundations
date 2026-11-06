@@ -287,12 +287,6 @@ body[data-md-color-scheme] {
 .md-typeset blockquote > :first-child { margin-top: 0; }
 .md-typeset blockquote > :last-child { margin-bottom: 0; }
 
-/* "Lectures 02, 04": which lectures cover a section. Small and grey. */
-.md-typeset .lectures {
-  font-size: 0.85em;
-  color: var(--md-default-fg-color--light);
-}
-
 /* ---------- Code ---------- */
 
 .md-typeset code {

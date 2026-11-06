@@ -42,8 +42,6 @@ java CarRace
 - Every opening `{` must have a matching closing `}`
 - Compile often, as you code
 
-<p class="lectures">Lectures 02, 04</p>
-
 ### Your turn
 
 1. **Find the bug.** This code is saved in a file named `Hello.java`. Why does `javac Hello.java` fail?
@@ -133,8 +131,6 @@ int i = (int) 9.99;
 - Declare a variable before you use it
 - The type cannot change later
 - A cast cuts off the decimal part; it does not round
-
-<p class="lectures">Lectures 02, 03, 04</p>
 
 ### Your turn
 
@@ -271,8 +267,6 @@ public static double average(int a, int b) {
 | `(int a, int b)` | The parameters, each with a type and a name. No parameters: `()`. |
 | `{` | Starts the method body, which ends at the matching `}`. |
 
-<p class="lectures">Lecture 03</p>
-
 ### Your turn
 
 1. **Find the bug.** This method should give back the square of `x`. Why does it not compile?
@@ -325,8 +319,6 @@ greet("Taylor");
 - Calling a method is also known as invoking it
 - For what happens to the argument inside the method, see [Use a parameter](#parameter)
 - Non-static methods need an object first; see [Create and use an object](classes-and-objects.md#object)
-
-<p class="lectures">Lectures 03, 07, 09</p>
 
 ### Your turn
 
@@ -395,8 +387,6 @@ public static void main(String[] args) {
 - `points` exists only inside `addBonus`, and `score` exists only inside `main`
     - Using `points` in `main` gives `error: cannot find symbol`
 - For an array or an object, the copied value is a reference to the same object, so the method can change its elements or fields; see [Compare values](classes-and-objects.md#compare)
-
-<p class="lectures">Lectures 02, 03, 09</p>
 
 ### Your turn
 
@@ -499,8 +489,6 @@ if (score >= 90) {
 - The condition must evaluate to a boolean (`true` or `false`)
 - The first condition that evaluates to `true` triggers its code block; no further conditions are checked
 - For Strings, use `.equals()`, not `==`; see [Compare values](classes-and-objects.md#compare)
-
-<p class="lectures">Lecture 05</p>
 
 ### Your turn
 
@@ -664,8 +652,6 @@ do {
 - `i++` increments `i` by 1, `i--` decrements it by 1
 - `total += x` is short for `total = total + x`
 
-<p class="lectures">Lecture 06</p>
-
 ### Your turn
 
 1. **Code tracing.** How many times does this print `Hi`?
@@ -751,8 +737,6 @@ int age = scanner.nextInt();
 
 **Trap:** if you call `nextLine()` after `nextInt()`, you need to call one extra `nextLine()` first. `nextInt()` reads only the number and leaves the newline in the input; the next `nextLine()` consumes that leftover newline and returns an empty String.
 
-<p class="lectures">Lecture 06</p>
-
 ### Your turn
 
 1. **What happens?** The user types `20`, presses Enter, then types `Sam Lee`.
@@ -817,8 +801,6 @@ System.out.printf("%.2f%n", 3.14159); // 3.14
 | `%n` | new line |
 
 **Trap:** `"Sum: " + 5 + 4` prints `Sum: 54`. Java evaluates left to right: `"Sum: " + 5` becomes the String `"Sum: 5"`, then `4` is joined to it as text (String concatenation). Use parentheses, `"Sum: " + (5 + 4)`, to get `Sum: 9`.
-
-<p class="lectures">Lectures 02, 05, 08</p>
 
 ### Your turn
 

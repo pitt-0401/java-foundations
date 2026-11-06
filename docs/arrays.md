@@ -74,8 +74,6 @@ int[] scores = new int[5];
 | `new int[5]` | Creates an array of length 5, filled with default values (`0`). |
 | `;` | Ends the statement. |
 
-<p class="lectures">Lecture 11</p>
-
 ### Your turn
 
 1. **Code tracing.** What does this print?
@@ -210,8 +208,6 @@ for (int i = 0; i < nums.length; i++) {
 - Print the whole array with `Arrays.toString(array)` (requires `import java.util.Arrays;`)
 - The loops work as described in [Repeat something](basics.md#repeat)
 
-<p class="lectures">Lectures 11, 12</p>
-
 ### Your turn
 
 1. **Find the bug.**
@@ -303,8 +299,6 @@ board[2][1] = 7;
 - A 2D array is an "array of arrays": each row is its own array
     - `grid.length` is the number of rows; `grid[0].length` is the number of columns in row 0
 - The nested loops traverse the array row by row: the outer loop picks a row, the inner loop goes through its columns
-
-<p class="lectures">Lecture 12</p>
 
 ### Your turn
 

@@ -12,6 +12,7 @@ nav:
   - Basics: basics.md
   - Classes and objects: classes-and-objects.md
   - Arrays: arrays.md
+  - Catch-up practice: https://pitt-0401.github.io/java-syntax-exercises/
 
 theme:
   name: material

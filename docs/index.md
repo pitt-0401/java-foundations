@@ -100,3 +100,6 @@ Run `mvn` commands from the course folder (the one that contains `pom.xml`).
    the **Your turn** exercises before you check the answers.
 2. Compile and run after every few lines. One error at a time is easy to fix;
    twenty at once are typically not.
+3. For more practice before an exam, use the
+   [catch-up practice](https://pitt-0401.github.io/java-syntax-exercises/)
+   site. It contains mini basic Java syntax exercises.

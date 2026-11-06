@@ -154,8 +154,7 @@ example sits directly under its pattern.
    each and have no final period; details go in sub-bullets. Student text spells
    out contractions ("does not", "it is"), except inside code and quoted
    compiler messages.
-4. **Lectures line:** `<p class="lectures">Lectures 02, 04</p>`, small and grey.
-5. **Your turn** (H3): one to three numbered exercises (up to five in a section
+4. **Your turn** (H3): one to three numbered exercises (up to five in a section
    with syntax helps), each starting with a bold
    label such as **Code tracing.** (followed by "What does this print?" unless the
    exercise asks its own question), **Find the bug.**, **Fill in the
@@ -163,10 +162,12 @@ example sits directly under its pattern.
    error.** and **Which exception will each line throw?**), followed by one `<details markdown>` box
    with `<summary>Answers</summary>`.
 
+Pages do not show lecture numbers.
+
 ### Syntax helps
 
 Sections whose main difficulty is syntax can add up to three H3 parts after the
-notes and before the lectures line. "How do I declare a class?" uses all three;
+notes and before **Your turn**. "How do I declare a class?" uses all three;
 "How do I write a constructor?", "How do I write a method?" and "How do I
 create an array?" each have a word-by-word table, so the explanation is in the section the student is
 already reading:
@@ -457,3 +458,26 @@ also without final periods. Multiple-choice explanations (**Correct.** /
   - Keep example lines to 45 characters: put a long comment on its own line
     above the code, and break long calls after `(` or before `+`.
 - Code blocks and tables otherwise scroll inside their own containers.
+
+## Companion site: catch-up practice
+
+The catch-up practice site (repository `java-syntax-exercises`,
+<https://pitt-0401.github.io/java-syntax-exercises/>) follows this page. It is
+plain HTML, CSS and JavaScript rather than MkDocs, so it copies the design
+instead of sharing files:
+
+- Its `web/style.css` uses the same `--jf-*` token names and values as
+  `extra.css`, plus the Material values that Foundations inherits (fonts, text
+  colors, the dark `slate` background and code colors). When you change a token
+  here, change it there too.
+- Fonts, heading sizes, text width, code blocks, syntax colors, buttons, focus
+  outlines, side notes and the "✓ Correct" / "✗ Incorrect" labels match this
+  page.
+- Deliberate differences: its own header and sidebar instead of Material's
+  tabs and question list; exercises in the sidebar are small status boxes (their
+  status is in each box's accessible name); progress is a thin accent bar
+  instead of ticks, because a section has up to 22 exercises; and the
+  green "you implement it" color in UML diagrams uses the `type` placeholder
+  colors.
+
+Its `AGENTS.md` repeats these differences for contributors to that repository.

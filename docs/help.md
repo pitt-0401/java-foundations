@@ -25,8 +25,6 @@ CarRace.java:3: error: ';' expected
 1 error
 ```
 
-<p class="lectures">Lectures 04, 10</p>
-
 ### Your turn
 
 1. **Read this error.** Which file, which line, and what is wrong?
@@ -88,8 +86,6 @@ Exception in thread "main" java.util.InputMismatchException
 ```
 
 **Never ends?** A loop condition never becomes false. Make sure the loop changes the variable that the condition checks. To stop the running program, press Ctrl+C in the terminal.
-
-<p class="lectures">Lectures 06, 09, 10, 11</p>
 
 ### Your turn
 

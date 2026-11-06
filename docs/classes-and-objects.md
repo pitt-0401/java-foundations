@@ -190,8 +190,6 @@ public class Car {
 Step 4: add the `drive` method below the constructor, still inside the class body.
 The result is the `Car` class at the top of this section.
 
-<p class="lectures">Lectures 07, 08</p>
-
 ### Your turn
 
 1. **Put the lines in order.** Arrange these lines into a class that compiles.
@@ -361,8 +359,6 @@ public Car(String model, int year) {
 | `(String model, int year)` | The parameters: they receive the arguments in `new Car("Roadster", 2024)`. |
 | `{` | Starts the constructor body, which ends at the matching `}`. |
 
-<p class="lectures">Lecture 07</p>
-
 ### Your turn
 
 1. **What happens?** `Car` has a field `private String model;`, a getter `getModel()`, and this "constructor":
@@ -432,8 +428,6 @@ int speed = car2.getSpeed();
 - The dot notation (`.`) is used to access an object's fields and invoke its methods, e.g., `car2.drive()`
 - Each object has its own field values (its state)
 - `Car car3;` on its own does not create an object; only `new` creates one
-
-<p class="lectures">Lectures 07, 09</p>
 
 ### Your turn
 
@@ -515,8 +509,6 @@ public void setSpeed(int speed) {
 - Not every field needs a setter
 - Encapsulation (also known as information hiding): fields are `private`, and access is controlled through `public` getters and setters
 
-<p class="lectures">Lecture 08</p>
-
 ### Your turn
 
 1. **Code tracing.** What does this print?
@@ -586,8 +578,6 @@ System.out.println(car2);
 - Every class already has a `toString()` (declared in `Object`) that returns something like `Car@7ad041f3`; `@Override` means that you provide a custom implementation
 - The method header must be exactly `public String toString()`: `public`, named `toString`, returns a `String`, no parameters
 
-<p class="lectures">Lecture 08</p>
-
 ### Your turn
 
 1. **Find the bug.** This method is in class `Car`, but `System.out.println(car2);` still prints something like `Car@7ad041f3`.
@@ -637,8 +627,6 @@ public class Car {
 ```
 
 Fields get default values (`0`, `false`, `null`); local variables do not, so initialize them before you use them.
-
-<p class="lectures">Lectures 02, 07, 09</p>
 
 ### Your turn
 
@@ -719,8 +707,6 @@ int n = Car.getTotalCars();
 
 A `static` method (e.g., `main`) cannot access instance fields directly; create an object first.
 
-<p class="lectures">Lecture 09</p>
-
 ### Your turn
 
 1. **Code tracing.** What does this print? Every `Car` constructor runs `totalCars++`.
@@ -790,8 +776,6 @@ public Student() { this("Unknown", 0); }
 Important: the `this(...)` call must come first in the constructor. Java 21
 (used in this course) requires that; Java 25 and later relax the rule.
 
-<p class="lectures">Lecture 09</p>
-
 ### Your turn
 
 1. **Code tracing.** `Car` has `toString()` from [Print an object](#print-object) and this constructor:
@@ -840,8 +824,6 @@ if (answer.equals("yes"))  // compares text
 ```
 
 A reference variable stores a reference to an object, not the object itself. `==` checks whether two references point to the same object (identity), not whether the content is equal (equality). A String read with a `Scanner` (see [Read input](basics.md#input)) is a new object, so `==` usually gives `false`, even when the text matches.
-
-<p class="lectures">Lectures 05, 09</p>
 
 ### Your turn
 
@@ -945,8 +927,6 @@ number, so `parseInt` throws a `NumberFormatException`. Java skips
 
 - `prices.length` is the number of elements in an array; see [Create an array](arrays.md#create-array)
 - `scanner.hasNextInt()` checks whether the next input is a whole number; see [Read input](basics.md#input)
-
-<p class="lectures">Lectures 06, 10</p>
 
 ### Your turn
 

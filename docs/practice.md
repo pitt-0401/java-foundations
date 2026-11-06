@@ -16,8 +16,6 @@ Nine small programs that combine several ideas from the cheat sheet. Each one ha
 
 Try each exercise on your own before you open its Review links. Compile after every few lines.
 
-<p class="lectures">Based on in-class practice tasks, Lectures 02 to 14</p>
-
 ## How to work on an exercise { #how }
 
 1. Open the exercise file in the `exercises` folder. It already compiles: the methods
@@ -86,8 +84,6 @@ a `%` sign is written `%%`.
 
 File: `exercises/TipCalculator.java`. Test: `mvn test -Dtest=TipCalculatorTest`
 
-<p class="lectures">Based on Lecture 03</p>
-
 ## 2. Leap year checker { #leap-year }
 
 Practices: `%` and comparison operators, `&&` and `||`, if / else, boolean methods.
@@ -115,8 +111,6 @@ first. Use `( )` to make the order clear.
 
 File: `exercises/LeapYear.java`. Test: `mvn test -Dtest=LeapYearTest` (it checks
 both versions)
-
-<p class="lectures">Based on Lecture 05 (operator practice tasks)</p>
 
 ## 3. Score collector { #score-collector }
 
@@ -153,8 +147,6 @@ divide when the count is 0.
 File: `exercises/ScoreCollector.java`. Test: `mvn test -Dtest=ScoreCollectorTest`.
 The tests type the input for you.
 
-<p class="lectures">Based on Lecture 06 (rating collector)</p>
-
 ## 4. Pet shelter, part 1 { #pet-shelter-1 }
 
 Practices: declaring a class, constructors, getters and setters, creating objects.
@@ -188,8 +180,6 @@ Mia after play(): 7
 Files: `exercises/Pet.java` and `exercises/PetShelter.java`. Test:
 `mvn test -Dtest=PetShelterPart1Test`. This test checks your `Pet` class directly,
 not the output of `main`, so it keeps passing after you change `main` in part 2.
-
-<p class="lectures">Based on Lectures 07, 08 (CarRace)</p>
 
 ## 5. Pet shelter, part 2 { #pet-shelter-2 }
 
@@ -226,8 +216,6 @@ instance variable?
 Files: `exercises/Pet.java` and `exercises/PetShelter.java`. Test:
 `mvn test -Dtest=PetShelterPart2Test`
 
-<p class="lectures">Based on Lectures 08, 09 (CarRace)</p>
-
 ## 6. Safe average { #safe-average }
 
 Practices: try / catch, null checks, check first vs catch. Review:
@@ -255,8 +243,6 @@ and on which line? Could you avoid the try / catch by checking `values.length`
 first? Which is better here?
 
 File: `exercises/SafeAverage.java`. Test: `mvn test -Dtest=SafeAverageTest`
-
-<p class="lectures">Based on Lecture 10</p>
 
 ## 7. Score statistics { #score-statistics }
 
@@ -290,8 +276,6 @@ First 88 at index: 2
 
 File: `exercises/ScoreStatistics.java`. Test: `mvn test -Dtest=ScoreStatisticsTest`
 
-<p class="lectures">Based on Lectures 11, 12</p>
-
 ## 8. Seating chart { #seating-chart }
 
 Practices: 2D arrays, nested loops, methods that return boolean. Review:
@@ -322,8 +306,6 @@ Free seats: 11
 `ArrayIndexOutOfBoundsException`.
 
 File: `exercises/SeatingChart.java`. Test: `mvn test -Dtest=SeatingChartTest`
-
-<p class="lectures">Based on Lecture 12</p>
 
 ## 9. Bubble sort { #bubble-sort }
 
@@ -361,8 +343,6 @@ If you work with a partner, one of you types and the other gives instructions. S
 
 File: `exercises/BubbleSort.java`. Test: `mvn test -Dtest=BubbleSortTest`
 
-<p class="lectures">Based on Lectures 13, 14</p>
-
 ## How should I approach a problem? { #approach }
 
 1. **Understand.** Say the goal in one sentence. What goes in, what comes out? Work
@@ -381,8 +361,6 @@ up and are hard to find.
 comment into code.
 
 The worked example below follows these steps on one problem.
-
-<p class="lectures">Lectures 04, 10, 13</p>
 
 ## Worked example: a playlist { #playlist }
 
@@ -545,4 +523,3 @@ javac *.java
 java PlaylistApp
 ```
 
-<p class="lectures">Lectures 04, 07, 08, 09, 10, 11, 12</p>
