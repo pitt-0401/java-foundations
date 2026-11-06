@@ -21,6 +21,7 @@ theme:
     code: IBM Plex Mono
   features:
     - navigation.tabs        # pages as tabs under the header
+    - navigation.tabs.sticky # tabs stay visible when the page scrolls
     - navigation.sections
     - navigation.footer
     - navigation.top
