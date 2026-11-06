@@ -256,10 +256,10 @@ int[] scores = {72, 95, 88, 64, 100, 79, 88};
 Write one method for each task:
 
 1. Print the whole array with `Arrays.toString`.
-2. `sum(int[] a)` and `average(int[] a)`, average as a `double`.
-3. `indexOfMax(int[] a)`: the position of the largest value.
-4. `countAtLeast(int[] a, int limit)`: how many are `>= limit`.
-5. `indexOf(int[] a, int target)`: first position, or -1 if not found.
+2. `sum(int[] scores)` and `average(int[] scores)`, average as a `double`.
+3. `indexOfMax(int[] scores)`: the position of the largest value.
+4. `countAtLeast(int[] scores, int limit)`: how many are `>= limit`.
+5. `indexOf(int[] scores, int target)`: first position, or -1 if not found.
 
 Expected output:
 
@@ -272,7 +272,7 @@ Scores >= 80: 4
 First 88 at index: 2
 ```
 
-**Hints:** `import java.util.Arrays;`. Average: `(double) sum / a.length`; print it with `%.2f`.
+**Hints:** `import java.util.Arrays;`. Average: `(double) sum / scores.length`; print it with `%.2f`.
 
 File: `exercises/ScoreStatistics.java`. Test: `mvn test -Dtest=ScoreStatisticsTest`
 
@@ -337,7 +337,7 @@ Pass 5: [1, 2, 3, 4, 6, 7, 9]
 ```
 
 **Hints:** after each pass the largest unsorted value is at the end. Why does the
-inner loop stop at `j < n - i - 1`?
+inner loop stop at `j < numbers.length - i - 1`?
 
 If you work with a partner, one of you types and the other gives instructions. Switch every 5 minutes.
 
@@ -475,9 +475,9 @@ and `return title;`.
         }
         Song longest = songs[0];
         for (int i = 1; i < count; i++) {
-            Song s = songs[i];
-            if (s.getSeconds() > longest.getSeconds()) {
-                longest = s;
+            Song song = songs[i];
+            if (song.getSeconds() > longest.getSeconds()) {
+                longest = song;
             }
         }
         return longest;

@@ -9,27 +9,27 @@ import java.util.Arrays;
  */
 public class ScoreStatistics {
 
-    public static int sum(int[] a) {
+    public static int sum(int[] scores) {
         // TODO
         return 0;
     }
 
-    public static double average(int[] a) {
+    public static double average(int[] scores) {
         // TODO: average as a double
         return 0;
     }
 
-    public static int indexOfMax(int[] a) {
+    public static int indexOfMax(int[] scores) {
         // TODO: the position of the largest value
         return 0;
     }
 
-    public static int countAtLeast(int[] a, int limit) {
+    public static int countAtLeast(int[] scores, int limit) {
         // TODO: how many values are >= limit
         return 0;
     }
 
-    public static int indexOf(int[] a, int target) {
+    public static int indexOf(int[] scores, int target) {
         // TODO: the first position of target, or -1 if it is not found
         return 0;
     }

@@ -19,7 +19,7 @@ public class CarRace {
         System.out.println(car2);             // Car [model: Roadster]
 
         // static method: call it on the class
-        int n = Car.getTotalCars();
-        System.out.println(n);                // 2
+        int total = Car.getTotalCars();
+        System.out.println(total);            // 2
     }
 }

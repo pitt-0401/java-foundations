@@ -6,31 +6,31 @@ import java.util.Arrays;
  */
 public class ScoreStatistics {
 
-    public static int sum(int[] a) {
+    public static int sum(int[] scores) {
         int total = 0;
-        for (int value : a) {
+        for (int value : scores) {
             total += value;
         }
         return total;
     }
 
-    public static double average(int[] a) {
-        return (double) sum(a) / a.length;
+    public static double average(int[] scores) {
+        return (double) sum(scores) / scores.length;
     }
 
-    public static int indexOfMax(int[] a) {
+    public static int indexOfMax(int[] scores) {
         int maxIndex = 0;
-        for (int i = 1; i < a.length; i++) {
-            if (a[i] > a[maxIndex]) {
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] > scores[maxIndex]) {
                 maxIndex = i;
             }
         }
         return maxIndex;
     }
 
-    public static int countAtLeast(int[] a, int limit) {
+    public static int countAtLeast(int[] scores, int limit) {
         int count = 0;
-        for (int value : a) {
+        for (int value : scores) {
             if (value >= limit) {
                 count++;
             }
@@ -38,9 +38,9 @@ public class ScoreStatistics {
         return count;
     }
 
-    public static int indexOf(int[] a, int target) {
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] == target) {
+    public static int indexOf(int[] scores, int target) {
+        for (int i = 0; i < scores.length; i++) {
+            if (scores[i] == target) {
                 return i;
             }
         }

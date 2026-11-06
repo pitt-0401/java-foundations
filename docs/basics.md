@@ -114,7 +114,7 @@ double price = 9.99;    // decimal
 boolean isOpen = true;  // true or false
 char grade = 'A';       // one character: ' '
 String name = "Yoda";   // text: " "
-float g = 9.81f;        // float needs f
+float gravity = 9.81f;  // float needs f
 long big = 9000000000L; // long needs L
 ```
 
@@ -122,9 +122,9 @@ Convert between types:
 
 ```java
 // int to double: automatic (widening)
-double d = 42;
+double amount = 42;
 // double to int: cast, gives 9
-int i = (int) 9.99;
+int whole = (int) 9.99;
 ```
 
 - Write names in **camelCase**: `numberOfSeats`
@@ -137,21 +137,21 @@ int i = (int) 9.99;
 1. **Code tracing.** What does this print?
 
     ```java
-    int a = 7 / 2;
-    double b = 7 / 2;
-    double c = 7 / 2.0;
-    System.out.println(a);
-    System.out.println(b);
-    System.out.println(c);
+    int first = 7 / 2;
+    double second = 7 / 2;
+    double third = 7 / 2.0;
+    System.out.println(first);
+    System.out.println(second);
+    System.out.println(third);
     ```
 
     - `3.5` `3.5` `3.5`
 
-        **Not quite.** `7 / 2` divides two `int` values, so the result is `3` for both `a` and `b`. Storing it in a `double` does not bring the `.5` back.
+        **Not quite.** `7 / 2` divides two `int` values, so the result is `3` for both `first` and `second`. Storing it in a `double` does not bring the `.5` back.
 
     - `3` `3` `3.5`
 
-        **Not quite.** `b` is a `double`, so `println` shows it with a decimal point: `3.0`, not `3`.
+        **Not quite.** `second` is a `double`, so `println` shows it with a decimal point: `3.0`, not `3`.
 
     - `3` `3.0` `3.5`
 
@@ -219,16 +219,16 @@ error: incompatible types: possible lossy conversion from double to int
 <var data-find="[[average]]( | [[greet]](">methodName</var>
 :   A descriptive method name, written in camelCase, e.g., `average` or `greet`.
 
-<var data-find="[[int]] a | [[int]] b | [[String]] name">type</var>
+<var data-find="[[int]] first | [[int]] second | [[String]] name">type</var>
 :   The data type of the parameter. It defines which values can be passed to the method.
 
-<var data-find="int [[a]] | int [[b]] | String [[name]]">paramName</var>
-:   A parameter acts as a placeholder for the value that is passed in when the method is called. Choose a meaningful name, e.g., `a`, `b`, or `name`.
+<var data-find="int [[first]] | int [[second]] | String [[name]]">paramName</var>
+:   A parameter acts as a placeholder for the value that is passed in when the method is called. Choose a meaningful name, e.g., `first`, `second`, or `name`.
 
-<var data-find='[[return (a + b) / 2.0;]] | [[System.out.println("Hello, " + name);]]'>statements</var>
+<var data-find='[[return (first + second) / 2.0;]] | [[System.out.println("Hello, " + name);]]'>statements</var>
 :   The method body: the statements that are executed when the method is called. It can include a `return` statement.
 
-<var data-find="return [[(a + b) / 2.0]]">value</var>
+<var data-find="return [[(first + second) / 2.0]]">value</var>
 :   The value the method returns. It must match the declared return type. `void` methods do not return a value.
 
 </div>
@@ -238,8 +238,8 @@ The pattern is simplified: a method does not need other statements before `retur
 Examples:
 
 ```java
-public static double average(int a, int b) {
-    return (a + b) / 2.0;
+public static double average(int first, int second) {
+    return (first + second) / 2.0;
 }
 
 public static void greet(String name) {
@@ -255,7 +255,7 @@ public static void greet(String name) {
 The first line is the method header:
 
 ```java
-public static double average(int a, int b) {
+public static double average(int first, int second) {
 ```
 
 | Part | Meaning |
@@ -264,20 +264,20 @@ public static double average(int a, int b) {
 | `static` | The method belongs to the class (not to an object), so `main` can call it without creating an object first. Methods that work on an object's fields leave it out. |
 | `double` | The return type: the type of value the method returns. `void` means it returns nothing. |
 | `average` | The method name, written in camelCase. |
-| `(int a, int b)` | The parameters, each with a type and a name. No parameters: `()`. |
+| `(int first, int second)` | The parameters, each with a type and a name. No parameters: `()`. |
 | `{` | Starts the method body, which ends at the matching `}`. |
 
 ### Your turn
 
-1. **Find the bug.** This method should give back the square of `x`. Why does it not compile?
+1. **Find the bug.** This method should give back the square of `number`. Why does it not compile?
 
     ```java
-    public static int square(int x) {
-        System.out.println(x * x);
+    public static int square(int number) {
+        System.out.println(number * number);
     }
     ```
 
-2. **Write it.** Write a method `isEven` that takes an `int` and returns `true` if the number is even. Hint: `n % 2` is the remainder after dividing by 2.
+2. **Write it.** Write a method `isEven` that takes an `int` and returns `true` if the number is even. Hint: `number % 2` is the remainder after dividing by 2.
 
 <details markdown>
 <summary>Answers</summary>
@@ -285,12 +285,12 @@ public static double average(int a, int b) {
 1. The return type is `int`, so the method must `return` an `int`
     - Printing a value is not the same as returning it
     - The compiler reports `error: missing return statement`
-    - Fix it with `return x * x;`
+    - Fix it with `return number * number;`
 2. One solution:
 
     ```java
-    public static boolean isEven(int n) {
-        return n % 2 == 0;
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
     }
     ```
 
@@ -393,23 +393,23 @@ public static void main(String[] args) {
 1. **Code tracing.** What does this print?
 
     ```java
-    public static void reset(int x) {
-        x = 0;
+    public static void reset(int value) {
+        value = 0;
     }
 
     // in main:
-    int n = 5;
-    reset(n);
-    System.out.println(n);
+    int score = 5;
+    reset(score);
+    System.out.println(score);
     ```
 
     - `0`
 
-        **Not quite.** `reset(n)` copies the value of `n` into `x`. Setting `x` to `0` changes only the copy, so `n` is still `5`.
+        **Not quite.** `reset(score)` copies the value of `score` into `value`. Setting `value` to `0` changes only the copy, so `score` is still `5`.
 
     - `5`
 
-        **Correct.** `5`. `x` is a copy of `n`, so changing `x` inside `reset` does not change `n`. To change `n`, `reset` would have to return the new value, and `main` would have to store it: `n = reset(n);`.
+        **Correct.** `5`. `value` is a copy of `score`, so changing `value` inside `reset` does not change `score`. To change `score`, `reset` would have to return the new value, and `main` would have to store it: `score = reset(score);`.
 
 2. **Find the bug.** Why does this not compile?
 
@@ -628,11 +628,11 @@ To run the body at least once, use `do`-`while`:
 
 <div class="pattern-parts" data-replace-with="the statements to repeat and a condition" markdown>
 
-<var data-find="[[System.out.println(n); n++;]]">statements</var>
+<var data-find="[[System.out.println(count); count++;]]">statements</var>
 :   The loop body. It is executed once before the condition is checked, so it always runs at least once.
 
-<var data-find="} while ([[n <= 3]])">condition</var>
-:   An expression that evaluates to a boolean, e.g., `n <= 3`. It is checked after each iteration; the loop repeats while it is `true`.
+<var data-find="} while ([[count <= 3]])">condition</var>
+:   An expression that evaluates to a boolean, e.g., `count <= 3`. It is checked after each iteration; the loop repeats while it is `true`.
 
 </div>
 
@@ -640,17 +640,17 @@ Example:
 
 ```java
 // prints 1 2 3
-int n = 1;
+int count = 1;
 do {
-    System.out.println(n);
-    n++;
-} while (n <= 3);
+    System.out.println(count);
+    count++;
+} while (count <= 3);
 ```
 
 - **`break`** exits the loop
 - **`continue`** skips to the next iteration
 - `i++` increments `i` by 1, `i--` decrements it by 1
-- `total += x` is short for `total = total + x`
+- `total += price` is short for `total = total + price`
 
 ### Your turn
 
@@ -665,20 +665,20 @@ do {
 2. **What happens?**
 
     ```java
-    int n = 3;
-    while (n > 0) {
-        System.out.println(n);
+    int count = 3;
+    while (count > 0) {
+        System.out.println(count);
     }
     ```
 
 3. **Code tracing.** What does this print?
 
     ```java
-    int x = 10;
+    int number = 10;
     do {
-        System.out.println(x);
-        x++;
-    } while (x < 5);
+        System.out.println(number);
+        number++;
+    } while (number < 5);
     ```
 
 <details markdown>
@@ -688,8 +688,8 @@ do {
     - Starting at `0` with `<=` runs one extra time
     - Use `i < 5` for 5 times
 2. It prints `3` forever: an infinite loop
-    - Nothing in the loop changes `n`, so the condition stays true
-    - Add `n--;` inside the loop
+    - Nothing in the loop changes `count`, so the condition stays true
+    - Add `count--;` inside the loop
     - Stop a running program with `Ctrl+C`
 3. `10`
     - A `do`-`while` loop runs its body once before it checks the condition, even if the condition is false from the start

@@ -16,7 +16,7 @@ public class SafeAverage {
         try {
             int average = sum / values.length;
             System.out.println("Average: " + average);
-        } catch (ArithmeticException e) {
+        } catch (ArithmeticException exception) {
             System.out.println("No values to average.");
         }
     }

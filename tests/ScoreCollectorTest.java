@@ -15,8 +15,8 @@ class ScoreCollectorTest {
 
     private static final String PROMPT = "Score (0-10, -1 to finish):";
 
-    private static String times(int n) {
-        return n == 1 ? "1 time" : n + " times";
+    private static String times(int count) {
+        return count == 1 ? "1 time" : count + " times";
     }
 
     /** Runs main with the given input. Checks the number of prompts, then returns the other lines. */

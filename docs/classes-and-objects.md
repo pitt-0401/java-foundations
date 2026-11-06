@@ -702,7 +702,7 @@ public static int getTotalCars() {
 In `main`:
 
 ```java
-int n = Car.getTotalCars();
+int total = Car.getTotalCars();
 ```
 
 A `static` method (e.g., `main`) cannot access instance fields directly; create an object first.
@@ -830,12 +830,12 @@ A reference variable stores a reference to an object, not the object itself. `==
 1. **Code tracing.** What does this print?
 
     ```java
-    String a = "yes";
-    String b = new String("yes");
-    System.out.println(a == b);
-    System.out.println(a.equals(b));
+    String first = "yes";
+    String second = new String("yes");
+    System.out.println(first == second);
+    System.out.println(first.equals(second));
     System.out.println(
-            "YES".equalsIgnoreCase(a));
+            "YES".equalsIgnoreCase(first));
     ```
 
 2. **Code tracing.** What does this print?
@@ -916,7 +916,7 @@ Example:
 try {
     int age = Integer.parseInt("abc");
     System.out.println(age);
-} catch (NumberFormatException e) {
+} catch (NumberFormatException exception) {
     System.out.println("Invalid number");
 }
 ```
@@ -942,7 +942,7 @@ number, so `parseInt` throws a `NumberFormatException`. Java skips
     try {
         System.out.println(sum / count);
         System.out.println("average printed");
-    } catch (ArithmeticException e) {
+    } catch (ArithmeticException exception) {
         System.out.println("count is 0");
     }
     ```

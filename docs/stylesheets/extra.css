@@ -158,6 +158,24 @@ body[data-md-color-scheme] {
   font-weight: 600;
   font-size: 1rem;
 }
+/* "Beta version" badge after the site name. The practice site uses the same
+   badge (.beta-badge in its style.css). */
+.md-header__topic:first-child::after {
+  content: "Beta version";
+  flex: none;
+  align-self: center;
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--jf-accent);
+  border-radius: 4px;
+  color: var(--jf-accent);
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@media screen and (max-width: 45em) {
+  .md-header__topic:first-child::after { content: "Beta"; margin-left: 0.4rem; }
+}
 /* Tabs (the six pages) sit in a compact row under the header. The current page
    is bold with an accent underline, so it does not depend on color alone. */
 .md-tabs {

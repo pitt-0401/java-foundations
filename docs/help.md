@@ -10,7 +10,7 @@ What common error messages mean, and the mistakes that usually cause them.
 | `cannot find symbol` | Typo, not declared, or used outside its scope | Check spelling, capitals, and where it was declared ([Declare a variable](basics.md#variable)) |
 | `incompatible types: possible lossy conversion from double to int` | A decimal goes into an `int` | Change the type, or cast with `(int)` |
 | `missing return statement` | Some path ends without `return` | Return a value on every path |
-| `variable x might not have been initialized` | A local variable is used before it has a value | Give it a value when you declare it |
+| `variable count might not have been initialized` | A local variable is used before it has a value | Give it a value when you declare it |
 | `non-static variable speed cannot be referenced from a static context` | A field is used inside `main` | Create an object, then use its getter ([Share a value (`static`)](classes-and-objects.md#static)) |
 | `reached end of file while parsing` | A `}` is missing | Count your `{` and `}` |
 
@@ -124,9 +124,9 @@ Exception in thread "main" java.util.InputMismatchException
 | Incorrect | Correct | Reason |
 |---|---|---|
 | `s1 == s2` | `s1.equals(s2)` | `==` checks for the same object ([Compare values](classes-and-objects.md#compare)) |
-| `if (x = 5)` | `if (x == 5)` | `=` assigns, `==` compares ([Make a decision](basics.md#decision)) |
+| `if (count = 5)` | `if (count == 5)` | `=` assigns, `==` compares ([Make a decision](basics.md#decision)) |
 | `7 / 2` is `3` | `7 / 2.0` is `3.5` | `int / int` drops decimals |
-| `float g = 9.81;` | `float g = 9.81f;` | `9.81` is a `double` |
+| `float gravity = 9.81;` | `float gravity = 9.81f;` | `9.81` is a `double` |
 | `model = model;` | `this.model = model;` | Parameter shadows field ([Use this](classes-and-objects.md#this)) |
 | `public void Car()` | `public Car()` | Constructors have no return type ([Write a constructor](classes-and-objects.md#constructor)) |
 | `arr[arr.length]` | `arr[arr.length - 1]` | Last index is `length - 1` |

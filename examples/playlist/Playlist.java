@@ -29,9 +29,9 @@ public class Playlist {
         }
         Song longest = songs[0];
         for (int i = 1; i < count; i++) {
-            Song s = songs[i];
-            if (s.getSeconds() > longest.getSeconds()) {
-                longest = s;
+            Song song = songs[i];
+            if (song.getSeconds() > longest.getSeconds()) {
+                longest = song;
             }
         }
         return longest;

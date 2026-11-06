@@ -103,8 +103,8 @@ int[] scores = new int[5];
 3. **What happens?**
 
     ```java
-    int[] a = {3, 6, 9};
-    a[3] = 12;
+    int[] numbers = {3, 6, 9};
+    numbers[3] = 12;
     ```
 
 <details markdown>
@@ -141,11 +141,11 @@ When you need the index, use a standard `for` loop:
 
 <div class="pattern-parts" data-replace-with="the name of your array" markdown>
 
-<var data-find="int [[i]] = 0 | ; [[i]] < nums | [[i]]++ | nums[[[i]]] | pos = [[i]];">i</var>
+<var data-find="int [[i]] = 0 | ; [[i]] < numbers | [[i]]++ | numbers[[[i]]] | pos = [[i]];">i</var>
 :   The loop control variable, used as the index. It starts at 0 and increases by 1 in each iteration (`i++`), up to `array.length - 1`.
 
-<var data-find="i < [[nums]].length | [[nums]][i]">array</var>
-:   The array to loop through, e.g., `nums`. `array[i]` is the element at index `i`.
+<var data-find="i < [[numbers]].length | [[numbers]][i]">array</var>
+:   The array to loop through, e.g., `numbers`. `array[i]` is the element at index `i`.
 
 </div>
 
@@ -158,35 +158,35 @@ When you only need the values, use a for-each loop (also known as enhanced
 
 <div class="pattern-parts" data-replace-with="the element type, a variable name, and the array" markdown>
 
-<var data-find="for ([[int]] n">type</var>
+<var data-find="for ([[int]] number">type</var>
 :   The type of the elements, e.g., `int` for an `int[]` array.
 
-<var data-find="int [[n]] : | += [[n]]; | if ([[n]] > | = [[n]];">element</var>
-:   A variable that holds one element in each iteration, e.g., `n`. It is a copy: changing it does not change the array.
+<var data-find="int [[number]] : | += [[number]]; | if ([[number]] > | = [[number]];">element</var>
+:   A variable that holds one element in each iteration, e.g., `number`. It is a copy: changing it does not change the array.
 
-<var data-find="n : [[nums]])">array</var>
-:   The array to loop through, e.g., `nums`.
+<var data-find="number : [[numbers]])">array</var>
+:   The array to loop through, e.g., `numbers`.
 
 </div>
 
-Three common tasks, each using `int[] nums = {4, 9, 2};`.
+Three common tasks, each using `int[] numbers = {4, 9, 2};`.
 
 Add up the values:
 
 ```java
 int sum = 0;
-for (int n : nums) {
-    sum += n;
+for (int number : numbers) {
+    sum += number;
 }
 ```
 
-Find the largest value (starts with `nums[0]`, so the array must not be empty):
+Find the largest value (starts with `numbers[0]`, so the array must not be empty):
 
 ```java
-int max = nums[0];
-for (int n : nums) {
-    if (n > max) {
-        max = n;
+int max = numbers[0];
+for (int number : numbers) {
+    if (number > max) {
+        max = number;
     }
 }
 ```
@@ -196,8 +196,8 @@ Find the index of `target` (`-1` means it is not in the array):
 ```java
 int target = 9;
 int pos = -1;
-for (int i = 0; i < nums.length; i++) {
-    if (nums[i] == target) {
+for (int i = 0; i < numbers.length; i++) {
+    if (numbers[i] == target) {
         pos = i;
         break;
     }
@@ -213,23 +213,23 @@ for (int i = 0; i < nums.length; i++) {
 1. **Find the bug.**
 
     ```java
-    int[] a = {3, 6, 9};
-    for (int i = 0; i <= a.length; i++) {
-        System.out.println(a[i]);
+    int[] numbers = {3, 6, 9};
+    for (int i = 0; i <= numbers.length; i++) {
+        System.out.println(numbers[i]);
     }
     ```
 
 2. **Code tracing.** What does this print? Assume `import java.util.Arrays;` is at the top of the file.
 
     ```java
-    int[] nums = {1, 2, 3};
-    for (int n : nums) {
-        n = n * 10;
+    int[] numbers = {1, 2, 3};
+    for (int number : numbers) {
+        number = number * 10;
     }
-    System.out.println(Arrays.toString(nums));
+    System.out.println(Arrays.toString(numbers));
     ```
 
-3. **What happens?** `int[] nums = {1, 2, 3};` followed by `System.out.println(nums);`
+3. **What happens?** `int[] numbers = {1, 2, 3};` followed by `System.out.println(numbers);`
 
 <details markdown>
 <summary>Answers</summary>
@@ -237,11 +237,11 @@ for (int i = 0; i < nums.length; i++) {
 1. It prints `3`, `6`, `9` and then crashes with `ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3`
     - Change `<=` to `<` so the loop stops at the last index, 2
 2. `[1, 2, 3]`
-    - In a for-each loop, `n` is a copy of each value, so changing `n` does not change the array
-    - To change the elements, use an index loop: `nums[i] = nums[i] * 10;`
+    - In a for-each loop, `number` is a copy of each value, so changing `number` does not change the array
+    - To change the elements, use an index loop: `numbers[i] = numbers[i] * 10;`
 3. It prints something like `[I@33909752`, not the values
     - That is the array's type (`[I` means an `int` array) followed by a hash code, not its contents
-    - Use `Arrays.toString(nums)` to print `[1, 2, 3]`
+    - Use `Arrays.toString(numbers)` to print `[1, 2, 3]`
 
 </details>
 
