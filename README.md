@@ -1,5 +1,8 @@
 # Java Foundations
 
+[![Verify solutions](https://github.com/pitt-0401/java-foundations/actions/workflows/tests.yml/badge.svg)](https://github.com/pitt-0401/java-foundations/actions/workflows/tests.yml)
+[![Deploy course site](https://github.com/pitt-0401/java-foundations/actions/workflows/pages.yml/badge.svg)](https://github.com/pitt-0401/java-foundations/actions/workflows/pages.yml)
+
 "Java: How do I …?" is a Java syntax cheat sheet. Each section
 answers one question with a pattern to copy, an example, and short exercises.
 
