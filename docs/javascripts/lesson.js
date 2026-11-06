@@ -44,6 +44,7 @@
     param: "name",
     varName: "name",
     var: "name",
+    i: "name",
     element: "name",
     array: "name",
     fieldName: "name",

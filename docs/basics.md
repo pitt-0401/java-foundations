@@ -547,11 +547,14 @@ if (score >= 90) {
 
 When the number of iterations is known in advance, use `for`:
 
-<pre class="pattern"><code>for (int i = 0; i &lt; <var data-label="how many times">count</var>; i++) {
+<pre class="pattern"><code>for (int <var data-label="counter">i</var> = 0; <var>i</var> &lt; <var data-label="how many times">count</var>; <var>i</var>++) {
     <var data-label="loop body">statements</var>
 }</code></pre>
 
 <div class="pattern-parts" data-replace-with="the number of iterations and the statements to repeat" markdown>
+
+<var data-find="int [[i]] = 0 | ; [[i]] < 5 | [[i]]++ | println([[i]])">i</var>
+:   The loop control variable. It starts at 0 and increases by 1 after each iteration (`i++`). Any name works, but `i` is the convention.
 
 <var data-find="i < [[5]];">count</var>
 :   The number of iterations, e.g., `5`. `i` starts at 0, and the loop stops when `i` reaches `count`, so `i` goes from 0 to `count - 1`.

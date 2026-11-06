@@ -1,11 +1,10 @@
 # Java: How do I …?
 
-This page serves as a Java syntax cheat sheet. Each section includes a topic, explains the syntax, and short exercises to help you practice it.
+This page serves as a Java syntax cheat sheet. Each section includes a topic, explains the syntax, and contains short exercises to help you test your understanding.
 
-If you are new to programming, start at the beginning. You can also use the list
-below to find the topic you need.
+It is recommended to create sample projects on your own computer where you practice writing code, e.g., for each topic, copy down the example and run it to understand it better.
 
-[Set up on your own computer](#setup){ .md-button .md-button--primary }
+[Install Java your own computer](#setup){ .md-button .md-button--primary }
 
 ## How do I …? { #questions }
 
@@ -67,33 +66,24 @@ programs), Maven (a tool that runs the automated tests), and a code editor.
 
 ### Install on your own computer
 
-1. Download the course files: on the repository page, choose
-   **Code > Download ZIP** and unzip it, or clone the repository with Git.
-2. Install JDK 21 or newer, for example Eclipse Temurin from
-   <https://adoptium.net/>. On Windows, select the installer option that sets
-   `JAVA_HOME`.
-3. Install Maven: <https://maven.apache.org/install.html>.
+1. Install JDK 21 or newer: https://www.oracle.com/java/technologies/downloads/
 4. Install VS Code with the Extension Pack for Java:
    <https://code.visualstudio.com/docs/java/java-tutorial>.
-5. In VS Code, choose **File > Open Folder** and open the course folder, the one
-   that contains the file `pom.xml`.
 
 To check that everything works, open a terminal (in VS Code,
 **Terminal > New Terminal**) and run:
 
 ```bash
 java -version
-mvn -v
 ```
 
-Both should show a Java version 21 or newer; in the `mvn -v` output, search for the
-`Java version:` line. If a command is not found, close and reopen the terminal,
-then check the installation steps again.
+It should show a Java version 21 or newer.
+
 
 ### Using the terminal
 
-A terminal session works inside one folder; commands look for files in that
-folder. The following commands are enough for this page:
+A terminal session works inside one folder; commands look for files in that folder. 
+You should be comfortable running these commands:
 
 | Command | Purpose |
 |---|---|

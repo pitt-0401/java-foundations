@@ -282,7 +282,7 @@ highlight; it never carries meaning on its own.
 | `return-type` | `returnType` | Amber | `#fbe9c7` / `#8a5a00` / `#ac7b1a` | `#42351f` / `#f2c875` / `#b58a3d` |
 | `method-name` | `methodName`, `ClassName`, `nextXxx` | Blue | `#e6f0fa` / `#1e4f8a` / `#5e89be` | `#20364d` / `#a6cefa` / `#679ccf` |
 | `type` | `type`, `ExceptionType` | Green | `#e4f4ef` / `#0e6b57` / `#439680` | `#1d3d35` / `#89dec2` / `#55ac91` |
-| `name` | `name`, `Name`, `paramName`, `param`, `var`, `varName`, `element`, `array`, `fieldName`, `FieldName`, `field` | Purple | `#f6e8f3` / `#8a4f79` / `#a8759a` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
+| `name` | `name`, `Name`, `paramName`, `param`, `var`, `i`, `varName`, `element`, `array`, `fieldName`, `FieldName`, `field` | Purple | `#f6e8f3` / `#8a4f79` / `#a8759a` | `#422b3f` / `#e8b5dc` / `#bb83ac` |
 | `statements` | `statements`, `risky statements`, `what to do instead` | Teal | `#e8f5fa` / `#2b6f86` / `#5292a7` | `#1c3c46` / `#a0dceb` / `#69aabd` |
 | `value` | `value`, `values`, `length`, `startValue`, `arguments`, `count`, `rows`, `cols`, `row`, `col` | Vermillion | `#fbe7e2` / `#8e4737` / `#b47567` | `#49302c` / `#f4b6a7` / `#cc8879` |
 

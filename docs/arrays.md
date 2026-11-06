@@ -137,14 +137,17 @@ Iterating over (traversing) an array means accessing each element one by one.
 
 When you need the index, use a standard `for` loop:
 
-<pre class="pattern"><code>for (int i = 0; i &lt; <var data-label="array name">array</var>.length; i++) {
-    // use <var>array</var>[i]
+<pre class="pattern"><code>for (int <var data-label="index">i</var> = 0; <var>i</var> &lt; <var data-label="array name">array</var>.length; <var>i</var>++) {
+    // use <var>array</var>[<var>i</var>]
 }</code></pre>
 
 <div class="pattern-parts" data-replace-with="the name of your array" markdown>
 
+<var data-find="int [[i]] = 0 | ; [[i]] < nums | [[i]]++ | nums[[[i]]] | pos = [[i]];">i</var>
+:   The loop control variable, used as the index. It starts at 0 and increases by 1 in each iteration (`i++`), up to `array.length - 1`.
+
 <var data-find="i < [[nums]].length | [[nums]][i]">array</var>
-:   The array to loop through, e.g., `nums`. `i` goes from 0 to `array.length - 1`, and `array[i]` is the element at index `i`.
+:   The array to loop through, e.g., `nums`. `array[i]` is the element at index `i`.
 
 </div>
 
